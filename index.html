@@ -48,24 +48,24 @@
   .nav-brand { display: flex; flex-direction: column; gap: 2px; }
   .nav-brand-main {
     font-family: 'Noto Serif TC', serif;
-    font-size: 1.35rem; font-weight: 500;
+    font-size: 1.55rem; font-weight: 500;
     color: var(--forest); letter-spacing: .08em;
   }
   .nav-brand-sub {
-    font-size: .65rem; color: var(--sage);
-    letter-spacing: .2em; text-transform: uppercase;
+    font-size: .75rem; color: var(--sage);
+    letter-spacing: .15em; text-transform: uppercase;
   }
   .nav-links { display: flex; align-items: center; gap: 2rem; }
   .nav-links a {
-    font-size: .8rem; color: var(--bark); text-decoration: none;
-    letter-spacing: .1em; transition: color .2s;
+    font-size: .95rem; color: var(--bark); text-decoration: none;
+    letter-spacing: .08em; transition: color .2s;
   }
   .nav-links a:hover { color: var(--forest); }
   .nav-cta {
-    font-size: .78rem; padding: .55rem 1.4rem;
+    font-size: .9rem; padding: .6rem 1.6rem;
     background: var(--forest); color: var(--cream);
     border: none; border-radius: 99px; cursor: pointer;
-    letter-spacing: .08em; font-family: 'Noto Sans TC', sans-serif;
+    letter-spacing: .06em; font-family: 'Noto Sans TC', sans-serif;
     transition: background .2s, transform .1s;
   }
   .nav-cta:hover { background: var(--deep-sage); transform: translateY(-1px); }
@@ -96,7 +96,7 @@
     );
   }
   .hero-banner-text {
-    position: absolute; bottom: 2.5rem; left: 0; right: 0;
+    position: absolute; bottom: 35%; left: 0; right: 0;
     text-align: center; width: 100%;
     padding: 0 3rem;
   }
@@ -534,7 +534,33 @@
         <p class="journey-card-desc">在咖啡香中，讓價值觀落地。你的探索結果將化為一段專屬結語，陪你在某個下午，輕輕打開關於未來的想像。</p>
       </div>
       <div class="journey-card animate-in delay-4">
-        <div class="journey-card-icon">◎</div>
+        <div class="journey-card-icon" style="width:52px;height:52px;background:var(--lavender-mist);border-radius:14px;display:flex;align-items:center;justify-content:center;">
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Blueprint paper background -->
+              <rect x="3" y="4" width="22" height="26" rx="1.5" fill="#E8DDD0" stroke="#C9A96E" stroke-width="1"/>
+              <!-- Paper fold corner -->
+              <path d="M21 4 L25 8 L21 8 Z" fill="#C9A96E" opacity=".5"/>
+              <path d="M21 4 L25 8 L21 8" stroke="#C9A96E" stroke-width="1" fill="#E8DDD0"/>
+              <!-- Grid lines on paper -->
+              <line x1="6" y1="10" x2="22" y2="10" stroke="#C9A96E" stroke-width=".4" opacity=".6"/>
+              <line x1="6" y1="14" x2="22" y2="14" stroke="#C9A96E" stroke-width=".4" opacity=".6"/>
+              <line x1="6" y1="18" x2="20" y2="18" stroke="#C9A96E" stroke-width=".4" opacity=".6"/>
+              <line x1="9" y1="8" x2="9" y2="26" stroke="#C9A96E" stroke-width=".4" opacity=".6"/>
+              <line x1="15" y1="8" x2="15" y2="26" stroke="#C9A96E" stroke-width=".4" opacity=".6"/>
+              <!-- Compass top hinge -->
+              <circle cx="22" cy="8" r="2" fill="#8B6F47" stroke="#6B5135" stroke-width=".8"/>
+              <!-- Compass left leg -->
+              <line x1="22" y1="8" x2="15" y2="26" stroke="#8B6F47" stroke-width="1.8" stroke-linecap="round"/>
+              <!-- Compass right leg -->
+              <line x1="22" y1="8" x2="27" y2="24" stroke="#8B6F47" stroke-width="1.8" stroke-linecap="round"/>
+              <!-- Left leg pencil tip -->
+              <circle cx="15" cy="26" r="1.2" fill="#6B5135"/>
+              <!-- Right leg point -->
+              <circle cx="27" cy="24" r="1" fill="#6B5135"/>
+              <!-- Compass arc suggestion -->
+              <path d="M17 22 Q21 19 25 22" stroke="#8B6F47" stroke-width=".8" fill="none" stroke-dasharray="1.5 1" opacity=".7"/>
+            </svg>
+          </div>
         <h3 class="journey-card-title">繪製藍圖</h3>
         <p class="journey-card-desc">將心裡的亮光，轉化為清晰的職涯路徑。透過藍圖對話，與 SCPC 國際職業規劃師一起，把價值觀寫成可行動的未來。</p>
       </div>
@@ -545,7 +571,7 @@
   <section class="cta-section">
     <div class="cta-inner animate-in delay-2">
       <p class="cta-quote">
-        「在繁忙的世界裡，給自己 10 分鐘，聽聽內心的聲音。這不只是一場測試，是一次與未來的自己相遇。」
+        「在繁忙的世界裡，給自己十分鐘，聽聽內心的聲音。這不只是一場測試，是一次與未來的自己相遇。」
       </p>
       <a id="fillout-link" href="https://forms.fillout.com/t/aY75koFMK7us" target="_blank" class="cta-btn">
         開始自我探索（免費體驗）
