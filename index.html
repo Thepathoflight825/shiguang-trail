@@ -76,13 +76,11 @@
 
   /* ─── HERO ─── */
   .hero {
-    min-height: 100vh;
-    display: grid; grid-template-rows: auto 1fr;
     padding-top: 72px;
     position: relative; overflow: hidden;
   }
   .hero-banner {
-    position: relative; height: 52vh; overflow: hidden;
+    position: relative; height: 68vh; overflow: hidden;
   }
   .hero-banner img {
     width: 100%; height: 100%; object-fit: cover;
@@ -491,16 +489,16 @@
       <div style="width:100%;height:100%;background:linear-gradient(160deg,#4A6741 0%,#6B8B5E 25%,#8FA882 50%,#C4B99A 75%,#E8DDD0 100%);position:relative;overflow:hidden;">
         <!-- Tree silhouettes -->
         <svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;left:0;width:100%;height:100%;opacity:.55">
-          <!-- Left trees -->
-          <ellipse cx="80" cy="200" rx="35" ry="220" fill="#2C4A43" opacity=".9"/>
-          <ellipse cx="140" cy="180" rx="30" ry="210" fill="#3D5A54" opacity=".8"/>
-          <ellipse cx="210" cy="190" rx="28" ry="195" fill="#4A6741" opacity=".7"/>
-          <ellipse cx="270" cy="200" rx="25" ry="185" fill="#3D5A54" opacity=".6"/>
-          <!-- Right trees -->
-          <ellipse cx="930" cy="200" rx="25" ry="185" fill="#3D5A54" opacity=".6"/>
-          <ellipse cx="990" cy="190" rx="28" ry="195" fill="#4A6741" opacity=".7"/>
-          <ellipse cx="1060" cy="180" rx="30" ry="210" fill="#3D5A54" opacity=".8"/>
-          <ellipse cx="1120" cy="200" rx="35" ry="220" fill="#2C4A43" opacity=".9"/>
+          <!-- Left trees - narrow, stay left edge -->
+          <ellipse cx="30" cy="200" rx="28" ry="220" fill="#2C4A43" opacity=".9"/>
+          <ellipse cx="85" cy="180" rx="24" ry="210" fill="#3D5A54" opacity=".8"/>
+          <ellipse cx="145" cy="195" rx="20" ry="200" fill="#4A6741" opacity=".7"/>
+          <ellipse cx="195" cy="205" rx="18" ry="185" fill="#3D5A54" opacity=".55"/>
+          <!-- Right trees - narrow, stay right edge -->
+          <ellipse cx="1005" cy="205" rx="18" ry="185" fill="#3D5A54" opacity=".55"/>
+          <ellipse cx="1055" cy="195" rx="20" ry="200" fill="#4A6741" opacity=".7"/>
+          <ellipse cx="1115" cy="180" rx="24" ry="210" fill="#3D5A54" opacity=".8"/>
+          <ellipse cx="1170" cy="200" rx="28" ry="220" fill="#2C4A43" opacity=".9"/>
           <!-- Path -->
           <path d="M520 400 Q560 300 580 200 Q600 100 610 0 M680 400 Q650 300 630 200 Q615 100 610 0" fill="none" stroke="#C4B99A" stroke-width="40" opacity=".4"/>
           <path d="M540 400 Q570 300 585 200 Q600 100 610 0 M660 400 Q645 300 630 200 Q618 100 610 0" fill="none" stroke="#E8DDD0" stroke-width="20" opacity=".3"/>
