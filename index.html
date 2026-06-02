@@ -72,6 +72,7 @@
     letter-spacing: .08em; transition: color .2s;
   }
   .nav-links a:hover { color: var(--forest); }
+  .nav-links a.nav-active { color: var(--forest); font-weight: 500; border-bottom: 1.5px solid var(--forest); padding-bottom: 2px; }
   .nav-cta {
     font-size: .9rem; padding: .6rem 1.6rem;
     background: var(--forest); color: var(--cream);
@@ -334,7 +335,7 @@
   /* ─── BLUEPRINT CONTENT ─── */
   .blueprint-body {
     max-width: 1100px; margin: 0 auto;
-    padding: 4rem 3rem 2rem;
+    padding: 2rem 3rem 2rem;
   }
   .bridge-quote {
     text-align: center; margin-bottom: 2rem;
@@ -498,8 +499,8 @@
   }
   .credential-item {
     display: flex; align-items: center; gap: .5rem;
-    font-size: .72rem; color: var(--bark);
-    letter-spacing: .08em; opacity: .75;
+    font-size: .82rem; color: var(--bark);
+    letter-spacing: .06em; opacity: .8;
   }
   .credential-dot {
     width: 4px; height: 4px;
@@ -551,7 +552,7 @@
     <span class="nav-brand-sub">自我探索 × 生涯引導</span>
   </div>
   <div class="nav-links">
-    <a href="#" onclick="showPage('p1')">拾光徑</a>
+    <a href="#" onclick="showPage('p1')" class="nav-active">拾光徑</a>
     <a href="#" onclick="showPage('p2')">藍圖對話</a>
   </div>
   <button class="nav-cta" onclick="document.getElementById('fillout-link').click()">開始探索</button>
@@ -719,7 +720,7 @@
 
     <!-- Bridge Quote -->
     <div class="bridge-quote animate-in delay-1">
-      <p>你已經走過拾光徑，那 10 個詞，是你靈魂的答案。<br>現在，讓我們把答案，<em>寫成你的下一步。</em></p>
+      <p>你已經走過拾光徑，那 10 個詞，是你靈魂的答案。<br>現在，讓我們把答案，寫成你的下一步。</p>
     </div>
 
     <!-- Plans -->
@@ -749,7 +750,7 @@
       <div class="plan-card featured">
         <span class="plan-tag">核心方案</span>
         <h3 class="plan-name">藍圖對話<br>1 on 1 生涯引導</h3>
-        <p class="plan-desc">與 Sherry｜生涯引導教練 進行 60 分鐘深度對話，把你的 10 個核心價值觀，轉化為一張只屬於你的人生藍圖。</p>
+        <p class="plan-desc">與 Sherry｜生涯引導教練&nbsp;進行 60 分鐘深度對話，把你的 10 個核心價值觀，轉化為一張只屬於你的人生藍圖。</p>
         <p class="plan-byline">Sherry｜SCPC 國際職業規劃師 × 7+ 年企業 HRBP 實務經驗</p>
         <ul class="plan-features">
           <li>60 分鐘 1 on 1 視訊引導</li>
@@ -783,7 +784,7 @@
     <div class="credential-dot"></div>
     <div class="credential-item">生涯探索 × 價值觀引導</div>
     <div class="credential-dot"></div>
-    <div class="credential-item">拾光徑 副牌服務</div>
+    <div class="credential-item">拾光徑</div>
   </div>
 
   <div class="coffee-strip" style="cursor:pointer" onclick="showPage('p1')">
@@ -801,6 +802,10 @@
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('nav-active'));
+    const map = { p1: 0, p2: 1 };
+    const links = document.querySelectorAll('.nav-links a');
+    if (links[map[id]]) links[map[id]].classList.add('nav-active');
   }
 
   function scrollToInterest() {
