@@ -39,11 +39,12 @@
   /* Warm light gradient overlay on page 1 */
   #p1 {
     background: linear-gradient(180deg,
-      #FAF3E0 0%,
-      #F5F0E8 30%,
-      #F0EBE0 70%,
-      #EDE5D8 100%
+      rgba(250,243,228,.82) 0%,
+      rgba(245,238,222,.88) 30%,
+      rgba(242,235,220,.93) 65%,
+      rgba(240,233,218,.97) 100%
     );
+    position: relative;
   }
 
   /* ─── NAV ─── */
@@ -87,27 +88,53 @@
   /* ─── HERO ─── */
   .hero {
     padding-top: 72px;
-    position: relative; overflow: hidden;
+    position: relative;
+    min-height: 44vh;
   }
+
+  /* Full-page forest: fixed trees pinned to viewport sides, scroll with page */
+  .forest-backdrop {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .forest-sun {
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 60%; height: 55%;
+    background: radial-gradient(ellipse at 50% 5%,
+      rgba(235,205,130,.5) 0%,
+      rgba(242,220,160,.2) 38%,
+      transparent 68%
+    );
+  }
+  .forest-trees {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 22%;
+    height: 100%;
+  }
+  .forest-trees-left  { left: 0; }
+  .forest-trees-right { right: 0; }
+
+  /* Page content sits above backdrop */
   .hero-banner {
-    position: relative; height: 44vh; overflow: hidden;
-  }
-  .hero-banner img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: brightness(.88) saturate(.9);
+    position: relative;
+    z-index: 1;
+    height: 44vh;
+    display: flex; align-items: center; justify-content: center; padding-top: 8vh;
   }
   .hero-banner-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(250,243,224,0) 25%,
-      rgba(248,240,220,.45) 65%,
-      rgba(245,240,232,.92) 88%,
-      rgba(245,240,232,1) 100%
+      rgba(250,243,224,0) 50%,
+      rgba(240,232,208,.7) 80%,
+      rgba(237,229,216,1) 100%
     );
   }
   .hero-banner-text {
-    position: absolute; top: 38%; transform: translateY(-50%); left: 0; right: 0;
     text-align: center; width: 100%;
     padding: 0 3rem;
   }
@@ -137,6 +164,7 @@
   .journey {
     padding: 1rem 3rem 1.5rem;
     max-width: 1100px; margin: 0 auto;
+    position: relative; z-index: 1;
   }
   .journey-header { text-align: center; margin-bottom: 2.5rem; }
   .journey-cards {
@@ -181,6 +209,7 @@
   .cta-section {
     padding: 1.5rem 3rem 4rem;
     text-align: center;
+    position: relative; z-index: 1;
   }
   .cta-inner {
     max-width: 560px; margin: 0 auto;
@@ -215,7 +244,7 @@
 
   /* ─── TRANSITION STRIP ─── */
   .coffee-strip {
-    background: var(--stone); padding: 2.5rem 3rem;
+    background: #D8D0C0; padding: 2.5rem 3rem;
     text-align: center;
     border-top: 0.5px solid var(--pebble);
     border-bottom: 0.5px solid var(--pebble);
@@ -500,54 +529,56 @@
 
   <!-- Hero Banner -->
   <section class="hero">
+    <div class="forest-backdrop">
+      <div class="forest-sun"></div>
+      <svg class="forest-trees forest-trees-left" viewBox="0 0 320 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="tL1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#A8C5A0" stop-opacity=".25"/>
+            <stop offset="30%"  stop-color="#6B9A72" stop-opacity=".55"/>
+            <stop offset="65%"  stop-color="#4A7055" stop-opacity=".72"/>
+            <stop offset="85%"  stop-color="#3A5C46" stop-opacity=".55"/>
+            <stop offset="100%" stop-color="#2C4A3A" stop-opacity=".2"/>
+          </linearGradient>
+          <linearGradient id="tL2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#B5CEB0" stop-opacity=".18"/>
+            <stop offset="35%"  stop-color="#7FAA78" stop-opacity=".42"/>
+            <stop offset="65%"  stop-color="#3D6048" stop-opacity=".6"/>
+            <stop offset="85%"  stop-color="#304C3A" stop-opacity=".4"/>
+            <stop offset="100%" stop-color="#253D30" stop-opacity=".15"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="30"  cy="450" rx="42" ry="500" fill="url(#tL1)"/>
+        <ellipse cx="110" cy="440" rx="30" ry="470" fill="url(#tL2)" opacity=".9"/>
+        <ellipse cx="185" cy="450" rx="22" ry="440" fill="url(#tL1)" opacity=".6"/>
+        <ellipse cx="248" cy="455" rx="16" ry="400" fill="url(#tL2)" opacity=".4"/>
+        <ellipse cx="298" cy="460" rx="11" ry="360" fill="url(#tL1)" opacity=".22"/>
+      </svg>
+      <svg class="forest-trees forest-trees-right" viewBox="0 0 320 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="tR1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#A8C5A0" stop-opacity=".25"/>
+            <stop offset="30%"  stop-color="#6B9A72" stop-opacity=".55"/>
+            <stop offset="65%"  stop-color="#4A7055" stop-opacity=".72"/>
+            <stop offset="85%"  stop-color="#3A5C46" stop-opacity=".55"/>
+            <stop offset="100%" stop-color="#2C4A3A" stop-opacity=".2"/>
+          </linearGradient>
+          <linearGradient id="tR2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#B5CEB0" stop-opacity=".18"/>
+            <stop offset="35%"  stop-color="#7FAA78" stop-opacity=".42"/>
+            <stop offset="65%"  stop-color="#3D6048" stop-opacity=".6"/>
+            <stop offset="85%"  stop-color="#304C3A" stop-opacity=".4"/>
+            <stop offset="100%" stop-color="#253D30" stop-opacity=".15"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="290" cy="450" rx="42" ry="500" fill="url(#tR1)"/>
+        <ellipse cx="210" cy="440" rx="30" ry="470" fill="url(#tR2)" opacity=".9"/>
+        <ellipse cx="135" cy="450" rx="22" ry="440" fill="url(#tR1)" opacity=".6"/>
+        <ellipse cx="72"  cy="455" rx="16" ry="400" fill="url(#tR2)" opacity=".4"/>
+        <ellipse cx="22"  cy="460" rx="11" ry="360" fill="url(#tR1)" opacity=".22"/>
+      </svg>
+    </div>
     <div class="hero-banner">
-      <!-- Forest path illustration — warm morning light version -->
-      <div style="width:100%;height:100%;background:linear-gradient(175deg,#FAF3E0 0%,#F0E8D0 20%,#D6CDB0 50%,#B8C9AA 78%,#8FA882 100%);position:relative;overflow:hidden;">
-
-        <!-- Soft golden radial glow from top-center (sun source) -->
-        <div style="position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:70%;height:70%;background:radial-gradient(ellipse at 50% 20%,rgba(230,200,130,.55) 0%,rgba(240,220,170,.2) 40%,transparent 70%);pointer-events:none;"></div>
-
-        <!-- SVG: trees + path + light rays -->
-        <svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;left:0;width:100%;height:100%;">
-          <defs>
-            <!-- Left tree gradient: dark base, lit top -->
-            <linearGradient id="treeL" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stop-color="#2C4A3A" stop-opacity=".95"/>
-              <stop offset="60%" stop-color="#4A7055" stop-opacity=".7"/>
-              <stop offset="100%" stop-color="#7FA870" stop-opacity=".35"/>
-            </linearGradient>
-            <!-- Right tree gradient -->
-            <linearGradient id="treeR" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stop-color="#2C4A3A" stop-opacity=".95"/>
-              <stop offset="60%" stop-color="#4A7055" stop-opacity=".7"/>
-              <stop offset="100%" stop-color="#7FA870" stop-opacity=".35"/>
-            </linearGradient>
-
-          </defs>
-
-          <!-- Left tree group -->
-          <ellipse cx="30"  cy="200" rx="28" ry="220" fill="url(#treeL)"/>
-          <ellipse cx="85"  cy="185" rx="22" ry="205" fill="url(#treeL)" opacity=".85"/>
-          <ellipse cx="145" cy="195" rx="18" ry="195" fill="url(#treeL)" opacity=".7"/>
-          <ellipse cx="195" cy="210" rx="15" ry="180" fill="url(#treeL)" opacity=".5"/>
-          <ellipse cx="240" cy="215" rx="12" ry="160" fill="url(#treeL)" opacity=".35"/>
-
-          <!-- Right tree group -->
-          <ellipse cx="960"  cy="215" rx="12" ry="160" fill="url(#treeR)" opacity=".35"/>
-          <ellipse cx="1005" cy="210" rx="15" ry="180" fill="url(#treeR)" opacity=".5"/>
-          <ellipse cx="1055" cy="195" rx="18" ry="195" fill="url(#treeR)" opacity=".7"/>
-          <ellipse cx="1115" cy="185" rx="22" ry="205" fill="url(#treeR)" opacity=".85"/>
-          <ellipse cx="1170" cy="200" rx="28" ry="220" fill="url(#treeR)"/>
-
-
-
-
-
-          <!-- Ground mist / soft horizon haze -->
-          <ellipse cx="600" cy="400" rx="500" ry="60" fill="#FAF3E0" opacity=".3"/>
-        </svg>
-      </div>
-      <div class="hero-banner-overlay"></div>
       <div class="hero-banner-text animate-in">
         <p>在迷惘中，慢慢走。<br>我們陪你整理過去，拾起那些曾被遺忘的內在價值，看見未來的亮光。</p>
       </div>
