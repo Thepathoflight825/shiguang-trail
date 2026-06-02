@@ -301,6 +301,7 @@
     background: linear-gradient(160deg, var(--forest) 0%, #2C4A43 50%, var(--bark) 100%);
     position: relative; overflow: hidden;
   }
+
   .blueprint-hero::before {
     content: ''; position: absolute; inset: 0;
     background-image: radial-gradient(circle at 20% 80%, rgba(175,169,236,.15) 0%, transparent 50%),
@@ -308,7 +309,8 @@
   }
   .blueprint-hero-content {
     position: relative; z-index: 1;
-    padding: 4rem 3rem; max-width: 700px;
+    padding: 4rem 3rem; max-width: 900px;
+    width: 100%; margin: 0 auto; text-align: center;
   }
   .blueprint-eyebrow {
     font-size: .65rem; letter-spacing: .3em;
@@ -325,7 +327,8 @@
   .blueprint-subtitle {
     font-size: .88rem; color: rgba(245,240,232,.7);
     line-height: 1.9; letter-spacing: .03em;
-    max-width: 480px;
+    max-width: 720px; margin: 0 auto;
+    white-space: nowrap;
   }
 
   /* ─── BLUEPRINT CONTENT ─── */
@@ -334,7 +337,7 @@
     padding: 4rem 3rem 2rem;
   }
   .bridge-quote {
-    text-align: center; margin-bottom: 4rem;
+    text-align: center; margin-bottom: 2rem;
     padding: 0 2rem;
   }
   .bridge-quote p {
@@ -355,6 +358,7 @@
   .plans-grid {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 1.5rem; margin-bottom: 3rem;
+    align-items: stretch;
   }
   .plan-card {
     border: 0.5px solid var(--stone);
@@ -362,7 +366,9 @@
     background: var(--warm-white);
     position: relative; overflow: hidden;
     transition: transform .25s, box-shadow .25s;
+    display: flex; flex-direction: column;
   }
+  .plan-tag { align-self: flex-start; }
   .plan-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(44,36,22,.08); }
   .plan-card.featured {
     background: var(--forest); border-color: var(--forest);
@@ -387,7 +393,7 @@
   .plan-card.featured .plan-name { color: var(--cream); }
   .plan-byline {
     font-size: .72rem;
-    color: rgba(245,240,232,.55);
+    color: rgba(245,240,232,.75);
     letter-spacing: .08em;
     margin-top: .5rem;
     margin-bottom: 1.25rem;
@@ -442,9 +448,10 @@
 
   /* Interest form */
   .interest-section {
-    background: var(--stone);
+    background: #D5CDB8;
     border-radius: 20px; padding: 2.5rem;
-    text-align: center; margin-bottom: 4rem;
+    text-align: center; margin-bottom: 2rem;
+    box-shadow: 0 2px 16px rgba(44,36,22,.07);
   }
   .interest-title {
     font-family: 'Noto Serif TC', serif;
@@ -486,17 +493,17 @@
   /* SCPC badge */
   .credential-bar {
     display: flex; align-items: center; justify-content: center;
-    gap: 1rem; padding: 1.5rem 3rem 4rem;
+    gap: 2rem; padding: 1rem 3rem 3rem;
     flex-wrap: wrap;
   }
   .credential-item {
     display: flex; align-items: center; gap: .5rem;
-    font-size: .72rem; color: var(--sage);
-    letter-spacing: .08em;
+    font-size: .72rem; color: var(--bark);
+    letter-spacing: .08em; opacity: .75;
   }
   .credential-dot {
-    width: 5px; height: 5px;
-    background: var(--pebble); border-radius: 50%;
+    width: 4px; height: 4px;
+    background: var(--bark); border-radius: 50%; opacity: .4;
   }
 
   /* ─── ANIMATIONS ─── */
@@ -743,7 +750,7 @@
         <span class="plan-tag">核心方案</span>
         <h3 class="plan-name">藍圖對話<br>1 on 1 生涯引導</h3>
         <p class="plan-desc">與 Sherry｜生涯引導教練 進行 60 分鐘深度對話，把你的 10 個核心價值觀，轉化為一張只屬於你的人生藍圖。</p>
-        <p class="plan-byline">— Sherry｜SCPC 國際職業規劃師 × 7+ 年企業 HRBP 實務經驗</p>
+        <p class="plan-byline">Sherry｜SCPC 國際職業規劃師 × 7+ 年企業 HRBP 實務經驗</p>
         <ul class="plan-features">
           <li>60 分鐘 1 on 1 視訊引導</li>
           <li>會前個人化預習報告</li>
