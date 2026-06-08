@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拾光徑 · 開始自我探索</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --cream-light: #FAF7F2;
+    --forest: #3D5A54;
+    --forest-dark: #2C4240;
+    --forest-light: #5A7A72;
+    --sand: #E8DDD0;
+    --sand-dark: #C8BAA8;
+    --lavender: #AFA9EC;
+    --text-dark: #2A2A2A;
+    --text-mid: #5A5A5A;
+    --text-soft: #8A8A8A;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(61, 90, 84, 0.08);
+    --shadow-hover: 0 8px 32px rgba(61, 90, 84, 0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background decorative elements */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 10% 20%, rgba(90, 122, 114, 0.10) 0%, transparent 70%),
+      radial_gradient(ellipse 500px 600px at 90% 80%, rgba(175, 169, 236, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── SCREENS ── */
+  .screen {
+    display: none;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .screen.active { display: flex; flex-direction: column; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── NAV ── */
+  .nav {
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .nav-brand { font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 500; color: var(--forest-dark); letter-spacing: 0.04em; text-decoration: none; }
+  .nav-sub { font-size: 11px; color: var(--text-soft); letter-spacing: 0.08em; margin-top: 2px; }
+  .nav-back {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--text-soft);
+    cursor: pointer; border: none; background: none;
+    padding: 8px 12px; border-radius: 20px;
+    transition: all 0.2s;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .nav-back:hover { background: var(--sand); color: var(--text-mid); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    height: 3px;
+    background: var(--sand);
+    margin: 0 48px;
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--forest-light), var(--forest));
+    border-radius: 2px;
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 56px 64px;
+    max-width: 720px;
+    width: 100%;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+
+  .card-icon {
+    width: 56px; height: 56px;
+    background: var(--cream);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    font-size: 24px;
+  }
+
+  h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1.4;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--forest);
+    color: var(--white);
+    border: none;
+    border-radius: 32px;
+    padding: 16px 40px;
+    font-size: 15px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--forest-dark); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+  .btn-primary:disabled { background: var(--sand-dark); cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .btn-gold {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #C9A96E, #B8935A);
+    color: var(--white);
+    border: none;
+    border-radius: 32px;
+    padding: 16px 40px;
+    font-size: 15px;
+    font-family: 'Noto Sans TC', sans-serif;
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.05em;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(185, 147, 90, 0.3); }
+
+  /* ── WORD GRID ── */
+  .word-grid-container {
+    background: var(--white);
+    border-radius: var(--radius);
+    max-width: 860px;
+    width: 100%;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .grid-header {
+    padding: 40px 48px 28px;
+    border-bottom: 1px solid var(--cream);
+    text-align: center;
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    z-index: 10;
+  }
+
+  .counter-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--cream);
+    padding: 10px 24px;
+    border-radius: 24px;
+    margin-top: 16px;
+  }
+  .counter-num {
+    font-size: 28px;
+    font-family: 'Noto Serif TC', serif;
+    color: var(--forest);
+    font-weight: 500;
+    min-width: 32px;
+    text-align: center;
+    line-height: 1;
+  }
+  .counter-slash { color: var(--text-soft); font-size: 18px; }
+  .counter-total { font-size: 18px; color: var(--text-soft); font-family: 'Noto Serif TC', serif; }
+  .counter-label { font-size: 12px; color: var(--text-soft); letter-spacing: 0.06em; margin-left: 4px; }
+
+  .grid-body { padding: 28px 48px 40px; }
+
+  .word-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+
+  .word-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    border: 1.5px solid var(--sand);
+    border-radius: 24px;
+    font-size: 14px;
+    color: var(--text-mid);
+    cursor: pointer;
+    background: var(--white);
+    transition: all 0.2s;
+    user-select: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .word-chip:hover:not(.disabled) {
+    border-color: var(--forest-light);
+    color: var(--forest);
+    background: rgba(61, 90, 84, 0.04);
+    transform: translateY(-1px);
+  }
+  .word-chip.selected {
+    background: var(--forest);
+    border-color: var(--forest);
+    color: var(--white);
+    box-shadow: 0 3px 12px rgba(61, 90, 84, 0.2);
+  }
+  .word-chip.selected:hover { background: var(--forest-dark); }
+  .word-chip.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .word-chip.highlight {
+    border-color: var(--lavender);
+    background: rgba(175, 169, 236, 0.1);
+    color: var(--text-dark);
+  }
+
+  .grid-footer {
+    padding: 20px 48px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--cream);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .hint-text {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── COMPLETION SCREEN ── */
+  .values-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 28px 0;
+  }
+  .value-tag {
+    background: var(--cream);
+    border: 1.5px solid var(--sand);
+    border-radius: 24px;
+    padding: 10px 20px;
+    font-size: 15px;
+    color: var(--forest-dark);
+    font-family: 'Noto Serif TC', serif;
+    letter-spacing: 0.04em;
+    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .divider {
+    width: 48px; height: 1px;
+    background: var(--sand-dark);
+    margin: 28px auto;
+  }
+
+  .email-section { text-align: left; margin-top: 8px; }
+
+  .email-label { font-size: 13px; color: var(--text-soft); margin-bottom: 10px; letter-spacing: 0.04em; }
+
+  .email-input-wrap {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .email-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1.5px solid var(--sand);
+    border-radius: 32px;
+    font-size: 14px;
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--cream-light);
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .email-input:focus { border-color: var(--forest-light); background: var(--white); }
+  .email-input::placeholder { color: var(--text-soft); }
+
+  .email-note { font-size: 11px; color: var(--text-soft); letter-spacing: 0.04em; text-align: center; margin-top: 10px; }
+
+  /* ── THANK YOU ── */
+  .thank-you-content {
+    text-align: center;
+  }
+  .sparkle {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 24px;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .next-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--forest);
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 1px solid var(--sand);
+    border-radius: 24px;
+    transition: all 0.2s;
+  }
+  .next-link:hover { background: var(--cream); border-color: var(--forest-light); }
+
+  /* ── LOADING ── */
+  .loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(245, 240, 232, 0.9);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .loading-overlay.show { display: flex; }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid var(--sand);
+    border-top-color: var(--forest);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 14px; color: var(--text-mid); letter-spacing: 0.04em; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px);
+    background: var(--forest-dark);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 32px;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    z-index: 200;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav { padding: 20px 24px; }
+    .progress-wrap { margin: 0 24px; }
+    .card { padding: 40px 28px; }
+    .grid-header { padding: 28px 24px 20px; }
+    .grid-body { padding: 20px 24px 28px; }
+    .grid-footer { padding: 16px 24px 28px; flex-direction: column; align-items: stretch; }
+    h1 { font-size: 22px; }
+    .word-chip { padding: 9px 14px; font-size: 13px; }
+    .email-input-wrap { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">正在傳送中⋯⋯</div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 0: Welcome
+═══════════════════════════════════════════ -->
+<div class="screen active" id="screen-welcome">
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">
+      拾光徑
+      <div class="nav-sub">自我探索 × 生涯引導</div>
+    </a>
+  </nav>
+  <div class="main">
+    <div class="card">
+      <div class="card-icon">✦</div>
+      <h1>拾光徑</h1>
+      <p class="subtitle">
+        在繁忙的世界裡，給自己 10 分鐘，聽聽內心的聲音。<br>
+        這不只是一次選擇，是一次與未來的自己相遇。
+      </p>
+      <button class="btn-primary" onclick="goToScreen('screen-phase1-intro')">
+        踏入小徑 &nbsp;→
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 1: Phase 1 Intro
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-phase1-intro">
+  <nav class="nav">
+    <button class="nav-back" onclick="goToScreen('screen-welcome')">← 返回</button>
+  </nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width: 15%"></div></div>
+  <div class="main">
+    <div class="card">
+      <div class="card-icon">○</div>
+      <h1>選出讓你心跳一下的詞</h1>
+      <p class="subtitle">
+        不用想太多，直覺反應就好<br><br>
+        從 52 個選項中，選出 20 個讓你有感覺的。<br>
+        選滿 20 個後，會自動解鎖下一步。
+      </p>
+      <button class="btn-primary" onclick="goToScreen('screen-phase1-select')">
+        我準備好了
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 2: Phase 1 Select (52 → 20)
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-phase1-select">
+  <nav class="nav">
+    <button class="nav-back" onclick="goToScreen('screen-phase1-intro')">← 返回</button>
+    <a href="index.html" class="nav-brand" style="text-align:right">拾光徑</a>
+  </nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width: 35%"></div></div>
+  <div class="main" style="padding-top: 28px; padding-bottom: 28px;">
+    <div class="word-grid-container">
+      <div class="grid-header">
+        <h2>選出讓你心跳一下的詞</h2>
+        <p class="subtitle" style="margin-bottom: 0; font-size: 13px;">不用想太多，跟著直覺走</p>
+        <div class="counter-display">
+          <span class="counter-num" id="count1">0</span>
+          <span class="counter-slash">/</span>
+          <span class="counter-total">20</span>
+          <span class="counter-label">已選擇</span>
+        </div>
+      </div>
+      <div class="grid-body">
+        <div class="word-grid" id="grid1"></div>
+      </div>
+      <div class="grid-footer">
+        <p class="hint-text">選滿 20 個後按鈕自動解鎖</p>
+        <button class="btn-primary" id="btn-phase1-next" disabled onclick="goToPhase2Intro()">
+          繼續探索 →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 3: Phase 2 Intro
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-phase2-intro">
+  <nav class="nav">
+    <button class="nav-back" onclick="goToScreen('screen-phase1-select')">← 返回</button>
+  </nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width: 55%"></div></div>
+  <div class="main">
+    <div class="card">
+      <div class="card-icon">◈</div>
+      <h1>如果只能帶走 10 個，你想要哪些？</h1>
+      <p class="subtitle">
+        回想剛才選的 20 個，再進一步縮小<br>
+        到最靠近你內心的 10 個心動詞<br><br>
+        這將是你的核心價值觀 ✦
+      </p>
+      <button class="btn-primary" onclick="goToScreen('screen-phase2-select')">
+        我知道了
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 4: Phase 2 Select (20 → 10)
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-phase2-select">
+  <nav class="nav">
+    <button class="nav-back" onclick="goToScreen('screen-phase2-intro')">← 返回</button>
+    <a href="index.html" class="nav-brand" style="text-align:right">拾光徑</a>
+  </nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width: 72%"></div></div>
+  <div class="main" style="padding-top: 28px; padding-bottom: 28px;">
+    <div class="word-grid-container">
+      <div class="grid-header">
+        <h2>留下最靠近你內心的 10 個</h2>
+        <p class="subtitle" style="margin-bottom: 0; font-size: 13px;">從你剛才選的 20 個詞裡，再精選一次</p>
+        <div class="counter-display">
+          <span class="counter-num" id="count2">0</span>
+          <span class="counter-slash">/</span>
+          <span class="counter-total">10</span>
+          <span class="counter-label">已選擇</span>
+        </div>
+      </div>
+      <div class="grid-body">
+        <div class="word-grid" id="grid2"></div>
+      </div>
+      <div class="grid-footer">
+        <p class="hint-text">選滿 10 個後按鈕自動解鎖</p>
+        <button class="btn-primary" id="btn-phase2-next" disabled onclick="goToCompletion()">
+          確認我的核心 →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 5: Completion + Email
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-complete">
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">
+      拾光徑
+      <div class="nav-sub">自我探索 × 生涯引導</div>
+    </a>
+  </nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width: 90%"></div></div>
+  <div class="main">
+    <div class="card" style="max-width: 640px; text-align: left;">
+      <div style="text-align:center; margin-bottom: 8px;">
+        <div class="card-icon">✦</div>
+        <h1>你的靈魂核心已浮現</h1>
+        <p class="subtitle">謝謝你給自己這 10 分鐘</p>
+      </div>
+
+      <div class="values-display" id="finalValues"></div>
+
+      <div class="divider"></div>
+
+      <p style="font-size: 14px; color: var(--text-mid); line-height: 1.9; margin-bottom: 24px; text-align: center;">
+        剛剛完成的，不只是一份選擇<br>
+        ——是一次與真實自我的相遇<br><br>
+        <strong style="color: var(--text-dark);">留下你的 Email，24 小時內收到你的 AI 深度分析報告</strong><br>
+        <span style="font-size: 13px; color: var(--text-soft);">包含：核心價值解析・職涯方向建議・理想夥伴特質</span>
+      </p>
+
+      <div class="email-section">
+        <div class="email-input-wrap">
+          <input
+            type="email"
+            class="email-input"
+            id="emailInput"
+            placeholder="your@email.com"
+            autocomplete="email"
+          >
+          <button class="btn-primary" onclick="submitEmail()" style="white-space: nowrap; padding: 14px 28px;">
+            收穫結語
+          </button>
+        </div>
+        <p class="email-note">不會寄送廣告 · 隨時可以取消訂閱</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 6: Thank You
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-thankyou">
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">
+      拾光徑
+      <div class="nav-sub">自我探索 × 生涯引導</div>
+    </a>
+  </nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width: 100%"></div></div>
+  <div class="main">
+    <div class="card thank-you-content">
+      <span class="sparkle">✨</span>
+      <h1>你的探索旅程，才剛開始</h1>
+      <p class="subtitle">
+        你的專屬結語，將於 24 小時內 Mail 到你的個人信箱<br>
+        請好好珍藏～
+      </p>
+      <div class="divider"></div>
+      <p style="font-size: 14px; color: var(--text-mid); line-height: 1.8;">
+        拾光徑的大門隨時為你敞開——<br>
+        把今天找到的答案，帶回你的生活裡
+      </p>
+      <a href="blueprint.html" class="next-link" style="margin: 24px auto 0; display: inline-flex;">
+        了解藍圖對話，把洞察化為行動 →
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+
+const ALL_WORDS = [
+  '韌性','心流','極簡','安全感','穩定可靠','財富',
+  '四處旅行','財務自由','平衡','有誠信','做自己','自律',
+  '有賺錢能力','和睦','享受自由','卓越','激勵他人',
+  '愉悅','長期運動','覺醒','有影響力','圓滿','感恩',
+  '好奇心','專業被認可','創造力','深層連結','勇氣',
+  '健康活力','生活單純','持續進步','社會地位','學習力',
+  '公平正義','友誼','傳承','陪伴家人','深耕','同理心',
+  '高品質','冒險','智慧','歸屬感','真實自我','創業精神',
+  '共好','自信','有機生活','內在平靜','幫助他人','自由',
+  '正念'
+];
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+
+let phase1Selected = new Set();
+let phase2Selected = new Set();
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+
+function goToScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToPhase2Intro() {
+  goToScreen('screen-phase2-intro');
+  renderPhase2Grid();
+}
+
+function goToCompletion() {
+  goToScreen('screen-complete');
+  renderFinalValues();
+}
+
+// ═══════════════════════════════════════════
+// PHASE 1 GRID
+// ═══════════════════════════════════════════
+
+function renderPhase1Grid() {
+  const grid = document.getElementById('grid1');
+  grid.innerHTML = '';
+  ALL_WORDS.forEach(word => {
+    const chip = document.createElement('button');
+    chip.className = 'word-chip' + (phase1Selected.has(word) ? ' selected' : '');
+    chip.textContent = word;
+    chip.onclick = () => togglePhase1(word, chip);
+    grid.appendChild(chip);
+  });
+  updatePhase1Counter();
+}
+
+function togglePhase1(word, chip) {
+  if (phase1Selected.has(word)) {
+    phase1Selected.delete(word);
+    chip.classList.remove('selected');
+  } else {
+    if (phase1Selected.size >= 20) {
+      showToast('已選滿 20 個，請先取消一個再選新的');
+      return;
+    }
+    phase1Selected.add(word);
+    chip.classList.add('selected');
+  }
+  updatePhase1Counter();
+  updatePhase1Disabled();
+}
+
+function updatePhase1Counter() {
+  document.getElementById('count1').textContent = phase1Selected.size;
+  const btn = document.getElementById('btn-phase1-next');
+  btn.disabled = phase1Selected.size !== 20;
+}
+
+function updatePhase1Disabled() {
+  const isFull = phase1Selected.size >= 20;
+  document.querySelectorAll('#grid1 .word-chip').forEach(chip => {
+    if (!chip.classList.contains('selected')) {
+      chip.classList.toggle('disabled', isFull);
+    }
+  });
+}
+
+// ═══════════════════════════════════════════
+// PHASE 2 GRID — only shows the 20 selected
+// ═══════════════════════════════════════════
+
+function renderPhase2Grid() {
+  const grid = document.getElementById('grid2');
+  grid.innerHTML = '';
+
+  // Reset phase2 if re-entering
+  phase2Selected = new Set();
+  document.getElementById('count2').textContent = '0';
+  document.getElementById('btn-phase2-next').disabled = true;
+
+  const words = Array.from(phase1Selected);
+  words.forEach(word => {
+    const chip = document.createElement('button');
+    chip.className = 'word-chip';
+    chip.textContent = word;
+    chip.onclick = () => togglePhase2(word, chip);
+    grid.appendChild(chip);
+  });
+}
+
+function togglePhase2(word, chip) {
+  if (phase2Selected.has(word)) {
+    phase2Selected.delete(word);
+    chip.classList.remove('selected');
+  } else {
+    if (phase2Selected.size >= 10) {
+      showToast('已選滿 10 個，請先取消一個再選新的');
+      return;
+    }
+    phase2Selected.add(word);
+    chip.classList.add('selected');
+  }
+  updatePhase2Counter();
+  updatePhase2Disabled();
+}
+
+function updatePhase2Counter() {
+  document.getElementById('count2').textContent = phase2Selected.size;
+  const btn = document.getElementById('btn-phase2-next');
+  btn.disabled = phase2Selected.size !== 10;
+}
+
+function updatePhase2Disabled() {
+  const isFull = phase2Selected.size >= 10;
+  document.querySelectorAll('#grid2 .word-chip').forEach(chip => {
+    if (!chip.classList.contains('selected')) {
+      chip.classList.toggle('disabled', isFull);
+    }
+  });
+}
+
+// ═══════════════════════════════════════════
+// FINAL VALUES DISPLAY
+// ═══════════════════════════════════════════
+
+function renderFinalValues() {
+  const container = document.getElementById('finalValues');
+  container.innerHTML = '';
+  Array.from(phase2Selected).forEach((word, i) => {
+    const tag = document.createElement('span');
+    tag.className = 'value-tag';
+    tag.textContent = word;
+    tag.style.animationDelay = `${i * 0.06}s`;
+    container.appendChild(tag);
+  });
+}
+
+// ═══════════════════════════════════════════
+// EMAIL SUBMIT — Google Apps Script
+// ═══════════════════════════════════════════
+
+// ⚠️ 請將下方 URL 替換成你的 Google Apps Script Web App URL
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbygxBayCsI-FRJlvkiNr7vON6kZE8IaOmEX1BBnos_IoHywoa43KaqcdqMhpXMdLgK4/exec';
+
+async function submitEmail() {
+  const email = document.getElementById('emailInput').value.trim();
+
+  if (!email || !email.includes('@')) {
+    showToast('請輸入有效的 Email 地址');
+    return;
+  }
+
+  const overlay = document.getElementById('loadingOverlay');
+  overlay.classList.add('show');
+
+  const payload = {
+    email: email,
+    phase1: Array.from(phase1Selected).join('、'),
+    phase2: Array.from(phase2Selected).join('、'),
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    // If no Apps Script URL configured, skip the API call (demo mode)
+    if (APPS_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }
+    overlay.classList.remove('show');
+    goToScreen('screen-thankyou');
+  } catch (err) {
+    overlay.classList.remove('show');
+    // Still proceed — no-cors means we can't read response anyway
+    goToScreen('screen-thankyou');
+  }
+}
+
+// ═══════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════
+
+let toastTimer = null;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ═══════════════════════════════════════════
+// ENTER key on email
+// ═══════════════════════════════════════════
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderPhase1Grid();
+  document.getElementById('emailInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitEmail();
+  });
+});
+</script>
+</body>
+</html>
