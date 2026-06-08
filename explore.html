@@ -24,7 +24,7 @@
   .screen{display:none;position:relative;z-index:1;min-height:100vh;animation:fadeUp 0.5s ease forwards;flex-direction:column;}
   .screen.active{display:flex;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-  .nav{padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+  .nav{padding:16px 48px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
   .nav-brand{font-family:'Noto Serif TC',serif;font-size:20px;font-weight:500;color:var(--forest-dark);letter-spacing:0.04em;text-decoration:none;}
   .nav-sub{font-size:11px;color:var(--text-soft);letter-spacing:0.08em;margin-top:2px;}
   .nav-back{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-soft);cursor:pointer;border:none;background:none;padding:8px 12px;border-radius:20px;transition:all 0.2s;font-family:'Noto Sans TC',sans-serif;}
@@ -152,7 +152,7 @@
   <nav class="nav"><button class="nav-back" onclick="goToScreen('screen-welcome')">← 返回</button></nav>
   <div class="progress-wrap"><div class="progress-fill" style="width:15%"></div></div>
   <div class="main"><div class="card">
-    <div class="card-icon">○</div>
+    <div class="card-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 24s-9-6.1-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.9-9 12-9 12z" stroke="#3D5A54" stroke-width="1.6" fill="none" stroke-linejoin="round"/><polyline points="4,14 7,14 9,10 11,18 13,13 15,16 17,14 24,14" stroke="#3D5A54" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <h1>選出讓你心跳一下的詞</h1>
     <p class="subtitle">不用想太多，直覺反應就好<br><br>從 52 個選項中，選出 20 個讓你有感覺的。<br>選滿 20 個後，會自動解鎖下一步。</p>
     <button class="btn-primary" onclick="goToScreen('screen-phase1-select')">我準備好了</button>
@@ -212,7 +212,7 @@
   <div class="main"><div class="card" style="max-width:600px;">
     <div class="card-icon">🌿</div>
     <h1>為你的藍圖加一道光</h1>
-    <p class="subtitle">上傳 1–3 張你喜歡或讓你心動的照片（選填）<br>它們將成為你專屬藍圖的視覺底蘊</p>
+    <p class="subtitle">上傳 1 張你最喜歡或讓你心動的照片（選填）<br>它將成為你專屬藍圖的視覺底蘊</p>
     <div class="upload-zone" onclick="document.getElementById('photoInput').click()">
       <input type="file" id="photoInput" accept="image/*" onchange="handlePhotoUpload(event)">
       <span class="upload-icon">📷</span>
@@ -267,7 +267,6 @@
     </div>
     <div class="next-steps">
       <a href="index.html#blueprint" onclick="sessionStorage.setItem('page','p2')" class="next-btn gold">了解藍圖對話 1 on 1 生涯引導 →</a>
-      <button class="next-btn" onclick="window.print()">🖨 列印 / 儲存這份藍圖</button>
     </div>
   </div>
 </div>
