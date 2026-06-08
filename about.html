@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>關於 Sherry — 拾光徑</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8; --warm-white: #FAF7F2;
+    --stone: #E8DDD0; --pebble: #D3C9BC; --sage: #9BA8A3;
+    --deep-sage: #5C7A72; --forest: #3D5A54; --bark: #6B5B4E; --ink: #2C2416;
+    --gold: #C9A96E; --gold-light: #E8D5A3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 3rem;
+    background: rgba(245,240,232,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--stone);
+  }
+  .nav-brand { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+  .nav-brand-main { font-family: 'Noto Serif TC', serif; font-size: 1.55rem; font-weight: 500; color: var(--forest); letter-spacing: .08em; }
+  .nav-brand-sub { font-size: .75rem; color: var(--sage); letter-spacing: .15em; text-transform: uppercase; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a { font-size: .95rem; color: var(--bark); text-decoration: none; letter-spacing: .08em; transition: color .2s; }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-links a.nav-active { color: var(--forest); font-weight: 500; border-bottom: 1.5px solid var(--forest); padding-bottom: 2px; }
+  .nav-cta { font-size: .9rem; padding: .6rem 1.6rem; background: var(--forest); color: var(--cream); border: none; border-radius: 99px; cursor: pointer; letter-spacing: .06em; font-family: 'Noto Sans TC', sans-serif; transition: background .2s, transform .1s; text-decoration: none; display: inline-flex; align-items: center; }
+  .nav-cta:hover { background: var(--deep-sage); transform: translateY(-1px); }
+
+  /* ── FOREST BACKGROUND (same as index) ── */
+  .forest-backdrop {
+    position: fixed; inset: 0; z-index: -1;
+    pointer-events: none; overflow: hidden;
+  }
+  .forest-sun {
+    position: absolute; top: -20vh; left: 50%; transform: translateX(-50%);
+    width: 70vw; height: 70vw; max-width: 900px; max-height: 900px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(250,243,215,0.65) 0%, rgba(245,238,218,0.3) 40%, transparent 70%);
+  }
+  .forest-trees {
+    position: absolute; top: 0; bottom: 0; width: 22vw; max-width: 300px;
+    opacity: 0.55;
+  }
+  .forest-trees-left { left: 0; }
+  .forest-trees-right { right: 0; transform: scaleX(-1); }
+
+  /* ── PAGE LAYOUT ── */
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: 80px 24px 120px; }
+
+  /* ── HERO ── */
+  .hero-section { text-align: center; margin-bottom: 72px; animation: fadeUp 0.7s ease forwards; }
+  .hero-eyebrow { font-size: .8rem; letter-spacing: .18em; color: var(--deep-sage); text-transform: uppercase; margin-bottom: 20px; }
+  .hero-name { font-family: 'Noto Serif TC', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; color: var(--forest); letter-spacing: .06em; line-height: 1.2; margin-bottom: 32px; }
+  .hero-belief {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.05rem; font-weight: 300;
+    color: var(--bark); line-height: 2.1;
+    letter-spacing: .04em;
+    background: rgba(245,240,232,0.7);
+    border-left: 3px solid var(--gold);
+    padding: 28px 36px;
+    border-radius: 0 12px 12px 0;
+    text-align: left;
+  }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 64px; animation: fadeUp 0.7s ease forwards; }
+  .section-eyebrow { font-size: .75rem; letter-spacing: .18em; color: var(--deep-sage); text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { font-family: 'Noto Serif TC', serif; font-size: 1.35rem; font-weight: 400; color: var(--forest); margin-bottom: 24px; letter-spacing: .04em; }
+  .section-body { font-size: .95rem; color: var(--bark); line-height: 2.1; letter-spacing: .03em; }
+  .section-body p + p { margin-top: 20px; }
+  .section-body strong { color: var(--forest); font-weight: 500; }
+
+  /* ── CREDENTIALS ── */
+  .credentials-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .cred-badge {
+    background: var(--warm-white);
+    border: 1px solid var(--stone);
+    border-radius: 16px;
+    padding: 28px 16px 24px;
+    text-align: center;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .cred-badge:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(61,90,84,0.10); }
+  .cred-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 400;
+    color: var(--forest); line-height: 1;
+    margin-bottom: 8px; letter-spacing: .04em;
+  }
+  .cred-label { font-size: .72rem; color: var(--bark); line-height: 1.6; letter-spacing: .04em; }
+
+  /* ── DIVIDER ── */
+  .divider { width: 48px; height: 1px; background: var(--pebble); margin: 0 auto 64px; }
+
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    background: var(--forest);
+    border-radius: 20px;
+    padding: 48px 40px;
+    text-align: center;
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .cta-strip-title { font-family: 'Noto Serif TC', serif; font-size: 1.4rem; font-weight: 400; color: var(--cream); margin-bottom: 12px; letter-spacing: .04em; }
+  .cta-strip-sub { font-size: .9rem; color: rgba(245,240,232,0.7); margin-bottom: 32px; line-height: 1.8; }
+  .cta-strip-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-cream { display: inline-flex; align-items: center; padding: .75rem 2rem; background: var(--cream); color: var(--forest); border: none; border-radius: 99px; font-size: .9rem; font-family: 'Noto Sans TC', sans-serif; letter-spacing: .06em; cursor: pointer; text-decoration: none; transition: all .2s; }
+  .btn-cream:hover { background: var(--warm-white); transform: translateY(-1px); }
+  .btn-outline { display: inline-flex; align-items: center; padding: .75rem 2rem; background: transparent; color: var(--cream); border: 1.5px solid rgba(245,240,232,0.4); border-radius: 99px; font-size: .9rem; font-family: 'Noto Sans TC', sans-serif; letter-spacing: .06em; cursor: pointer; text-decoration: none; transition: all .2s; }
+  .btn-outline:hover { border-color: var(--cream); background: rgba(245,240,232,0.08); }
+
+  /* ── FOOTER ── */
+  .site-footer { text-align: center; padding: 32px 24px; font-size: .78rem; color: var(--sage); letter-spacing: .08em; border-top: 0.5px solid var(--stone); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .delay-1 { animation-delay: .15s; opacity: 0; }
+  .delay-2 { animation-delay: .3s; opacity: 0; }
+  .delay-3 { animation-delay: .45s; opacity: 0; }
+  .delay-4 { animation-delay: .6s; opacity: 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.4rem; }
+    .nav-links { display: none; }
+    .page-wrap { padding: 48px 20px 80px; }
+    .hero-belief { padding: 20px 22px; }
+    .credentials-grid { grid-template-columns: repeat(2, 1fr); }
+    .cta-strip { padding: 36px 24px; }
+    .cta-strip-btns { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Forest Background -->
+<div class="forest-backdrop">
+  <div class="forest-sun"></div>
+  <svg class="forest-trees forest-trees-left" viewBox="0 0 320 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <g fill="#4a6741" opacity="0.7">
+      <polygon points="60,900 130,520 200,900"/>
+      <polygon points="0,900 90,480 180,900"/>
+      <polygon points="80,900 160,380 240,900"/>
+      <polygon points="20,900 110,560 200,900"/>
+      <polygon points="100,900 180,440 260,900"/>
+    </g>
+    <g fill="#3D5A54" opacity="0.5">
+      <polygon points="40,900 100,600 160,900"/>
+      <polygon points="120,900 190,500 260,900"/>
+    </g>
+  </svg>
+  <svg class="forest-trees forest-trees-right" viewBox="0 0 320 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <g fill="#4a6741" opacity="0.7">
+      <polygon points="60,900 130,520 200,900"/>
+      <polygon points="0,900 90,480 180,900"/>
+      <polygon points="80,900 160,380 240,900"/>
+      <polygon points="20,900 110,560 200,900"/>
+      <polygon points="100,900 180,440 260,900"/>
+    </g>
+    <g fill="#3D5A54" opacity="0.5">
+      <polygon points="40,900 100,600 160,900"/>
+      <polygon points="120,900 190,500 260,900"/>
+    </g>
+  </svg>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <span class="nav-brand-main">拾光徑</span>
+    <span class="nav-brand-sub">自我探索 × 生涯引導</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">拾光徑</a>
+    <a href="index.html#blueprint">藍圖對話</a>
+    <a href="about.html" class="nav-active">關於 Sherry</a>
+  </div>
+  <a href="explore.html" class="nav-cta">開始探索</a>
+</nav>
+
+<!-- MAIN -->
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <p class="hero-eyebrow">About · 關於引導者</p>
+    <h1 class="hero-name">Hi，我是 Sherry</h1>
+    <blockquote class="hero-belief">
+      我深信每個人迷惘的背後，都只是暫時遺忘了自己的原廠設定。<br><br>
+      我將運用 HR 的理性結構與引導教練的溫暖陪伴，陪你在迷惘中慢下來，拾回內在價值，畫出真正能落地的行動藍圖。
+    </blockquote>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHY ME -->
+  <section class="section delay-1">
+    <p class="section-eyebrow">Why Me · 為什麼是我</p>
+    <h2 class="section-title">我見過太多優秀的人，在 KPI 裡失去眼裡的光</h2>
+    <div class="section-body">
+      <p>在深耕企業 HRBP 與 Full Function 的 7 年多裡，我的日常是看過數千份履歷、面談過無數個在職場中掙扎的靈魂。</p>
+      <p>我見過太多優秀的人，在日復一日的 KPI 與盲目的轉職循環中，逐漸失去了眼裡的光。那種<strong>「不知道自己要什麼、卻又不敢停下來」</strong>的焦慮，我也曾深深體會。</p>
+      <p>我創立「拾光徑」不是為了給你一套標準的成功公式，而是想用我的雙眼，協助你找到那些被你忽略的個人優勢與亮點，<strong>把模糊的直覺，變成往前跨步的底氣。</strong></p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CREDENTIALS -->
+  <section class="section delay-2">
+    <p class="section-eyebrow">Credentials · 專業背書</p>
+    <h2 class="section-title">用真實的積累，陪你走每一步</h2>
+    <div class="credentials-grid">
+      <div class="cred-badge">
+        <div class="cred-num">7+</div>
+        <div class="cred-label">Years<br>跨產業企業 HRBP<br>實務經驗<br><span style="color:var(--sage);font-size:.68rem;">數位行銷・新創・醫美・教育</span></div>
+      </div>
+      <div class="cred-badge">
+        <div class="cred-num" style="font-size:1.6rem;padding-top:4px;">SCPC</div>
+        <div class="cred-label" style="margin-top:4px;">國際職業規劃師<br>認證</div>
+      </div>
+      <div class="cred-badge">
+        <div class="cred-num" style="font-size:1.3rem;padding-top:6px;line-height:1.2;">1 on 1</div>
+        <div class="cred-label" style="margin-top:6px;">生涯引導<br>諮詢與引導教練<br>實務經驗</div>
+      </div>
+      <div class="cred-badge">
+        <div class="cred-num" style="font-size:1.1rem;padding-top:8px;line-height:1.3;">104</div>
+        <div class="cred-label" style="margin-top:4px;">人力銀行<br>平台認證<br>職涯諮詢志工</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA -->
+  <section class="cta-strip delay-3">
+    <h2 class="cta-strip-title">準備好開始你的探索了嗎？</h2>
+    <p class="cta-strip-sub">從一次免費的自我探索開始，<br>找回那個最真實的你。</p>
+    <div class="cta-strip-btns">
+      <a href="explore.html" class="btn-cream">開始自我探索（免費）</a>
+      <a href="index.html#blueprint" class="btn-outline">了解藍圖對話 1 on 1</a>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  拾光徑 × 靈魂本質 &nbsp;|&nbsp; 自我探索 × 生涯引導 &nbsp;|&nbsp; © 2026
+</footer>
+
+</body>
+</html>
