@@ -808,6 +808,13 @@
     if (links[map[id]]) links[map[id]].classList.add('nav-active');
   }
 
+  // Auto-navigate to blueprint page if coming from explore.html
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash === '#blueprint') {
+      showPage('p2');
+    }
+  });
+
   function scrollToInterest() {
     document.getElementById('interest-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }

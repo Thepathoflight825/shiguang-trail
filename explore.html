@@ -214,9 +214,9 @@
     <h1>為你的藍圖加一道光</h1>
     <p class="subtitle">上傳 1–3 張你喜歡或讓你心動的照片（選填）<br>它們將成為你專屬藍圖的視覺底蘊</p>
     <div class="upload-zone" onclick="document.getElementById('photoInput').click()">
-      <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotoUpload(event)">
+      <input type="file" id="photoInput" accept="image/*" onchange="handlePhotoUpload(event)">
       <span class="upload-icon">📷</span>
-      <p class="upload-text">點擊選擇照片，或拖曳到這裡<br><strong>最多 3 張・每張上限 5MB</strong></p>
+      <p class="upload-text">點擊選擇照片，或拖曳到這裡<br><strong>1 張・上限 5MB</strong></p>
     </div>
     <div class="upload-preview" id="uploadPreview"></div>
     <div class="divider"></div>
@@ -247,8 +247,8 @@
   <div class="teaser-section" id="teaserSection">
     <div class="teaser-card">
       <span class="teaser-icon">✦</span>
-      <h2 class="teaser-title">你的靈魂洞察，已在等你</h2>
-      <p class="teaser-body">這 10 個詞不只是選擇——它們是你靈魂最誠實的答案。<br>留下 Email，解鎖專為你組裝的深度洞察——<br><strong>為什麼這 10 個詞選擇了你？你的靈魂在尋找什麼？</strong></p>
+      <h2 class="teaser-title">✦ 拾起核心詞後，下一步呢？</h2>
+      <p class="teaser-body">留下 Email，立即解鎖專屬於你的深度洞察——<br>看清自己為什麼卡住？以及你真正渴望的「原廠設定」是什麼。<br><strong>給自己一個機會，把模糊的直覺，變成清晰的底氣。</strong></p>
       <div class="teaser-preview"><p class="teaser-preview-text" id="teaserText"></p></div>
       <p class="unlock-label">留下 Email，立即解鎖完整洞察</p>
       <div class="email-input-wrap">
@@ -266,7 +266,7 @@
       <p class="insight-sign">— Sherry · 拾光徑</p>
     </div>
     <div class="next-steps">
-      <a href="blueprint.html" class="next-btn gold">了解藍圖對話 1 on 1 生涯引導 →</a>
+      <a href="index.html#blueprint" onclick="sessionStorage.setItem('page','p2')" class="next-btn gold">了解藍圖對話 1 on 1 生涯引導 →</a>
       <button class="next-btn" onclick="window.print()">🖨 列印 / 儲存這份藍圖</button>
     </div>
   </div>
@@ -302,7 +302,7 @@ function handlePhotoUpload(e){const files=Array.from(e.target.files).slice(0,3);
 
 function renderResult(){const vals=Array.from(phase2Selected);const now=new Date();const p=n=>String(n).padStart(2,'0');document.getElementById('blueprintTimestamp').textContent='拾光於：'+now.getFullYear()+'/'+p(now.getMonth()+1)+'/'+p(now.getDate())+' '+p(now.getHours())+':'+p(now.getMinutes());const ps=document.getElementById('photoSection'),ss=document.getElementById('sceneSection');if(uploadedPhotos.length>0){ps.style.display='flex';ss.style.display='none';ps.innerHTML='';uploadedPhotos.forEach(src=>{const fr=document.createElement('div');fr.className='photo-frame';const img=document.createElement('img');img.src=src;img.alt='你的心動照片';fr.appendChild(img);ps.appendChild(fr);});}else{ps.style.display='none';ss.style.display='block';document.getElementById('sceneVisual').innerHTML=SCENES[getScene(vals)];}const ct=document.getElementById('resultValues');ct.innerHTML='';vals.forEach((w,i)=>{const t=document.createElement('span');t.className='value-tag';t.textContent=w;t.style.animationDelay=i*0.07+'s';ct.appendChild(t);});const firstInsight=INSIGHTS[vals[0]]||'';document.getElementById('teaserText').textContent=firstInsight?firstInsight.split('。')[0]+'。':'';}
 
-function buildInsight(vals){const picks=vals.slice(0,3).filter(w=>INSIGHTS[w]);const opener='在這 52 個詞裡，你最終留下了「'+vals.slice(0,3).join('」、「')+'」——\n\n';const body=picks.map(w=>INSIGHTS[w]).join('\n\n');const closer='\n\n這不是巧合，是你靈魂最誠實的選擇。當你感到迷惘時，回到這裡，這 10 個詞就是你的指南針。✦';return opener+body+closer;}
+function buildInsight(vals){const picks=vals.slice(0,3).filter(w=>INSIGHTS[w]);const opener='在這 52 個價值觀裡，你最終留下了「'+vals.slice(0,3).join('」、「')+'」——\n\n';const body=picks.map(w=>INSIGHTS[w]).join('\n\n');const closer='\n\n這不是巧合，是你靈魂最誠實的選擇。當你感到迷惘時，回到這裡，這 10 個詞就是你的指南針。✦';return opener+body+closer;}
 
 const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbygxBayCsI-FRJlvkiNr7vON6kZE8IaOmEX1BBnos_IoHywoa43KaqcdqMhpXMdLgK4/exec';
 
