@@ -8,898 +8,310 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #F5F0E8;
-    --cream-light: #FAF7F2;
-    --forest: #3D5A54;
-    --forest-dark: #2C4240;
-    --forest-light: #5A7A72;
-    --sand: #E8DDD0;
-    --sand-dark: #C8BAA8;
-    --lavender: #AFA9EC;
-    --text-dark: #2A2A2A;
-    --text-mid: #5A5A5A;
-    --text-soft: #8A8A8A;
-    --white: #FFFFFF;
-    --radius: 16px;
-    --shadow: 0 4px 24px rgba(61, 90, 84, 0.08);
-    --shadow-hover: 0 8px 32px rgba(61, 90, 84, 0.16);
+    --cream:#F5F0E8;--cream-light:#FAF7F2;
+    --forest:#3D5A54;--forest-dark:#2C4240;--forest-light:#5A7A72;
+    --sand:#E8DDD0;--sand-dark:#C8BAA8;
+    --gold:#C9A96E;
+    --text-dark:#2A2A2A;--text-mid:#5A5A5A;--text-soft:#8A8A8A;
+    --white:#FFFFFF;
+    --radius:16px;
+    --shadow:0 4px 24px rgba(61,90,84,0.08);
+    --shadow-hover:0 8px 32px rgba(61,90,84,0.16);
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Noto Sans TC', sans-serif;
-    background: var(--cream);
-    color: var(--text-dark);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* Background decorative elements */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background:
-      radial-gradient(ellipse 600px 400px at 10% 20%, rgba(90, 122, 114, 0.10) 0%, transparent 70%),
-      radial_gradient(ellipse 500px 600px at 90% 80%, rgba(175, 169, 236, 0.06) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* ── SCREENS ── */
-  .screen {
-    display: none;
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    animation: fadeUp 0.5s ease forwards;
-  }
-  .screen.active { display: flex; flex-direction: column; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── NAV ── */
-  .nav {
-    padding: 28px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-  }
-  .nav-brand { font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 500; color: var(--forest-dark); letter-spacing: 0.04em; text-decoration: none; }
-  .nav-sub { font-size: 11px; color: var(--text-soft); letter-spacing: 0.08em; margin-top: 2px; }
-  .nav-back {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13px; color: var(--text-soft);
-    cursor: pointer; border: none; background: none;
-    padding: 8px 12px; border-radius: 20px;
-    transition: all 0.2s;
-    font-family: 'Noto Sans TC', sans-serif;
-  }
-  .nav-back:hover { background: var(--sand); color: var(--text-mid); }
-
-  /* ── PROGRESS BAR ── */
-  .progress-wrap {
-    height: 3px;
-    background: var(--sand);
-    margin: 0 48px;
-    border-radius: 2px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--forest-light), var(--forest));
-    border-radius: 2px;
-    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  /* ── MAIN CONTENT ── */
-  .main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 48px 24px;
-  }
-
-  /* ── CARD ── */
-  .card {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 56px 64px;
-    max-width: 720px;
-    width: 100%;
-    box-shadow: var(--shadow);
-    text-align: center;
-  }
-
-  .card-icon {
-    width: 56px; height: 56px;
-    background: var(--cream);
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 28px;
-    font-size: 24px;
-  }
-
-  h1 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 28px;
-    font-weight: 400;
-    color: var(--text-dark);
-    line-height: 1.4;
-    margin-bottom: 16px;
-    letter-spacing: 0.02em;
-  }
-
-  h2 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--text-dark);
-    margin-bottom: 12px;
-    letter-spacing: 0.02em;
-  }
-
-  .subtitle {
-    font-size: 15px;
-    color: var(--text-mid);
-    line-height: 1.8;
-    margin-bottom: 32px;
-  }
-
-  /* ── BUTTONS ── */
-  .btn-primary {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    background: var(--forest);
-    color: var(--white);
-    border: none;
-    border-radius: 32px;
-    padding: 16px 40px;
-    font-size: 15px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: all 0.25s;
-    text-decoration: none;
-  }
-  .btn-primary:hover { background: var(--forest-dark); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
-  .btn-primary:disabled { background: var(--sand-dark); cursor: not-allowed; transform: none; box-shadow: none; }
-
-  .btn-gold {
-    display: inline-flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, #C9A96E, #B8935A);
-    color: var(--white);
-    border: none;
-    border-radius: 32px;
-    padding: 16px 40px;
-    font-size: 15px;
-    font-family: 'Noto Sans TC', sans-serif;
-    cursor: pointer;
-    transition: all 0.25s;
-    letter-spacing: 0.05em;
-    width: 100%;
-    margin-top: 8px;
-  }
-  .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(185, 147, 90, 0.3); }
-
-  /* ── WORD GRID ── */
-  .word-grid-container {
-    background: var(--white);
-    border-radius: var(--radius);
-    max-width: 860px;
-    width: 100%;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-  }
-
-  .grid-header {
-    padding: 40px 48px 28px;
-    border-bottom: 1px solid var(--cream);
-    text-align: center;
-    position: sticky;
-    top: 0;
-    background: var(--white);
-    z-index: 10;
-  }
-
-  .counter-display {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--cream);
-    padding: 10px 24px;
-    border-radius: 24px;
-    margin-top: 16px;
-  }
-  .counter-num {
-    font-size: 28px;
-    font-family: 'Noto Serif TC', serif;
-    color: var(--forest);
-    font-weight: 500;
-    min-width: 32px;
-    text-align: center;
-    line-height: 1;
-  }
-  .counter-slash { color: var(--text-soft); font-size: 18px; }
-  .counter-total { font-size: 18px; color: var(--text-soft); font-family: 'Noto Serif TC', serif; }
-  .counter-label { font-size: 12px; color: var(--text-soft); letter-spacing: 0.06em; margin-left: 4px; }
-
-  .grid-body { padding: 28px 48px 40px; }
-
-  .word-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-start;
-  }
-
-  .word-chip {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 18px;
-    border: 1.5px solid var(--sand);
-    border-radius: 24px;
-    font-size: 14px;
-    color: var(--text-mid);
-    cursor: pointer;
-    background: var(--white);
-    transition: all 0.2s;
-    user-select: none;
-    font-family: 'Noto Sans TC', sans-serif;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-  }
-  .word-chip:hover:not(.disabled) {
-    border-color: var(--forest-light);
-    color: var(--forest);
-    background: rgba(61, 90, 84, 0.04);
-    transform: translateY(-1px);
-  }
-  .word-chip.selected {
-    background: var(--forest);
-    border-color: var(--forest);
-    color: var(--white);
-    box-shadow: 0 3px 12px rgba(61, 90, 84, 0.2);
-  }
-  .word-chip.selected:hover { background: var(--forest-dark); }
-  .word-chip.disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
-  .word-chip.highlight {
-    border-color: var(--lavender);
-    background: rgba(175, 169, 236, 0.1);
-    color: var(--text-dark);
-  }
-
-  .grid-footer {
-    padding: 20px 48px 36px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid var(--cream);
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .hint-text {
-    font-size: 13px;
-    color: var(--text-soft);
-    line-height: 1.6;
-    letter-spacing: 0.02em;
-  }
-
-  /* ── COMPLETION SCREEN ── */
-  .values-display {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin: 28px 0;
-  }
-  .value-tag {
-    background: var(--cream);
-    border: 1.5px solid var(--sand);
-    border-radius: 24px;
-    padding: 10px 20px;
-    font-size: 15px;
-    color: var(--forest-dark);
-    font-family: 'Noto Serif TC', serif;
-    letter-spacing: 0.04em;
-    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    opacity: 0;
-  }
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to   { opacity: 1; transform: scale(1); }
-  }
-
-  .divider {
-    width: 48px; height: 1px;
-    background: var(--sand-dark);
-    margin: 28px auto;
-  }
-
-  .email-section { text-align: left; margin-top: 8px; }
-
-  .email-label { font-size: 13px; color: var(--text-soft); margin-bottom: 10px; letter-spacing: 0.04em; }
-
-  .email-input-wrap {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .email-input {
-    flex: 1;
-    padding: 14px 20px;
-    border: 1.5px solid var(--sand);
-    border-radius: 32px;
-    font-size: 14px;
-    font-family: 'Noto Sans TC', sans-serif;
-    background: var(--cream-light);
-    color: var(--text-dark);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .email-input:focus { border-color: var(--forest-light); background: var(--white); }
-  .email-input::placeholder { color: var(--text-soft); }
-
-  .email-note { font-size: 11px; color: var(--text-soft); letter-spacing: 0.04em; text-align: center; margin-top: 10px; }
-
-  /* ── THANK YOU ── */
-  .thank-you-content {
-    text-align: center;
-  }
-  .sparkle {
-    font-size: 48px;
-    display: block;
-    margin-bottom: 24px;
-    animation: float 3s ease-in-out infinite;
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-  .next-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--forest);
-    font-size: 14px;
-    text-decoration: none;
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: 1px solid var(--sand);
-    border-radius: 24px;
-    transition: all 0.2s;
-  }
-  .next-link:hover { background: var(--cream); border-color: var(--forest-light); }
-
-  /* ── LOADING ── */
-  .loading-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(245, 240, 232, 0.9);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .loading-overlay.show { display: flex; }
-  .spinner {
-    width: 36px; height: 36px;
-    border: 3px solid var(--sand);
-    border-top-color: var(--forest);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-text { font-size: 14px; color: var(--text-mid); letter-spacing: 0.04em; }
-
-  /* ── TOAST ── */
-  .toast {
-    position: fixed;
-    bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px);
-    background: var(--forest-dark);
-    color: var(--white);
-    padding: 14px 28px;
-    border-radius: 32px;
-    font-size: 14px;
-    letter-spacing: 0.04em;
-    z-index: 200;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    white-space: nowrap;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .nav { padding: 20px 24px; }
-    .progress-wrap { margin: 0 24px; }
-    .card { padding: 40px 28px; }
-    .grid-header { padding: 28px 24px 20px; }
-    .grid-body { padding: 20px 24px 28px; }
-    .grid-footer { padding: 16px 24px 28px; flex-direction: column; align-items: stretch; }
-    h1 { font-size: 22px; }
-    .word-chip { padding: 9px 14px; font-size: 13px; }
-    .email-input-wrap { flex-direction: column; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--text-dark);min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 600px 400px at 10% 20%,rgba(90,122,114,0.10) 0%,transparent 70%);pointer-events:none;z-index:0;}
+  .screen{display:none;position:relative;z-index:1;min-height:100vh;animation:fadeUp 0.5s ease forwards;flex-direction:column;}
+  .screen.active{display:flex;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  .nav{padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+  .nav-brand{font-family:'Noto Serif TC',serif;font-size:20px;font-weight:500;color:var(--forest-dark);letter-spacing:0.04em;text-decoration:none;}
+  .nav-sub{font-size:11px;color:var(--text-soft);letter-spacing:0.08em;margin-top:2px;}
+  .nav-back{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-soft);cursor:pointer;border:none;background:none;padding:8px 12px;border-radius:20px;transition:all 0.2s;font-family:'Noto Sans TC',sans-serif;}
+  .nav-back:hover{background:var(--sand);color:var(--text-mid);}
+  .progress-wrap{height:3px;background:var(--sand);margin:0 48px;border-radius:2px;overflow:hidden;flex-shrink:0;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--forest-light),var(--forest));border-radius:2px;transition:width 0.6s cubic-bezier(0.34,1.56,0.64,1);}
+  .main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;}
+  .card{background:var(--white);border-radius:var(--radius);padding:56px 64px;max-width:720px;width:100%;box-shadow:var(--shadow);text-align:center;}
+  .card-icon{width:56px;height:56px;background:var(--cream);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:24px;}
+  h1{font-family:'Noto Serif TC',serif;font-size:28px;font-weight:400;color:var(--text-dark);line-height:1.4;margin-bottom:16px;letter-spacing:0.02em;}
+  h2{font-family:'Noto Serif TC',serif;font-size:22px;font-weight:400;color:var(--text-dark);margin-bottom:12px;letter-spacing:0.02em;}
+  .subtitle{font-size:15px;color:var(--text-mid);line-height:1.8;margin-bottom:32px;}
+  .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--forest);color:var(--white);border:none;border-radius:32px;padding:16px 40px;font-size:15px;font-family:'Noto Sans TC',sans-serif;font-weight:400;letter-spacing:0.05em;cursor:pointer;transition:all 0.25s;text-decoration:none;}
+  .btn-primary:hover{background:var(--forest-dark);transform:translateY(-1px);box-shadow:var(--shadow-hover);}
+  .btn-primary:disabled{background:var(--sand-dark);cursor:not-allowed;transform:none;box-shadow:none;}
+  /* WORD GRID */
+  .word-grid-container{background:var(--white);border-radius:var(--radius);max-width:860px;width:100%;box-shadow:var(--shadow);overflow:hidden;}
+  .grid-header{padding:40px 48px 28px;border-bottom:1px solid var(--cream);text-align:center;position:sticky;top:0;background:var(--white);z-index:10;}
+  .counter-display{display:inline-flex;align-items:center;gap:12px;background:var(--cream);padding:10px 24px;border-radius:24px;margin-top:16px;}
+  .counter-num{font-size:28px;font-family:'Noto Serif TC',serif;color:var(--forest);font-weight:500;min-width:32px;text-align:center;line-height:1;}
+  .counter-slash{color:var(--text-soft);font-size:18px;}
+  .counter-total{font-size:18px;color:var(--text-soft);font-family:'Noto Serif TC',serif;}
+  .counter-label{font-size:12px;color:var(--text-soft);letter-spacing:0.06em;margin-left:4px;}
+  .grid-body{padding:28px 48px 40px;}
+  .word-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-start;}
+  .word-chip{display:inline-flex;align-items:center;padding:10px 18px;border:1.5px solid var(--sand);border-radius:24px;font-size:14px;color:var(--text-mid);cursor:pointer;background:var(--white);transition:all 0.2s;user-select:none;font-family:'Noto Sans TC',sans-serif;letter-spacing:0.02em;white-space:nowrap;}
+  .word-chip:hover:not(.disabled){border-color:var(--forest-light);color:var(--forest);background:rgba(61,90,84,0.04);transform:translateY(-1px);}
+  .word-chip.selected{background:var(--forest);border-color:var(--forest);color:var(--white);box-shadow:0 3px 12px rgba(61,90,84,0.2);}
+  .word-chip.selected:hover{background:var(--forest-dark);}
+  .word-chip.disabled{opacity:0.4;cursor:not-allowed;}
+  .grid-footer{padding:20px 48px 36px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--cream);gap:16px;flex-wrap:wrap;}
+  .hint-text{font-size:13px;color:var(--text-soft);line-height:1.6;}
+  /* UPLOAD */
+  .upload-zone{border:2px dashed var(--sand);border-radius:12px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:8px;}
+  .upload-zone:hover{border-color:var(--forest-light);background:rgba(61,90,84,0.03);}
+  .upload-zone input{display:none;}
+  .upload-icon{font-size:28px;margin-bottom:8px;display:block;}
+  .upload-text{font-size:13px;color:var(--text-soft);line-height:1.6;}
+  .upload-text strong{color:var(--forest);}
+  .upload-preview{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;justify-content:center;}
+  .upload-thumb{width:72px;height:72px;border-radius:8px;object-fit:cover;border:2px solid var(--sand);}
+  .divider{width:48px;height:1px;background:var(--sand-dark);margin:28px auto;}
+  /* RESULT */
+  .result-page{background:var(--cream-light);}
+  .blueprint-hero{padding:56px 48px 32px;max-width:900px;margin:0 auto;text-align:center;}
+  .blueprint-label{font-size:11px;letter-spacing:0.14em;color:var(--forest-light);text-transform:uppercase;margin-bottom:12px;}
+  .blueprint-title{font-family:'Noto Serif TC',serif;font-size:30px;font-weight:400;color:var(--forest-dark);letter-spacing:0.04em;margin-bottom:8px;}
+  .blueprint-timestamp{font-size:12px;color:var(--text-soft);letter-spacing:0.08em;margin-top:8px;}
+  .photo-section{max-width:900px;margin:0 auto 40px;padding:0 48px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+  .photo-frame{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(61,90,84,0.18),0 0 0 6px var(--white),0 0 0 8px var(--sand);}
+  .photo-frame img{display:block;width:220px;height:220px;object-fit:cover;filter:sepia(12%) brightness(1.04) contrast(0.96);}
+  .photo-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.12) 0%,transparent 50%,rgba(61,90,84,0.06) 100%);pointer-events:none;}
+  .scene-card{max-width:600px;margin:0 auto 40px;padding:0 48px;}
+  .scene-visual{border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(61,90,84,0.14),0 0 0 6px var(--white),0 0 0 8px var(--sand);position:relative;height:200px;}
+  .scene-svg{width:100%;height:100%;display:block;}
+  .values-section{max-width:900px;margin:0 auto 40px;padding:0 48px;}
+  .section-label{font-size:11px;letter-spacing:0.12em;color:var(--forest-light);text-transform:uppercase;margin-bottom:16px;text-align:center;}
+  .values-tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+  .value-tag{background:var(--white);border:1.5px solid var(--sand);border-radius:24px;padding:10px 20px;font-size:15px;color:var(--forest-dark);font-family:'Noto Serif TC',serif;letter-spacing:0.04em;animation:popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;opacity:0;}
+  @keyframes popIn{from{opacity:0;transform:scale(0.8);}to{opacity:1;transform:scale(1);}}
+  /* TEASER */
+  .teaser-section{max-width:680px;margin:0 auto;padding:0 48px 60px;}
+  .teaser-card{background:var(--white);border-radius:var(--radius);padding:40px 48px;box-shadow:var(--shadow);text-align:center;}
+  .teaser-icon{font-size:32px;margin-bottom:16px;display:block;}
+  .teaser-title{font-family:'Noto Serif TC',serif;font-size:20px;color:var(--forest-dark);margin-bottom:12px;letter-spacing:0.02em;}
+  .teaser-body{font-size:14px;color:var(--text-mid);line-height:1.9;margin-bottom:24px;}
+  .teaser-preview{background:var(--cream);border-radius:12px;padding:20px 24px;margin-bottom:24px;text-align:left;border-left:3px solid var(--forest-light);}
+  .teaser-preview-text{font-size:14px;color:var(--text-mid);line-height:1.9;font-style:italic;filter:blur(4px);user-select:none;transition:filter 0.9s ease;}
+  .teaser-preview-text.unlocked{filter:blur(0);}
+  .unlock-label{font-size:11px;color:var(--text-soft);letter-spacing:0.06em;margin-bottom:12px;}
+  .email-input-wrap{display:flex;gap:10px;margin-bottom:8px;}
+  .email-input{flex:1;padding:14px 20px;border:1.5px solid var(--sand);border-radius:32px;font-size:14px;font-family:'Noto Sans TC',sans-serif;background:var(--cream-light);color:var(--text-dark);outline:none;transition:border-color 0.2s;}
+  .email-input:focus{border-color:var(--forest-light);background:var(--white);}
+  .email-input::placeholder{color:var(--text-soft);}
+  .email-note{font-size:11px;color:var(--text-soft);letter-spacing:0.04em;text-align:center;margin-top:8px;}
+  /* FULL INSIGHT */
+  .insight-wrap{max-width:680px;margin:0 auto;padding:0 48px 60px;display:none;}
+  .insight-wrap.show{display:block;animation:fadeUp 0.6s ease forwards;}
+  .insight-inner{background:var(--forest);border-radius:var(--radius);padding:40px 48px;box-shadow:var(--shadow-hover);}
+  .insight-quote{font-family:'Noto Serif TC',serif;font-size:15px;color:rgba(255,255,255,0.90);line-height:2.1;letter-spacing:0.03em;white-space:pre-line;}
+  .insight-divider{height:1px;background:rgba(255,255,255,0.15);margin:20px 0;}
+  .insight-sign{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:0.08em;text-align:right;}
+  .next-steps{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+  .next-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,0.10);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.18);border-radius:32px;padding:14px 28px;font-size:14px;font-family:'Noto Sans TC',sans-serif;cursor:pointer;transition:all 0.2s;text-decoration:none;}
+  .next-btn:hover{background:rgba(255,255,255,0.18);}
+  .next-btn.gold{background:linear-gradient(135deg,#C9A96E,#B8935A);border-color:transparent;color:var(--white);}
+  .next-btn.gold:hover{box-shadow:0 6px 20px rgba(185,147,90,0.4);}
+  /* LOADING / TOAST */
+  .loading-overlay{display:none;position:fixed;inset:0;background:rgba(245,240,232,0.92);z-index:100;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+  .loading-overlay.show{display:flex;}
+  .spinner{width:36px;height:36px;border:3px solid var(--sand);border-top-color:var(--forest);border-radius:50%;animation:spin 0.8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .loading-text{font-size:14px;color:var(--text-mid);letter-spacing:0.04em;}
+  .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--forest-dark);color:var(--white);padding:14px 28px;border-radius:32px;font-size:14px;z-index:200;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);white-space:nowrap;}
+  .toast.show{transform:translateX(-50%) translateY(0);}
+  @media(max-width:768px){
+    .nav{padding:20px 24px;}.progress-wrap{margin:0 24px;}
+    .card{padding:36px 24px;}.grid-header{padding:24px 20px 18px;}
+    .grid-body{padding:18px 20px 24px;}.grid-footer{padding:14px 20px 24px;flex-direction:column;align-items:stretch;}
+    h1{font-size:22px;}.word-chip{padding:9px 14px;font-size:13px;}
+    .blueprint-hero,.photo-section,.values-section,.teaser-section,.insight-wrap{padding-left:20px;padding-right:20px;}
+    .blueprint-title{font-size:22px;}.photo-frame img{width:150px;height:150px;}
+    .teaser-card,.insight-inner{padding:28px 24px;}.email-input-wrap{flex-direction:column;}
+    .scene-card{padding:0 20px;}
   }
 </style>
 </head>
 <body>
-
-<!-- Loading Overlay -->
-<div class="loading-overlay" id="loadingOverlay">
-  <div class="spinner"></div>
-  <div class="loading-text">正在傳送中⋯⋯</div>
-</div>
-
-<!-- Toast -->
+<div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div><div class="loading-text" id="loadingText">正在傳送中⋯⋯</div></div>
 <div class="toast" id="toast"></div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 0: Welcome
-═══════════════════════════════════════════ -->
+<!-- SCREEN 0: Welcome -->
 <div class="screen active" id="screen-welcome">
-  <nav class="nav">
-    <a href="index.html" class="nav-brand">
-      拾光徑
-      <div class="nav-sub">自我探索 × 生涯引導</div>
-    </a>
-  </nav>
-  <div class="main">
-    <div class="card">
-      <div class="card-icon">✦</div>
-      <h1>拾光徑</h1>
-      <p class="subtitle">
-        在繁忙的世界裡，給自己 10 分鐘，聽聽內心的聲音。<br>
-        這不只是一次選擇，是一次與未來的自己相遇。
-      </p>
-      <button class="btn-primary" onclick="goToScreen('screen-phase1-intro')">
-        踏入小徑 &nbsp;→
-      </button>
-    </div>
-  </div>
+  <nav class="nav"><a href="index.html" class="nav-brand">拾光徑<div class="nav-sub">自我探索 × 生涯引導</div></a></nav>
+  <div class="main"><div class="card">
+    <div class="card-icon">✦</div>
+    <h1>拾光徑</h1>
+    <p class="subtitle">在繁忙的世界裡，給自己 10 分鐘，聽聽內心的聲音。<br>這不只是一次選擇，是一次與未來的自己相遇。</p>
+    <button class="btn-primary" onclick="goToScreen('screen-phase1-intro')">踏入小徑 &nbsp;→</button>
+  </div></div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 1: Phase 1 Intro
-═══════════════════════════════════════════ -->
+<!-- SCREEN 1: Phase 1 Intro -->
 <div class="screen" id="screen-phase1-intro">
-  <nav class="nav">
-    <button class="nav-back" onclick="goToScreen('screen-welcome')">← 返回</button>
-  </nav>
-  <div class="progress-wrap"><div class="progress-fill" style="width: 15%"></div></div>
-  <div class="main">
-    <div class="card">
-      <div class="card-icon">○</div>
-      <h1>選出讓你心跳一下的詞</h1>
-      <p class="subtitle">
-        不用想太多，直覺反應就好<br><br>
-        從 52 個選項中，選出 20 個讓你有感覺的。<br>
-        選滿 20 個後，會自動解鎖下一步。
-      </p>
-      <button class="btn-primary" onclick="goToScreen('screen-phase1-select')">
-        我準備好了
-      </button>
-    </div>
-  </div>
+  <nav class="nav"><button class="nav-back" onclick="goToScreen('screen-welcome')">← 返回</button></nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width:15%"></div></div>
+  <div class="main"><div class="card">
+    <div class="card-icon">○</div>
+    <h1>選出讓你心跳一下的詞</h1>
+    <p class="subtitle">不用想太多，直覺反應就好<br><br>從 52 個選項中，選出 20 個讓你有感覺的。<br>選滿 20 個後，會自動解鎖下一步。</p>
+    <button class="btn-primary" onclick="goToScreen('screen-phase1-select')">我準備好了</button>
+  </div></div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 2: Phase 1 Select (52 → 20)
-═══════════════════════════════════════════ -->
+<!-- SCREEN 2: Phase 1 Select -->
 <div class="screen" id="screen-phase1-select">
-  <nav class="nav">
-    <button class="nav-back" onclick="goToScreen('screen-phase1-intro')">← 返回</button>
-    <a href="index.html" class="nav-brand" style="text-align:right">拾光徑</a>
-  </nav>
-  <div class="progress-wrap"><div class="progress-fill" style="width: 35%"></div></div>
-  <div class="main" style="padding-top: 28px; padding-bottom: 28px;">
+  <nav class="nav"><button class="nav-back" onclick="goToScreen('screen-phase1-intro')">← 返回</button><a href="index.html" class="nav-brand" style="text-align:right">拾光徑</a></nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width:35%"></div></div>
+  <div class="main" style="padding-top:28px;padding-bottom:28px;">
     <div class="word-grid-container">
       <div class="grid-header">
         <h2>選出讓你心跳一下的詞</h2>
-        <p class="subtitle" style="margin-bottom: 0; font-size: 13px;">不用想太多，跟著直覺走</p>
-        <div class="counter-display">
-          <span class="counter-num" id="count1">0</span>
-          <span class="counter-slash">/</span>
-          <span class="counter-total">20</span>
-          <span class="counter-label">已選擇</span>
-        </div>
+        <p class="subtitle" style="margin-bottom:0;font-size:13px;">不用想太多，跟著直覺走</p>
+        <div class="counter-display"><span class="counter-num" id="count1">0</span><span class="counter-slash">/</span><span class="counter-total">20</span><span class="counter-label">已選擇</span></div>
       </div>
-      <div class="grid-body">
-        <div class="word-grid" id="grid1"></div>
-      </div>
-      <div class="grid-footer">
-        <p class="hint-text">選滿 20 個後按鈕自動解鎖</p>
-        <button class="btn-primary" id="btn-phase1-next" disabled onclick="goToPhase2Intro()">
-          繼續探索 →
-        </button>
-      </div>
+      <div class="grid-body"><div class="word-grid" id="grid1"></div></div>
+      <div class="grid-footer"><p class="hint-text">選滿 20 個後按鈕自動解鎖</p><button class="btn-primary" id="btn-phase1-next" disabled onclick="goToPhase2Intro()">繼續探索 →</button></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 3: Phase 2 Intro
-═══════════════════════════════════════════ -->
+<!-- SCREEN 3: Phase 2 Intro -->
 <div class="screen" id="screen-phase2-intro">
-  <nav class="nav">
-    <button class="nav-back" onclick="goToScreen('screen-phase1-select')">← 返回</button>
-  </nav>
-  <div class="progress-wrap"><div class="progress-fill" style="width: 55%"></div></div>
-  <div class="main">
-    <div class="card">
-      <div class="card-icon">◈</div>
-      <h1>如果只能帶走 10 個，你想要哪些？</h1>
-      <p class="subtitle">
-        回想剛才選的 20 個，再進一步縮小<br>
-        到最靠近你內心的 10 個心動詞<br><br>
-        這將是你的核心價值觀 ✦
-      </p>
-      <button class="btn-primary" onclick="goToScreen('screen-phase2-select')">
-        我知道了
-      </button>
-    </div>
-  </div>
+  <nav class="nav"><button class="nav-back" onclick="goToScreen('screen-phase1-select')">← 返回</button></nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width:55%"></div></div>
+  <div class="main"><div class="card">
+    <div class="card-icon">◈</div>
+    <h1>如果只能帶走 10 個，你想要哪些？</h1>
+    <p class="subtitle">回想剛才選的 20 個，再進一步縮小<br>到最靠近你內心的 10 個心動詞<br><br>這將是你的核心價值觀 ✦</p>
+    <button class="btn-primary" onclick="goToScreen('screen-phase2-select')">我知道了</button>
+  </div></div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 4: Phase 2 Select (20 → 10)
-═══════════════════════════════════════════ -->
+<!-- SCREEN 4: Phase 2 Select -->
 <div class="screen" id="screen-phase2-select">
-  <nav class="nav">
-    <button class="nav-back" onclick="goToScreen('screen-phase2-intro')">← 返回</button>
-    <a href="index.html" class="nav-brand" style="text-align:right">拾光徑</a>
-  </nav>
-  <div class="progress-wrap"><div class="progress-fill" style="width: 72%"></div></div>
-  <div class="main" style="padding-top: 28px; padding-bottom: 28px;">
+  <nav class="nav"><button class="nav-back" onclick="goToScreen('screen-phase2-intro')">← 返回</button><a href="index.html" class="nav-brand" style="text-align:right">拾光徑</a></nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width:72%"></div></div>
+  <div class="main" style="padding-top:28px;padding-bottom:28px;">
     <div class="word-grid-container">
       <div class="grid-header">
         <h2>留下最靠近你內心的 10 個</h2>
-        <p class="subtitle" style="margin-bottom: 0; font-size: 13px;">從你剛才選的 20 個詞裡，再精選一次</p>
-        <div class="counter-display">
-          <span class="counter-num" id="count2">0</span>
-          <span class="counter-slash">/</span>
-          <span class="counter-total">10</span>
-          <span class="counter-label">已選擇</span>
-        </div>
+        <p class="subtitle" style="margin-bottom:0;font-size:13px;">從你剛才選的 20 個詞裡，再精選一次</p>
+        <div class="counter-display"><span class="counter-num" id="count2">0</span><span class="counter-slash">/</span><span class="counter-total">10</span><span class="counter-label">已選擇</span></div>
       </div>
-      <div class="grid-body">
-        <div class="word-grid" id="grid2"></div>
-      </div>
-      <div class="grid-footer">
-        <p class="hint-text">選滿 10 個後按鈕自動解鎖</p>
-        <button class="btn-primary" id="btn-phase2-next" disabled onclick="goToCompletion()">
-          確認我的核心 →
-        </button>
-      </div>
+      <div class="grid-body"><div class="word-grid" id="grid2"></div></div>
+      <div class="grid-footer"><p class="hint-text">選滿 10 個後按鈕自動解鎖</p><button class="btn-primary" id="btn-phase2-next" disabled onclick="goToUpload()">確認我的核心 →</button></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 5: Completion + Email
-═══════════════════════════════════════════ -->
-<div class="screen" id="screen-complete">
-  <nav class="nav">
-    <a href="index.html" class="nav-brand">
-      拾光徑
-      <div class="nav-sub">自我探索 × 生涯引導</div>
-    </a>
-  </nav>
-  <div class="progress-wrap"><div class="progress-fill" style="width: 90%"></div></div>
-  <div class="main">
-    <div class="card" style="max-width: 640px; text-align: left;">
-      <div style="text-align:center; margin-bottom: 8px;">
-        <div class="card-icon">✦</div>
-        <h1>你的靈魂核心已浮現</h1>
-        <p class="subtitle">謝謝你給自己這 10 分鐘</p>
-      </div>
-
-      <div class="values-display" id="finalValues"></div>
-
-      <div class="divider"></div>
-
-      <p style="font-size: 14px; color: var(--text-mid); line-height: 1.9; margin-bottom: 24px; text-align: center;">
-        剛剛完成的，不只是一份選擇<br>
-        ——是一次與真實自我的相遇<br><br>
-        <strong style="color: var(--text-dark);">留下你的 Email，24 小時內收到你的 AI 深度分析報告</strong><br>
-        <span style="font-size: 13px; color: var(--text-soft);">包含：核心價值解析・職涯方向建議・理想夥伴特質</span>
-      </p>
-
-      <div class="email-section">
-        <div class="email-input-wrap">
-          <input
-            type="email"
-            class="email-input"
-            id="emailInput"
-            placeholder="your@email.com"
-            autocomplete="email"
-          >
-          <button class="btn-primary" onclick="submitEmail()" style="white-space: nowrap; padding: 14px 28px;">
-            收穫結語
-          </button>
-        </div>
-        <p class="email-note">不會寄送廣告 · 隨時可以取消訂閱</p>
-      </div>
+<!-- SCREEN 5: Photo Upload -->
+<div class="screen" id="screen-upload">
+  <nav class="nav"><button class="nav-back" onclick="goToScreen('screen-phase2-select')">← 返回</button></nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width:85%"></div></div>
+  <div class="main"><div class="card" style="max-width:600px;">
+    <div class="card-icon">🌿</div>
+    <h1>為你的藍圖加一道光</h1>
+    <p class="subtitle">上傳 1–3 張你喜歡或讓你心動的照片（選填）<br>它們將成為你專屬藍圖的視覺底蘊</p>
+    <div class="upload-zone" onclick="document.getElementById('photoInput').click()">
+      <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotoUpload(event)">
+      <span class="upload-icon">📷</span>
+      <p class="upload-text">點擊選擇照片，或拖曳到這裡<br><strong>最多 3 張・每張上限 5MB</strong></p>
     </div>
-  </div>
+    <div class="upload-preview" id="uploadPreview"></div>
+    <div class="divider"></div>
+    <button class="btn-primary" onclick="goToResult()" style="width:100%;">生成我的專屬藍圖 ✦</button>
+    <p style="font-size:12px;color:var(--text-soft);margin-top:14px;">不上傳照片也可以直接生成</p>
+  </div></div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 6: Thank You
-═══════════════════════════════════════════ -->
-<div class="screen" id="screen-thankyou">
-  <nav class="nav">
-    <a href="index.html" class="nav-brand">
-      拾光徑
-      <div class="nav-sub">自我探索 × 生涯引導</div>
-    </a>
-  </nav>
-  <div class="progress-wrap"><div class="progress-fill" style="width: 100%"></div></div>
-  <div class="main">
-    <div class="card thank-you-content">
-      <span class="sparkle">✨</span>
-      <h1>你的探索旅程，才剛開始</h1>
-      <p class="subtitle">
-        你的專屬結語，將於 24 小時內 Mail 到你的個人信箱<br>
-        請好好珍藏～
-      </p>
-      <div class="divider"></div>
-      <p style="font-size: 14px; color: var(--text-mid); line-height: 1.8;">
-        拾光徑的大門隨時為你敞開——<br>
-        把今天找到的答案，帶回你的生活裡
-      </p>
-      <a href="blueprint.html" class="next-link" style="margin: 24px auto 0; display: inline-flex;">
-        了解藍圖對話，把洞察化為行動 →
-      </a>
+<!-- SCREEN 6: Result -->
+<div class="screen result-page" id="screen-result">
+  <nav class="nav"><a href="index.html" class="nav-brand">拾光徑<div class="nav-sub">自我探索 × 生涯引導</div></a></nav>
+  <div class="progress-wrap"><div class="progress-fill" style="width:100%"></div></div>
+
+  <div class="blueprint-hero">
+    <p class="blueprint-label">My Journey Blueprint · 專屬生涯藍圖</p>
+    <h1 class="blueprint-title">拾光徑：你的專屬生涯藍圖</h1>
+    <p class="blueprint-timestamp" id="blueprintTimestamp"></p>
+  </div>
+
+  <div id="photoSection" class="photo-section" style="display:none;"></div>
+  <div id="sceneSection" class="scene-card"><div class="scene-visual" id="sceneVisual"></div></div>
+
+  <div class="values-section">
+    <p class="section-label">My Core Values · 你的 10 個核心價值觀</p>
+    <div class="values-tags" id="resultValues"></div>
+  </div>
+
+  <div class="teaser-section" id="teaserSection">
+    <div class="teaser-card">
+      <span class="teaser-icon">✦</span>
+      <h2 class="teaser-title">你的靈魂洞察，已在等你</h2>
+      <p class="teaser-body">這 10 個詞不只是選擇——它們是你靈魂最誠實的答案。<br>留下 Email，解鎖專為你組裝的深度洞察——<br><strong>為什麼這 10 個詞選擇了你？你的靈魂在尋找什麼？</strong></p>
+      <div class="teaser-preview"><p class="teaser-preview-text" id="teaserText"></p></div>
+      <p class="unlock-label">留下 Email，立即解鎖完整洞察</p>
+      <div class="email-input-wrap">
+        <input type="email" class="email-input" id="emailInput" placeholder="your@email.com" autocomplete="email">
+        <button class="btn-primary" onclick="submitAndUnlock()" style="white-space:nowrap;padding:14px 24px;">解鎖洞察 ✦</button>
+      </div>
+      <p class="email-note">不會寄送廣告 · 隨時可以取消訂閱</p>
+    </div>
+  </div>
+
+  <div class="insight-wrap" id="insightWrap">
+    <div class="insight-inner">
+      <p class="insight-quote" id="insightText"></p>
+      <div class="insight-divider"></div>
+      <p class="insight-sign">— Sherry · 拾光徑</p>
+    </div>
+    <div class="next-steps">
+      <a href="blueprint.html" class="next-btn gold">了解藍圖對話 1 on 1 生涯引導 →</a>
+      <button class="next-btn" onclick="window.print()">🖨 列印 / 儲存這份藍圖</button>
     </div>
   </div>
 </div>
 
 <script>
-// ═══════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════
+const ALL_WORDS=['韌性','心流','極簡','安全感','穩定可靠','財富','四處旅行','財務自由','平衡','有誠信','做自己','自律','有賺錢能力','和睦','享受自由','卓越','激勵他人','愉悅','長期運動','覺醒','有影響力','圓滿','感恩','好奇心','專業被認可','創造力','深層連結','勇氣','健康活力','生活單純','持續進步','社會地位','學習力','公平正義','友誼','傳承','陪伴家人','深耕','同理心','高品質','冒險','智慧','歸屬感','真實自我','創業精神','共好','自信','有機生活','內在平靜','幫助他人','自由','正念'];
 
-const ALL_WORDS = [
-  '韌性','心流','極簡','安全感','穩定可靠','財富',
-  '四處旅行','財務自由','平衡','有誠信','做自己','自律',
-  '有賺錢能力','和睦','享受自由','卓越','激勵他人',
-  '愉悅','長期運動','覺醒','有影響力','圓滿','感恩',
-  '好奇心','專業被認可','創造力','深層連結','勇氣',
-  '健康活力','生活單純','持續進步','社會地位','學習力',
-  '公平正義','友誼','傳承','陪伴家人','深耕','同理心',
-  '高品質','冒險','智慧','歸屬感','真實自我','創業精神',
-  '共好','自信','有機生活','內在平靜','幫助他人','自由',
-  '正念'
-];
+const INSIGHTS={'韌性':'你知道跌倒、踩坑都不是終點。那些被你硬撐過去的低谷，正在悄悄內化成你最扎實的底氣。','心流':'你渴望那種「忘記時間、全神貫注」的狀態。當你找到那件能讓自己忘我投入的事，那就是你天賦的落腳點。','極簡':'你懂得在繁雜的世界裡做減法。定期幫生活與職涯「斷捨離」，留下真正重要的，前進的腳步才能輕盈。','安全感':'你重視穩定的根基與確定性。唯有後顧無憂、把地基打穩了，你才能真正心無旁騖地放膽去飛。','穩定可靠':'你是團隊或關係裡最令人安心的定海神針。這份不浮誇的厚實與擔當，是你行走職場最亮的名片。','財富':'你坦然地面對對金錢的渴望。你清楚知道財富是放大選擇權的工具，你追求的不只是數字，而是對人生的自主權。','四處旅行':'移動與轉換環境是你重新開機的方式。在不同的城市與陌生風景之間，你一邊探索世界，一邊撿回迷失的自己。','財務自由':'你渴望擁有「隨時說不」的底氣。財務自由對你而言，是不再為了生計向不喜歡的環境或人妥協。','平衡':'你拒絕把人生過得只剩下工作。平衡不是完美的各半，而是你能在工作、生活與自我之間，掌握好踩煞車與催油門的節奏。','有誠信':'你言出必行。在充滿套路的世界裡，這份對承諾的執著，是你建立長期信任與個人品牌最無價的資產。','做自己':'你不願意為了融入體制而抹殺自己的稜角。在別人的期待與真實的自我之間，你選擇勇敢地活出自己的原廠設定。','自律':'你相信複利的力量。那些看似枯燥、無人看見的日常堅持，正在拉開你與他人的差距，默默改變你的生涯軌跡。','有賺錢能力':'你重視自己的市場價值。具備隨時能變現的能力，讓你在任何環境變動下都不必驚慌，因為你知道自己隨時可以重新開始。','和睦':'你珍視關係裡的溫度。你明白真正的和諧從來不是粉飾太平，而是有勇氣和能力去好好修復與溝通。','享受自由':'你需要不受拘束的空間。對你而言，常規和框架只是參考，能自由決定自己的時間、節奏與生活方式，才是你前進的動力。','卓越':'你對自己有著不妥協的標準。不是為了向誰證明什麼，而是因為你體驗過極致的美好，就不想將就於差不多的平庸。','激勵他人':'你的言行自帶光芒與感染力。你最快樂的時刻，往往是看到身邊的人因為你的拉一把或一句點撥，重新找回前進的勇氣。','愉悅':'你知道過得快樂、懂得取悅自己，本身就是一項高尚的能力。讓自己維持在好狀態，是你對自己最基本的責任。','長期運動':'你把身體當作大後方。定期運動與流汗，不只是為了體態，更是你為大腦排毒、維持生涯長跑續航力的投資。','覺醒':'你不再願意盲目地被慣性推著走。那個突然看清盲點、明白自己要什麼的清醒瞬間，是你拿回人生發球權的開始。','有影響力':'你想用自己的專業在別人的生命或產業裡留下痕跡。影響力對你而言不是虛名，是一份用生命陪伴生命的深層責任。','圓滿':'你追求內外的完整與自洽。圓滿不是生活從不犯錯，而是當風雨過去，你回頭看，能坦然接納這一切都是最好的安排。','感恩':'你擁有一雙擅長在日常中拾光的眼睛。感恩不是盲目的樂觀，而是即使在混亂的職場或生活中，你依然有能力看見善意。','好奇心':'你對世界永遠抱持著探索的興致。這份不設限的好奇，讓你樂於嘗試新事物、接觸新領域，靈魂永遠維持在最新版本。','專業被認可':'你重視付出的努力獲得對等的市場反饋。被認可不是因為虛榮，而是你的專業實力與含金量得到了應有的尊重。','創造力':'你的腦袋裡總有跳脫框架的解法。那些天馬行空、不按牌理出牌的想法，正是你在職場上無法被輕易取代的獨特資產。','深層連結':'你對表面客套的社交感到疲憊。你渴望的是那種可以脫下職場防備、真誠坦白、彼此能聽懂對方弦外之音的深度對話。','勇氣':'你知道害怕是正常的，帶著恐懼繼續往前走才是解答。你的勇氣不是無所畏懼，而是看清現實後，依然選擇跨出下一步。','健康活力':'你知道高能量是一切宏大理想的底層邏輯。當你擁有飽滿的精力，你做任何決策都會更果斷，夢想才不會淪為空談。','生活單純':'你懂得拒絕無效的社交與複雜的關係。把生活圈縮小、讓心思回歸本質，反而能幫你騰出更多空間，去專注在真正核心的事。','持續進步':'你永遠走在自我反思與迭代的路上。那份對現狀還可以更好的不滿足，是驅使你不斷向上打破天花板的底層燃料。','社會地位':'你重視自己在專業領域的話語權。這不是虛榮，而是你清楚知道，擁有相應的位置與影響力，你才能調動更多資源去實踐理想。','學習力':'你把遇到的每個人、踩過的每個坑都當作生涯的養分。這份強大的內化與學習渴望，讓你無論幾歲，都能快速融入新時代。','公平正義':'你對不公不義、被貼標籤的事格外敏銳。這份原則，說明你心中有一把清晰的尺，在關鍵時刻你願意站出來捍衛正確的價值。','友誼':'你珍視那些不用特別經營也能一拍即合的夥伴。那些懂你的脆弱、為你的成功真心喝采的朋友，是你生涯路上最暖心的後盾。','傳承':'你想把自己踩過的坑、累積的智慧轉化為別人的路標。那份想傳遞價值、有所延續的心，是你身為前輩最溫柔的展現。','陪伴家人':'在看過職場的來來去去後，你深深明白最核心的風景往往就在家裡。那些平凡的相聚與日常，是你最不願意妥協的優先順序。','深耕':'你不羨慕速成的表面風光，你追求的是在一個領域挖得夠深、走得夠遠。那種成為專家的扎實感，最讓你感到踏實。','同理心':'作為一個優秀的傾聽者，你能輕易感知到別人在言語背後的委屈與需求。這份細膩，讓你天然具備療癒與引導他人的能力。','高品質':'你對將就、應付了事的態度感到難受。你對細節的精緻與用心，是你對自己專業品牌的一種極致尊重。','冒險':'穩定的生活會讓你感到枯萎，你的靈魂需要未知的挑戰來激發熱情。那些帶點風險、不確定會怎樣的時刻，最能讓你感受到活著。','智慧':'你追求穿透表象、看見事情本質的能力。不盲從主流、不被情緒綁架，用長遠且清醒的視角來看待生涯，是你一生的修煉。','歸屬感':'你需要一個能讓你感到安全、被全然接納的團隊或環境。找到了對的歸屬，你的根才能扎得夠深，能量才能毫無保留地釋放。','真實自我':'你受夠了在不同場合演繹別人期待的角色。那個敢於展現不完美、坦然接受自己所有面向的你，才是你最強大的版本。','創業精神':'你心裡有一把火，不想只當體制下的螺絲釘。那份想把想法從0到1落地、自己定義規則的渴望，是驅使你破局的創造能量。','共好':'你相信一個人走得快，但一群人才能走得遠。在實現自我價值的同時，也順手成就身邊的人，這讓你的職涯道路更寬廣。','自信':'你正在學著把評價的權力收回自己手上。那份不再需要向外界證明什麼、從內而外的篤定，是你送給自己最棒的禮物。','有機生活':'你追求身心靈的純淨與減法。在飲食、作息與環境上回歸天然與簡單，是你對抗高壓職場、找回身體節奏的溫柔革命。','內在平靜':'你渴望那種即使外界風雨交加、內心依舊井然有序的定力。內在的寧靜與自洽，是你面對職場動盪時最強大的護城河。','幫助他人':'你在利他中看見自己的價值。透過你的專業，讓另一個迷惘的人少走彎路，這帶給你極大的成就感。','自由':'你不願意被任何標籤、職稱或世俗框架給框住。保持靈活與選擇權，是你呼吸的方式，也是你規劃生涯的底層邏輯。','正念':'你明白焦慮往往來自對未來的過度擔憂。那份將注意力拉回此時此刻、專注於眼前半步的能力，能幫你有效停止職場的精神內耗。'};
 
-// ═══════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════
+const SCENES={forest:`<svg class="scene-svg" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E8F0E8"/><stop offset="100%" stop-color="#F5F0E8"/></linearGradient></defs><rect width="560" height="200" fill="url(#sg1)"/><ellipse cx="280" cy="55" rx="140" ry="45" fill="rgba(245,240,220,0.55)"/><polygon points="60,185 95,95 130,185" fill="#5C7A72" opacity="0.65"/><polygon points="90,185 130,72 170,185" fill="#3D5A54" opacity="0.82"/><polygon points="125,185 158,108 191,185" fill="#5C7A72" opacity="0.60"/><polygon points="370,185 405,85 440,185" fill="#3D5A54" opacity="0.78"/><polygon points="405,185 442,68 479,185" fill="#5C7A72" opacity="0.65"/><polygon points="435,185 468,102 501,185" fill="#3D5A54" opacity="0.60"/><rect x="0" y="178" width="560" height="22" fill="#D3C9BC" opacity="0.35"/><path d="M210,185 Q280,148 350,185" stroke="#C9A96E" stroke-width="1.5" fill="none" opacity="0.45"/></svg>`,sunrise:`<svg class="scene-svg" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F8EDD8" stop-opacity="0.7"/><stop offset="65%" stop-color="#F5F0E8"/><stop offset="100%" stop-color="#E8DDD0"/></linearGradient></defs><rect width="560" height="200" fill="url(#sg2)"/><circle cx="280" cy="135" r="58" fill="#C9A96E" opacity="0.20"/><circle cx="280" cy="135" r="40" fill="#C9A96E" opacity="0.30"/><circle cx="280" cy="135" r="24" fill="#C9A96E" opacity="0.48"/><rect x="0" y="158" width="560" height="42" fill="#D3C9BC" opacity="0.32"/><line x1="280" y1="78" x2="280" y2="58" stroke="#C9A96E" stroke-width="1.5" opacity="0.38"/><line x1="318" y1="88" x2="334" y2="73" stroke="#C9A96E" stroke-width="1.5" opacity="0.38"/><line x1="242" y1="88" x2="226" y2="73" stroke="#C9A96E" stroke-width="1.5" opacity="0.38"/></svg>`,ocean:`<svg class="scene-svg" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#EAF2EE"/><stop offset="100%" stop-color="#F5F0E8"/></linearGradient></defs><rect width="560" height="200" fill="url(#sg3)"/><path d="M0,118 Q70,98 140,118 Q210,138 280,118 Q350,98 420,118 Q490,138 560,118 L560,200 L0,200Z" fill="#9BA8A3" opacity="0.28"/><path d="M0,133 Q70,113 140,133 Q210,153 280,133 Q350,113 420,133 Q490,153 560,133 L560,200 L0,200Z" fill="#5C7A72" opacity="0.22"/><path d="M0,150 Q140,130 280,150 Q420,170 560,150 L560,200 L0,200Z" fill="#3D5A54" opacity="0.18"/><ellipse cx="280" cy="62" rx="38" ry="38" fill="#C9A96E" opacity="0.18"/></svg>`};
 
-let phase1Selected = new Set();
-let phase2Selected = new Set();
+function getScene(v){const a=['四處旅行','冒險','自由','享受自由','好奇心'],c=['內在平靜','正念','生活單純','極簡','有機生活','平衡'];for(const w of v)if(a.includes(w))return'ocean';for(const w of v)if(c.includes(w))return'sunrise';return'forest';}
 
-// ═══════════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════════
+let phase1Selected=new Set(),phase2Selected=new Set(),uploadedPhotos=[];
 
-function goToScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const target = document.getElementById(id);
-  target.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+function goToScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function goToPhase2Intro(){goToScreen('screen-phase2-intro');renderPhase2Grid();}
+function goToUpload(){goToScreen('screen-upload');}
+function goToResult(){goToScreen('screen-result');renderResult();}
 
-function goToPhase2Intro() {
-  goToScreen('screen-phase2-intro');
-  renderPhase2Grid();
-}
+function renderPhase1Grid(){const g=document.getElementById('grid1');g.innerHTML='';ALL_WORDS.forEach(w=>{const c=document.createElement('button');c.className='word-chip'+(phase1Selected.has(w)?' selected':'');c.textContent=w;c.onclick=()=>togglePhase1(w,c);g.appendChild(c);});updatePhase1Counter();}
+function togglePhase1(w,c){if(phase1Selected.has(w)){phase1Selected.delete(w);c.classList.remove('selected');}else{if(phase1Selected.size>=20){showToast('已選滿 20 個，請先取消一個再選新的');return;}phase1Selected.add(w);c.classList.add('selected');}updatePhase1Counter();updatePhase1Disabled();}
+function updatePhase1Counter(){document.getElementById('count1').textContent=phase1Selected.size;document.getElementById('btn-phase1-next').disabled=phase1Selected.size!==20;}
+function updatePhase1Disabled(){const f=phase1Selected.size>=20;document.querySelectorAll('#grid1 .word-chip').forEach(c=>{if(!c.classList.contains('selected'))c.classList.toggle('disabled',f);});}
 
-function goToCompletion() {
-  goToScreen('screen-complete');
-  renderFinalValues();
-}
+function renderPhase2Grid(){const g=document.getElementById('grid2');g.innerHTML='';phase2Selected=new Set();document.getElementById('count2').textContent='0';document.getElementById('btn-phase2-next').disabled=true;Array.from(phase1Selected).forEach(w=>{const c=document.createElement('button');c.className='word-chip';c.textContent=w;c.onclick=()=>togglePhase2(w,c);g.appendChild(c);});}
+function togglePhase2(w,c){if(phase2Selected.has(w)){phase2Selected.delete(w);c.classList.remove('selected');}else{if(phase2Selected.size>=10){showToast('已選滿 10 個，請先取消一個再選新的');return;}phase2Selected.add(w);c.classList.add('selected');}updatePhase2Counter();updatePhase2Disabled();}
+function updatePhase2Counter(){document.getElementById('count2').textContent=phase2Selected.size;document.getElementById('btn-phase2-next').disabled=phase2Selected.size!==10;}
+function updatePhase2Disabled(){const f=phase2Selected.size>=10;document.querySelectorAll('#grid2 .word-chip').forEach(c=>{if(!c.classList.contains('selected'))c.classList.toggle('disabled',f);});}
 
-// ═══════════════════════════════════════════
-// PHASE 1 GRID
-// ═══════════════════════════════════════════
+function handlePhotoUpload(e){const files=Array.from(e.target.files).slice(0,3);uploadedPhotos=[];const prev=document.getElementById('uploadPreview');prev.innerHTML='';files.forEach(file=>{if(file.size>5*1024*1024){showToast(file.name+' 超過 5MB，已略過');return;}const r=new FileReader();r.onload=ev=>{uploadedPhotos.push(ev.target.result);const img=document.createElement('img');img.src=ev.target.result;img.className='upload-thumb';prev.appendChild(img);};r.readAsDataURL(file);});}
 
-function renderPhase1Grid() {
-  const grid = document.getElementById('grid1');
-  grid.innerHTML = '';
-  ALL_WORDS.forEach(word => {
-    const chip = document.createElement('button');
-    chip.className = 'word-chip' + (phase1Selected.has(word) ? ' selected' : '');
-    chip.textContent = word;
-    chip.onclick = () => togglePhase1(word, chip);
-    grid.appendChild(chip);
-  });
-  updatePhase1Counter();
-}
+function renderResult(){const vals=Array.from(phase2Selected);const now=new Date();const p=n=>String(n).padStart(2,'0');document.getElementById('blueprintTimestamp').textContent='拾光於：'+now.getFullYear()+'/'+p(now.getMonth()+1)+'/'+p(now.getDate())+' '+p(now.getHours())+':'+p(now.getMinutes());const ps=document.getElementById('photoSection'),ss=document.getElementById('sceneSection');if(uploadedPhotos.length>0){ps.style.display='flex';ss.style.display='none';ps.innerHTML='';uploadedPhotos.forEach(src=>{const fr=document.createElement('div');fr.className='photo-frame';const img=document.createElement('img');img.src=src;img.alt='你的心動照片';fr.appendChild(img);ps.appendChild(fr);});}else{ps.style.display='none';ss.style.display='block';document.getElementById('sceneVisual').innerHTML=SCENES[getScene(vals)];}const ct=document.getElementById('resultValues');ct.innerHTML='';vals.forEach((w,i)=>{const t=document.createElement('span');t.className='value-tag';t.textContent=w;t.style.animationDelay=i*0.07+'s';ct.appendChild(t);});const firstInsight=INSIGHTS[vals[0]]||'';document.getElementById('teaserText').textContent=firstInsight?firstInsight.split('。')[0]+'。':'';}
 
-function togglePhase1(word, chip) {
-  if (phase1Selected.has(word)) {
-    phase1Selected.delete(word);
-    chip.classList.remove('selected');
-  } else {
-    if (phase1Selected.size >= 20) {
-      showToast('已選滿 20 個，請先取消一個再選新的');
-      return;
-    }
-    phase1Selected.add(word);
-    chip.classList.add('selected');
-  }
-  updatePhase1Counter();
-  updatePhase1Disabled();
-}
+function buildInsight(vals){const picks=vals.slice(0,3).filter(w=>INSIGHTS[w]);const opener='在這 52 個詞裡，你最終留下了「'+vals.slice(0,3).join('」、「')+'」——\n\n';const body=picks.map(w=>INSIGHTS[w]).join('\n\n');const closer='\n\n這不是巧合，是你靈魂最誠實的選擇。當你感到迷惘時，回到這裡，這 10 個詞就是你的指南針。✦';return opener+body+closer;}
 
-function updatePhase1Counter() {
-  document.getElementById('count1').textContent = phase1Selected.size;
-  const btn = document.getElementById('btn-phase1-next');
-  btn.disabled = phase1Selected.size !== 20;
-}
+const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbygxBayCsI-FRJlvkiNr7vON6kZE8IaOmEX1BBnos_IoHywoa43KaqcdqMhpXMdLgK4/exec';
 
-function updatePhase1Disabled() {
-  const isFull = phase1Selected.size >= 20;
-  document.querySelectorAll('#grid1 .word-chip').forEach(chip => {
-    if (!chip.classList.contains('selected')) {
-      chip.classList.toggle('disabled', isFull);
-    }
-  });
-}
+async function submitAndUnlock(){const email=document.getElementById('emailInput').value.trim();if(!email||!email.includes('@')){showToast('請輸入有效的 Email 地址');return;}document.getElementById('loadingText').textContent='正在解鎖你的專屬洞察⋯⋯';document.getElementById('loadingOverlay').classList.add('show');const vals=Array.from(phase2Selected);try{await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,phase1:Array.from(phase1Selected).join('、'),phase2:vals.join('、'),timestamp:new Date().toISOString()})});}catch(e){}document.getElementById('loadingOverlay').classList.remove('show');document.getElementById('teaserText').classList.add('unlocked');document.getElementById('insightText').textContent=buildInsight(vals);const wrap=document.getElementById('insightWrap');wrap.classList.add('show');document.getElementById('teaserSection').style.display='none';setTimeout(()=>wrap.scrollIntoView({behavior:'smooth',block:'start'}),400);}
 
-// ═══════════════════════════════════════════
-// PHASE 2 GRID — only shows the 20 selected
-// ═══════════════════════════════════════════
+let toastTimer=null;
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2500);}
 
-function renderPhase2Grid() {
-  const grid = document.getElementById('grid2');
-  grid.innerHTML = '';
-
-  // Reset phase2 if re-entering
-  phase2Selected = new Set();
-  document.getElementById('count2').textContent = '0';
-  document.getElementById('btn-phase2-next').disabled = true;
-
-  const words = Array.from(phase1Selected);
-  words.forEach(word => {
-    const chip = document.createElement('button');
-    chip.className = 'word-chip';
-    chip.textContent = word;
-    chip.onclick = () => togglePhase2(word, chip);
-    grid.appendChild(chip);
-  });
-}
-
-function togglePhase2(word, chip) {
-  if (phase2Selected.has(word)) {
-    phase2Selected.delete(word);
-    chip.classList.remove('selected');
-  } else {
-    if (phase2Selected.size >= 10) {
-      showToast('已選滿 10 個，請先取消一個再選新的');
-      return;
-    }
-    phase2Selected.add(word);
-    chip.classList.add('selected');
-  }
-  updatePhase2Counter();
-  updatePhase2Disabled();
-}
-
-function updatePhase2Counter() {
-  document.getElementById('count2').textContent = phase2Selected.size;
-  const btn = document.getElementById('btn-phase2-next');
-  btn.disabled = phase2Selected.size !== 10;
-}
-
-function updatePhase2Disabled() {
-  const isFull = phase2Selected.size >= 10;
-  document.querySelectorAll('#grid2 .word-chip').forEach(chip => {
-    if (!chip.classList.contains('selected')) {
-      chip.classList.toggle('disabled', isFull);
-    }
-  });
-}
-
-// ═══════════════════════════════════════════
-// FINAL VALUES DISPLAY
-// ═══════════════════════════════════════════
-
-function renderFinalValues() {
-  const container = document.getElementById('finalValues');
-  container.innerHTML = '';
-  Array.from(phase2Selected).forEach((word, i) => {
-    const tag = document.createElement('span');
-    tag.className = 'value-tag';
-    tag.textContent = word;
-    tag.style.animationDelay = `${i * 0.06}s`;
-    container.appendChild(tag);
-  });
-}
-
-// ═══════════════════════════════════════════
-// EMAIL SUBMIT — Google Apps Script
-// ═══════════════════════════════════════════
-
-// ⚠️ 請將下方 URL 替換成你的 Google Apps Script Web App URL
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbygxBayCsI-FRJlvkiNr7vON6kZE8IaOmEX1BBnos_IoHywoa43KaqcdqMhpXMdLgK4/exec';
-
-async function submitEmail() {
-  const email = document.getElementById('emailInput').value.trim();
-
-  if (!email || !email.includes('@')) {
-    showToast('請輸入有效的 Email 地址');
-    return;
-  }
-
-  const overlay = document.getElementById('loadingOverlay');
-  overlay.classList.add('show');
-
-  const payload = {
-    email: email,
-    phase1: Array.from(phase1Selected).join('、'),
-    phase2: Array.from(phase2Selected).join('、'),
-    timestamp: new Date().toISOString()
-  };
-
-  try {
-    // If no Apps Script URL configured, skip the API call (demo mode)
-    if (APPS_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-      await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    }
-    overlay.classList.remove('show');
-    goToScreen('screen-thankyou');
-  } catch (err) {
-    overlay.classList.remove('show');
-    // Still proceed — no-cors means we can't read response anyway
-    goToScreen('screen-thankyou');
-  }
-}
-
-// ═══════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════
-
-let toastTimer = null;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
-}
-
-// ═══════════════════════════════════════════
-// ENTER key on email
-// ═══════════════════════════════════════════
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderPhase1Grid();
-  document.getElementById('emailInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') submitEmail();
-  });
-});
+document.addEventListener('DOMContentLoaded',()=>{renderPhase1Grid();document.getElementById('emailInput').addEventListener('keydown',e=>{if(e.key==='Enter')submitAndUnlock();});});
 </script>
 </body>
 </html>
