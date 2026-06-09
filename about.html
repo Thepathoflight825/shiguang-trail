@@ -121,18 +121,108 @@
 <div class="forest-backdrop">
   <div class="forest-sun"></div>
 
-  <!-- Left: connected organic tree silhouettes -->
+  <!-- Left: soft rounded tree + layered organic leaves -->
   <svg class="forest-trees forest-trees-left" viewBox="0 0 260 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
-    <!-- Tree 1: tall centre -->
-    <path d="M120,880 L120,640 Q100,620 75,580 Q55,540 70,500 Q55,470 65,440 Q50,410 70,380 Q85,350 105,360 Q95,330 110,310 Q125,290 140,310 Q155,295 165,320 Q180,340 170,370 Q190,360 195,390 Q205,420 185,445 Q200,470 190,505 Q205,540 185,575 Q165,610 145,630 L145,880 Z" fill="#5C7A72" opacity="0.45"/>
-    <!-- Tree 2: shorter left -->
-    <path d="M50,880 L50,720 Q35,700 20,670 Q5,640 18,610 Q5,585 15,560 Q25,535 45,545 Q38,520 52,505 Q65,490 78,508 Q88,490 98,510 Q105,535 90,555 Q108,548 110,575 Q112,605 95,625 Q112,645 105,675 Q95,705 75,720 L75,880 Z" fill="#3D5A54" opacity="0.35"/>
+    <defs>
+      <radialGradient id="treeGradL" cx="50%" cy="40%" r="55%">
+        <stop offset="0%" stop-color="#7A9E90" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#3D5A54" stop-opacity="0.25"/>
+      </radialGradient>
+      <radialGradient id="leafGradL" cx="40%" cy="30%" r="60%">
+        <stop offset="0%" stop-color="#9AB5A8" stop-opacity="0.45"/>
+        <stop offset="100%" stop-color="#5C7A72" stop-opacity="0.2"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Main tree — rounded organic canopy connected to trunk -->
+    <path d="
+      M132,900 L132,695
+      Q118,688 105,672 Q85,648 88,622
+      Q70,604 72,580 Q74,556 92,545
+      Q78,525 80,503 Q82,478 100,468
+      Q86,448 90,425 Q95,400 116,393
+      Q108,368 118,350 Q130,330 148,338
+      Q162,322 175,338 Q184,358 176,378
+      Q196,372 200,396 Q204,420 188,436
+      Q204,448 202,472 Q200,496 184,510
+      Q200,522 198,548 Q196,572 178,588
+      Q192,608 186,632 Q178,658 158,672
+      Q147,684 138,692 L138,900 Z
+    " fill="url(#treeGradL)"/>
+
+    <!-- Layered leaf blob 1 — lower left -->
+    <path d="
+      M30,900 Q18,860 22,820 Q16,790 28,768
+      Q10,748 14,720 Q20,694 40,688
+      Q28,664 38,644 Q52,622 72,628
+      Q68,604 84,596 Q100,590 108,608
+      Q116,590 128,598 Q136,612 126,630
+      Q140,622 144,640 Q146,660 132,672
+      Q144,686 138,706 Q130,726 112,730
+      Q118,752 108,768 Q96,784 80,780
+      Q78,806 64,818 Q48,828 38,820
+      Q28,860 30,900 Z
+    " fill="url(#leafGradL)" opacity="0.75"/>
+
+    <!-- Leaf blob 2 — mid left accent -->
+    <path d="
+      M0,780 Q-4,750 8,730 Q18,710 36,714
+      Q28,692 42,680 Q58,670 68,684
+      Q72,666 86,664 Q98,664 100,680
+      Q108,666 118,672 Q122,686 112,698
+      Q120,706 116,720 Q110,734 96,734
+      Q98,750 88,760 Q74,768 62,760
+      Q52,774 38,774 Q18,772 0,780 Z
+    " fill="#6B8F84" opacity="0.3"/>
   </svg>
 
-  <!-- Right: mirror -->
+  <!-- Right: mirror of left -->
   <svg class="forest-trees forest-trees-right" viewBox="0 0 260 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
-    <path d="M120,880 L120,640 Q100,620 75,580 Q55,540 70,500 Q55,470 65,440 Q50,410 70,380 Q85,350 105,360 Q95,330 110,310 Q125,290 140,310 Q155,295 165,320 Q180,340 170,370 Q190,360 195,390 Q205,420 185,445 Q200,470 190,505 Q205,540 185,575 Q165,610 145,630 L145,880 Z" fill="#5C7A72" opacity="0.45"/>
-    <path d="M50,880 L50,720 Q35,700 20,670 Q5,640 18,610 Q5,585 15,560 Q25,535 45,545 Q38,520 52,505 Q65,490 78,508 Q88,490 98,510 Q105,535 90,555 Q108,548 110,575 Q112,605 95,625 Q112,645 105,675 Q95,705 75,720 L75,880 Z" fill="#3D5A54" opacity="0.35"/>
+    <defs>
+      <radialGradient id="treeGradR" cx="50%" cy="40%" r="55%">
+        <stop offset="0%" stop-color="#7A9E90" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#3D5A54" stop-opacity="0.25"/>
+      </radialGradient>
+      <radialGradient id="leafGradR" cx="40%" cy="30%" r="60%">
+        <stop offset="0%" stop-color="#9AB5A8" stop-opacity="0.45"/>
+        <stop offset="100%" stop-color="#5C7A72" stop-opacity="0.2"/>
+      </radialGradient>
+    </defs>
+    <path d="
+      M132,900 L132,695
+      Q118,688 105,672 Q85,648 88,622
+      Q70,604 72,580 Q74,556 92,545
+      Q78,525 80,503 Q82,478 100,468
+      Q86,448 90,425 Q95,400 116,393
+      Q108,368 118,350 Q130,330 148,338
+      Q162,322 175,338 Q184,358 176,378
+      Q196,372 200,396 Q204,420 188,436
+      Q204,448 202,472 Q200,496 184,510
+      Q200,522 198,548 Q196,572 178,588
+      Q192,608 186,632 Q178,658 158,672
+      Q147,684 138,692 L138,900 Z
+    " fill="url(#treeGradR)"/>
+    <path d="
+      M30,900 Q18,860 22,820 Q16,790 28,768
+      Q10,748 14,720 Q20,694 40,688
+      Q28,664 38,644 Q52,622 72,628
+      Q68,604 84,596 Q100,590 108,608
+      Q116,590 128,598 Q136,612 126,630
+      Q140,622 144,640 Q146,660 132,672
+      Q144,686 138,706 Q130,726 112,730
+      Q118,752 108,768 Q96,784 80,780
+      Q78,806 64,818 Q48,828 38,820
+      Q28,860 30,900 Z
+    " fill="url(#leafGradR)" opacity="0.75"/>
+    <path d="
+      M0,780 Q-4,750 8,730 Q18,710 36,714
+      Q28,692 42,680 Q58,670 68,684
+      Q72,666 86,664 Q98,664 100,680
+      Q108,666 118,672 Q122,686 112,698
+      Q120,706 116,720 Q110,734 96,734
+      Q98,750 88,760 Q74,768 62,760
+      Q52,774 38,774 Q18,772 0,780 Z
+    " fill="#6B8F84" opacity="0.3"/>
   </svg>
 </div>
 
