@@ -33,9 +33,9 @@
   /* FOREST BACKGROUND — soft rounded trees */
   .forest-backdrop{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
   .forest-sun{position:absolute;top:-20vh;left:50%;transform:translateX(-50%);width:70vw;height:70vw;max-width:900px;max-height:900px;border-radius:50%;background:radial-gradient(circle,rgba(250,243,215,0.65) 0%,rgba(245,238,218,0.3) 40%,transparent 70%);}
-  .forest-trees{position:absolute;top:0;bottom:0;width:22vw;max-width:320px;opacity:0.45;}
+  .forest-trees{position:absolute;top:0;bottom:0;width:24vw;max-width:340px;opacity:0.45;}
   .forest-trees-left{left:0;}
-  .forest-trees-right{right:0;transform:scaleX(-1);}
+  .forest-trees-right{right:0;}
 
   /* PAGE */
   .page-wrap{max-width:760px;margin:0 auto;padding:64px 24px 100px;}
@@ -121,97 +121,126 @@
 <div class="forest-backdrop">
   <div class="forest-sun"></div>
 
-  <!-- Left forest: round canopy trees, 3 trees, tallest rightmost (closest to content) -->
-  <svg class="forest-trees forest-trees-left" viewBox="0 0 320 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMax slice">
+  <!-- Left forest: tallest on far left (outer), shortest on far right (inner/closest to content) -->
+  <svg class="forest-trees forest-trees-left" viewBox="0 0 340 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMax slice">
     <defs>
-      <radialGradient id="lc1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#A8C8A8" stop-opacity="0.58"/><stop offset="100%" stop-color="#4A7858" stop-opacity="0.14"/></radialGradient>
-      <radialGradient id="lc2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#78A884" stop-opacity="0.66"/><stop offset="100%" stop-color="#2E5C3C" stop-opacity="0.20"/></radialGradient>
-      <radialGradient id="lc3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#C0D8BC" stop-opacity="0.44"/><stop offset="100%" stop-color="#5A8264" stop-opacity="0.13"/></radialGradient>
-      <radialGradient id="lc4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#6A9872" stop-opacity="0.70"/><stop offset="100%" stop-color="#224E30" stop-opacity="0.26"/></radialGradient>
+      <radialGradient id="lp1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#C8DEC8" stop-opacity="0.42"/><stop offset="100%" stop-color="#5A8264" stop-opacity="0.10"/></radialGradient>
+      <radialGradient id="lp2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#A8C8A8" stop-opacity="0.52"/><stop offset="100%" stop-color="#4A7858" stop-opacity="0.14"/></radialGradient>
+      <radialGradient id="lp3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#88B494" stop-opacity="0.62"/><stop offset="100%" stop-color="#347848" stop-opacity="0.20"/></radialGradient>
+      <radialGradient id="lp4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#68A078" stop-opacity="0.72"/><stop offset="100%" stop-color="#245A38" stop-opacity="0.26"/></radialGradient>
     </defs>
 
-    <!-- Tree L-1: tallest, rightmost (closest to text), 4 canopy circles -->
-    <rect x="262" y="380" width="16" height="520" rx="8" fill="#4A7858" opacity="0.22"/>
-    <ellipse cx="270" cy="375" rx="58" ry="68" fill="url(#lc3)" opacity="0.48"/>
-    <ellipse cx="270" cy="312" rx="50" ry="60" fill="url(#lc1)" opacity="0.52"/>
-    <ellipse cx="270" cy="258" rx="42" ry="52" fill="url(#lc3)" opacity="0.46"/>
-    <ellipse cx="270" cy="212" rx="34" ry="44" fill="url(#lc1)" opacity="0.50"/>
-    <ellipse cx="270" cy="174" rx="26" ry="36" fill="url(#lc3)" opacity="0.44"/>
+    <!-- Tree L-1: tallest, leftmost (outer edge), 6 circles -->
+    <rect x="18" y="250" width="16" height="650" rx="8" fill="#3E6A4A" opacity="0.22"/>
+    <ellipse cx="26" cy="244" rx="58" ry="70" fill="url(#lp4)" opacity="0.54"/>
+    <ellipse cx="26" cy="178" rx="50" ry="62" fill="url(#lp4)" opacity="0.50"/>
+    <ellipse cx="26" cy="120" rx="42" ry="54" fill="url(#lp4)" opacity="0.46"/>
+    <ellipse cx="26" cy="70"  rx="34" ry="46" fill="url(#lp4)" opacity="0.42"/>
+    <ellipse cx="26" cy="28"  rx="26" ry="38" fill="url(#lp4)" opacity="0.38"/>
 
-    <!-- Tree L-2: mid height, centre -->
-    <rect x="158" y="500" width="14" height="400" rx="7" fill="#3E6A4A" opacity="0.20"/>
-    <ellipse cx="165" cy="495" rx="50" ry="60" fill="url(#lc2)" opacity="0.52"/>
-    <ellipse cx="165" cy="438" rx="42" ry="52" fill="url(#lc4)" opacity="0.48"/>
-    <ellipse cx="165" cy="390" rx="34" ry="44" fill="url(#lc2)" opacity="0.46"/>
-    <ellipse cx="165" cy="350" rx="26" ry="36" fill="url(#lc4)" opacity="0.42"/>
+    <!-- Tree L-2: slightly shorter -->
+    <rect x="92" y="360" width="14" height="540" rx="7" fill="#4A7858" opacity="0.20"/>
+    <ellipse cx="99" cy="355" rx="50" ry="60" fill="url(#lp3)" opacity="0.50"/>
+    <ellipse cx="99" cy="299" rx="42" ry="52" fill="url(#lp3)" opacity="0.46"/>
+    <ellipse cx="99" cy="251" rx="34" ry="44" fill="url(#lp3)" opacity="0.42"/>
+    <ellipse cx="99" cy="211" rx="26" ry="36" fill="url(#lp3)" opacity="0.38"/>
+    <ellipse cx="99" cy="179" rx="18" ry="28" fill="url(#lp3)" opacity="0.34"/>
 
-    <!-- Tree L-3: shortest, leftmost (furthest back) -->
-    <rect x="55" y="620" width="12" height="280" rx="6" fill="#3E6A4A" opacity="0.18"/>
-    <ellipse cx="61" cy="616" rx="42" ry="52" fill="url(#lc3)" opacity="0.46"/>
-    <ellipse cx="61" cy="567" rx="34" ry="44" fill="url(#lc1)" opacity="0.42"/>
-    <ellipse cx="61" cy="527" rx="26" ry="36" fill="url(#lc3)" opacity="0.38"/>
+    <!-- Tree L-3: medium -->
+    <rect x="164" y="480" width="12" height="420" rx="6" fill="#4A7858" opacity="0.18"/>
+    <ellipse cx="170" cy="475" rx="40" ry="50" fill="url(#lp2)" opacity="0.46"/>
+    <ellipse cx="170" cy="429" rx="32" ry="42" fill="url(#lp2)" opacity="0.42"/>
+    <ellipse cx="170" cy="391" rx="24" ry="34" fill="url(#lp2)" opacity="0.38"/>
+    <ellipse cx="170" cy="361" rx="18" ry="26" fill="url(#lp2)" opacity="0.34"/>
 
-    <!-- Ground shrubs -->
-    <ellipse cx="80"  cy="876" rx="72" ry="24" fill="url(#lc2)" opacity="0.36"/>
-    <ellipse cx="185" cy="884" rx="58" ry="20" fill="url(#lc4)" opacity="0.32"/>
-    <ellipse cx="272" cy="890" rx="48" ry="18" fill="url(#lc2)" opacity="0.30"/>
+    <!-- Tree L-4: shorter -->
+    <rect x="230" y="590" width="10" height="310" rx="5" fill="#4A7858" opacity="0.16"/>
+    <ellipse cx="235" cy="586" rx="30" ry="38" fill="url(#lp2)" opacity="0.42"/>
+    <ellipse cx="235" cy="552" rx="22" ry="30" fill="url(#lp1)" opacity="0.38"/>
+    <ellipse cx="235" cy="526" rx="16" ry="24" fill="url(#lp1)" opacity="0.32"/>
 
-    <!-- Grass blades -->
-    <path d="M25,900 C32,872 44,848 36,820" stroke="#4A7858" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.32"/>
-    <path d="M58,900 C67,870 82,844 72,814" stroke="#3A6448" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.34"/>
-    <path d="M100,900 C110,874 126,852 114,822" stroke="#4A7858" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.30"/>
-    <path d="M148,900 C156,876 168,856 158,828" stroke="#3A6448" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.28"/>
-    <path d="M200,900 C208,876 220,858 210,830" stroke="#4A7858" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.28"/>
-    <path d="M244,900 C252,878 264,860 254,832" stroke="#3A6448" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.26"/>
-    <path d="M290,900 C298,878 308,860 300,834" stroke="#4A7858" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.26"/>
-    <ellipse cx="160" cy="900" rx="200" ry="15" fill="#3A6448" opacity="0.06"/>
+    <!-- Tree L-5: shortest, rightmost (inner edge, closest to content) -->
+    <rect x="294" y="700" width="8" height="200" rx="4" fill="#4A7858" opacity="0.14"/>
+    <ellipse cx="298" cy="697" rx="20" ry="26" fill="url(#lp1)" opacity="0.36"/>
+    <ellipse cx="298" cy="675" rx="14" ry="20" fill="url(#lp1)" opacity="0.28"/>
+
+    <!-- Ground shrubs — denser on outer left -->
+    <ellipse cx="28"  cy="868" rx="72" ry="22" fill="url(#lp4)" opacity="0.38"/>
+    <ellipse cx="100" cy="876" rx="58" ry="18" fill="url(#lp3)" opacity="0.34"/>
+    <ellipse cx="172" cy="882" rx="46" ry="16" fill="url(#lp2)" opacity="0.30"/>
+    <ellipse cx="238" cy="887" rx="34" ry="14" fill="url(#lp1)" opacity="0.26"/>
+    <ellipse cx="300" cy="892" rx="24" ry="12" fill="url(#lp1)" opacity="0.20"/>
+
+    <!-- Grass blades — taller on outer left -->
+    <path d="M8,900  C14,866 26,840 16,808"  stroke="#3E6A4A" stroke-width="3"   fill="none" stroke-linecap="round" opacity="0.34"/>
+    <path d="M45,900 C53,870 68,844 56,814"  stroke="#3E6A4A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.32"/>
+    <path d="M90,900 C100,872 114,848 102,820" stroke="#3E6A4A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.30"/>
+    <path d="M140,900 C148,874 160,854 150,826" stroke="#3E6A4A" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.28"/>
+    <path d="M192,900 C198,876 208,858 200,832" stroke="#3E6A4A" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.26"/>
+    <path d="M246,900 C252,880 260,864 254,840" stroke="#3E6A4A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.22"/>
+    <path d="M302,900 C306,884 312,870 308,852" stroke="#3E6A4A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.18"/>
+    <ellipse cx="170" cy="900" rx="220" ry="14" fill="#3A6448" opacity="0.05"/>
   </svg>
 
-  <!-- Right forest: round canopy trees, tallest leftmost (closest to content), different count & spacing -->
-  <svg class="forest-trees forest-trees-right" viewBox="0 0 320 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMax slice">
+  <!-- Right forest: tallest on far right (outer), shortest on far left (inner/closest to content) -->
+  <svg class="forest-trees forest-trees-right" viewBox="0 0 340 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMax slice">
     <defs>
-      <radialGradient id="rc1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#A8C8A8" stop-opacity="0.58"/><stop offset="100%" stop-color="#4A7858" stop-opacity="0.14"/></radialGradient>
-      <radialGradient id="rc2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#78A884" stop-opacity="0.66"/><stop offset="100%" stop-color="#2E5C3C" stop-opacity="0.20"/></radialGradient>
-      <radialGradient id="rc3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#C0D8BC" stop-opacity="0.44"/><stop offset="100%" stop-color="#5A8264" stop-opacity="0.13"/></radialGradient>
-      <radialGradient id="rc4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#6A9872" stop-opacity="0.70"/><stop offset="100%" stop-color="#224E30" stop-opacity="0.26"/></radialGradient>
+      <radialGradient id="rp1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#C8DEC8" stop-opacity="0.42"/><stop offset="100%" stop-color="#5A8264" stop-opacity="0.10"/></radialGradient>
+      <radialGradient id="rp2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#A8C8A8" stop-opacity="0.52"/><stop offset="100%" stop-color="#4A7858" stop-opacity="0.14"/></radialGradient>
+      <radialGradient id="rp3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#88B494" stop-opacity="0.62"/><stop offset="100%" stop-color="#347848" stop-opacity="0.20"/></radialGradient>
+      <radialGradient id="rp4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#68A078" stop-opacity="0.72"/><stop offset="100%" stop-color="#245A38" stop-opacity="0.26"/></radialGradient>
     </defs>
 
-    <!-- Tree R-1: tallest, leftmost (closest to text), 5 canopy circles — taller than left counterpart -->
-    <rect x="42" y="340" width="16" height="560" rx="8" fill="#4A7858" opacity="0.22"/>
-    <ellipse cx="50" cy="335" rx="60" ry="70" fill="url(#rc3)" opacity="0.48"/>
-    <ellipse cx="50" cy="270" rx="52" ry="62" fill="url(#rc1)" opacity="0.52"/>
-    <ellipse cx="50" cy="214" rx="44" ry="54" fill="url(#rc3)" opacity="0.46"/>
-    <ellipse cx="50" cy="166" rx="36" ry="46" fill="url(#rc1)" opacity="0.50"/>
-    <ellipse cx="50" cy="126" rx="28" ry="38" fill="url(#rc3)" opacity="0.44"/>
-    <ellipse cx="50" cy="94"  rx="20" ry="30" fill="url(#rc1)" opacity="0.40"/>
+    <!-- Tree R-5: shortest, leftmost (inner edge, closest to content) -->
+    <rect x="30" y="700" width="8" height="200" rx="4" fill="#4A7858" opacity="0.14"/>
+    <ellipse cx="34" cy="697" rx="20" ry="26" fill="url(#rp1)" opacity="0.36"/>
+    <ellipse cx="34" cy="675" rx="14" ry="20" fill="url(#rp1)" opacity="0.28"/>
 
-    <!-- Tree R-2: mid, slightly right and shorter -->
-    <rect x="162" y="520" width="14" height="380" rx="7" fill="#3E6A4A" opacity="0.20"/>
-    <ellipse cx="169" cy="516" rx="48" ry="58" fill="url(#rc4)" opacity="0.50"/>
-    <ellipse cx="169" cy="461" rx="40" ry="50" fill="url(#rc2)" opacity="0.46"/>
-    <ellipse cx="169" cy="414" rx="32" ry="42" fill="url(#rc4)" opacity="0.44"/>
-    <ellipse cx="169" cy="376" rx="24" ry="34" fill="url(#rc2)" opacity="0.40"/>
+    <!-- Tree R-4 -->
+    <rect x="90" y="590" width="10" height="310" rx="5" fill="#4A7858" opacity="0.16"/>
+    <ellipse cx="95" cy="586" rx="30" ry="38" fill="url(#rp1)" opacity="0.42"/>
+    <ellipse cx="95" cy="552" rx="22" ry="30" fill="url(#rp2)" opacity="0.38"/>
+    <ellipse cx="95" cy="526" rx="16" ry="24" fill="url(#rp2)" opacity="0.32"/>
 
-    <!-- Tree R-3: shortest, rightmost — 3 circles only -->
-    <rect x="260" y="660" width="12" height="240" rx="6" fill="#3E6A4A" opacity="0.18"/>
-    <ellipse cx="266" cy="656" rx="40" ry="50" fill="url(#rc3)" opacity="0.44"/>
-    <ellipse cx="266" cy="610" rx="32" ry="42" fill="url(#rc1)" opacity="0.40"/>
-    <ellipse cx="266" cy="572" rx="24" ry="34" fill="url(#rc3)" opacity="0.36"/>
+    <!-- Tree R-3: medium -->
+    <rect x="156" y="480" width="12" height="420" rx="6" fill="#4A7858" opacity="0.18"/>
+    <ellipse cx="162" cy="475" rx="40" ry="50" fill="url(#rp2)" opacity="0.46"/>
+    <ellipse cx="162" cy="429" rx="32" ry="42" fill="url(#rp2)" opacity="0.42"/>
+    <ellipse cx="162" cy="391" rx="24" ry="34" fill="url(#rp2)" opacity="0.38"/>
+    <ellipse cx="162" cy="361" rx="18" ry="26" fill="url(#rp2)" opacity="0.34"/>
 
-    <!-- Ground shrubs -->
-    <ellipse cx="55"  cy="872" rx="68" ry="22" fill="url(#rc2)" opacity="0.35"/>
-    <ellipse cx="165" cy="882" rx="54" ry="20" fill="url(#rc4)" opacity="0.32"/>
-    <ellipse cx="265" cy="888" rx="46" ry="18" fill="url(#rc2)" opacity="0.28"/>
+    <!-- Tree R-2: taller -->
+    <rect x="222" y="360" width="14" height="540" rx="7" fill="#4A7858" opacity="0.20"/>
+    <ellipse cx="229" cy="355" rx="50" ry="60" fill="url(#rp3)" opacity="0.50"/>
+    <ellipse cx="229" cy="299" rx="42" ry="52" fill="url(#rp3)" opacity="0.46"/>
+    <ellipse cx="229" cy="251" rx="34" ry="44" fill="url(#rp3)" opacity="0.42"/>
+    <ellipse cx="229" cy="211" rx="26" ry="36" fill="url(#rp3)" opacity="0.38"/>
+    <ellipse cx="229" cy="179" rx="18" ry="28" fill="url(#rp3)" opacity="0.34"/>
 
-    <!-- Grass blades -->
-    <path d="M295,900 C288,872 276,848 284,820" stroke="#4A7858" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.32"/>
-    <path d="M262,900 C253,870 238,844 248,814" stroke="#3A6448" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.34"/>
-    <path d="M220,900 C210,874 194,852 206,822" stroke="#4A7858" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.30"/>
-    <path d="M172,900 C164,876 152,856 162,828" stroke="#3A6448" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.28"/>
-    <path d="M120,900 C112,876 100,858 110,830" stroke="#4A7858" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.28"/>
-    <path d="M76,900 C68,878 56,860 66,832" stroke="#3A6448" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.26"/>
-    <path d="M30,900 C22,878 12,860 20,834" stroke="#4A7858" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.26"/>
-    <ellipse cx="160" cy="900" rx="200" ry="15" fill="#3A6448" opacity="0.06"/>
+    <!-- Tree R-1: tallest, rightmost (outer edge), 6 circles -->
+    <rect x="296" y="250" width="16" height="650" rx="8" fill="#3E6A4A" opacity="0.22"/>
+    <ellipse cx="304" cy="244" rx="58" ry="70" fill="url(#rp4)" opacity="0.54"/>
+    <ellipse cx="304" cy="178" rx="50" ry="62" fill="url(#rp4)" opacity="0.50"/>
+    <ellipse cx="304" cy="120" rx="42" ry="54" fill="url(#rp4)" opacity="0.46"/>
+    <ellipse cx="304" cy="70"  rx="34" ry="46" fill="url(#rp4)" opacity="0.42"/>
+    <ellipse cx="304" cy="28"  rx="26" ry="38" fill="url(#rp4)" opacity="0.38"/>
+
+    <!-- Ground shrubs — denser toward outer right -->
+    <ellipse cx="34"  cy="892" rx="24" ry="12" fill="url(#rp1)" opacity="0.20"/>
+    <ellipse cx="96"  cy="887" rx="36" ry="14" fill="url(#rp1)" opacity="0.26"/>
+    <ellipse cx="164" cy="882" rx="48" ry="16" fill="url(#rp2)" opacity="0.30"/>
+    <ellipse cx="232" cy="876" rx="60" ry="18" fill="url(#rp3)" opacity="0.34"/>
+    <ellipse cx="306" cy="868" rx="72" ry="22" fill="url(#rp4)" opacity="0.38"/>
+
+    <!-- Grass blades — shorter inner, taller outer -->
+    <path d="M18,900  C22,884 28,870 24,852"   stroke="#3E6A4A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.18"/>
+    <path d="M58,900  C64,880 72,864 66,840"   stroke="#3E6A4A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.22"/>
+    <path d="M108,900 C114,876 124,858 116,832" stroke="#3E6A4A" stroke-width="2"   fill="none" stroke-linecap="round" opacity="0.26"/>
+    <path d="M162,900 C170,874 182,854 172,826" stroke="#3E6A4A" stroke-width="2"   fill="none" stroke-linecap="round" opacity="0.28"/>
+    <path d="M218,900 C228,872 242,848 230,820" stroke="#3E6A4A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.30"/>
+    <path d="M272,900 C282,868 298,842 286,814" stroke="#3E6A4A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.32"/>
+    <path d="M322,900 C330,866 340,840 332,810" stroke="#3E6A4A" stroke-width="3"   fill="none" stroke-linecap="round" opacity="0.34"/>
+    <ellipse cx="170" cy="900" rx="220" ry="14" fill="#3A6448" opacity="0.05"/>
   </svg>
 </div>
 
