@@ -77,8 +77,8 @@
   }
   /* 讓 SCPC / 104 視覺重量與數字一致 */
   .cred-num-text{
-    font-family:'Cormorant Garamond',serif;
-    font-size:2.2rem;font-weight:400;
+    font-family:'Noto Serif TC',serif;
+    font-size:2rem;font-weight:500;
     color:var(--forest);line-height:1;
     margin-bottom:10px;letter-spacing:.06em;
   }
@@ -121,44 +121,18 @@
 <div class="forest-backdrop">
   <div class="forest-sun"></div>
 
-  <!-- Left: soft organic tree shapes -->
+  <!-- Left: connected organic tree silhouettes -->
   <svg class="forest-trees forest-trees-left" viewBox="0 0 260 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
-    <g fill="#5C7A72" opacity="0.5">
-      <!-- trunk -->
-      <rect x="110" y="680" width="18" height="220" rx="6"/>
-      <rect x="58" y="740" width="14" height="160" rx="5"/>
-      <rect x="168" y="760" width="12" height="140" rx="5"/>
-      <!-- canopy circles — layered soft blobs -->
-      <ellipse cx="120" cy="560" rx="68" ry="75"/>
-      <ellipse cx="120" cy="490" rx="55" ry="62"/>
-      <ellipse cx="80"  cy="580" rx="48" ry="52"/>
-      <ellipse cx="160" cy="590" rx="44" ry="48"/>
-      <ellipse cx="120" cy="430" rx="42" ry="48"/>
-    </g>
-    <g fill="#3D5A54" opacity="0.35">
-      <ellipse cx="65"  cy="660" rx="40" ry="110"/>
-      <ellipse cx="65"  cy="590" rx="36" ry="52"/>
-      <ellipse cx="65"  cy="540" rx="30" ry="42"/>
-    </g>
+    <!-- Tree 1: tall centre -->
+    <path d="M120,880 L120,640 Q100,620 75,580 Q55,540 70,500 Q55,470 65,440 Q50,410 70,380 Q85,350 105,360 Q95,330 110,310 Q125,290 140,310 Q155,295 165,320 Q180,340 170,370 Q190,360 195,390 Q205,420 185,445 Q200,470 190,505 Q205,540 185,575 Q165,610 145,630 L145,880 Z" fill="#5C7A72" opacity="0.45"/>
+    <!-- Tree 2: shorter left -->
+    <path d="M50,880 L50,720 Q35,700 20,670 Q5,640 18,610 Q5,585 15,560 Q25,535 45,545 Q38,520 52,505 Q65,490 78,508 Q88,490 98,510 Q105,535 90,555 Q108,548 110,575 Q112,605 95,625 Q112,645 105,675 Q95,705 75,720 L75,880 Z" fill="#3D5A54" opacity="0.35"/>
   </svg>
 
   <!-- Right: mirror -->
   <svg class="forest-trees forest-trees-right" viewBox="0 0 260 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
-    <g fill="#5C7A72" opacity="0.5">
-      <rect x="110" y="680" width="18" height="220" rx="6"/>
-      <rect x="58"  y="740" width="14" height="160" rx="5"/>
-      <rect x="168" y="760" width="12" height="140" rx="5"/>
-      <ellipse cx="120" cy="560" rx="68" ry="75"/>
-      <ellipse cx="120" cy="490" rx="55" ry="62"/>
-      <ellipse cx="80"  cy="580" rx="48" ry="52"/>
-      <ellipse cx="160" cy="590" rx="44" ry="48"/>
-      <ellipse cx="120" cy="430" rx="42" ry="48"/>
-    </g>
-    <g fill="#3D5A54" opacity="0.35">
-      <ellipse cx="65"  cy="660" rx="40" ry="110"/>
-      <ellipse cx="65"  cy="590" rx="36" ry="52"/>
-      <ellipse cx="65"  cy="540" rx="30" ry="42"/>
-    </g>
+    <path d="M120,880 L120,640 Q100,620 75,580 Q55,540 70,500 Q55,470 65,440 Q50,410 70,380 Q85,350 105,360 Q95,330 110,310 Q125,290 140,310 Q155,295 165,320 Q180,340 170,370 Q190,360 195,390 Q205,420 185,445 Q200,470 190,505 Q205,540 185,575 Q165,610 145,630 L145,880 Z" fill="#5C7A72" opacity="0.45"/>
+    <path d="M50,880 L50,720 Q35,700 20,670 Q5,640 18,610 Q5,585 15,560 Q25,535 45,545 Q38,520 52,505 Q65,490 78,508 Q88,490 98,510 Q105,535 90,555 Q108,548 110,575 Q112,605 95,625 Q112,645 105,675 Q95,705 75,720 L75,880 Z" fill="#3D5A54" opacity="0.35"/>
   </svg>
 </div>
 
