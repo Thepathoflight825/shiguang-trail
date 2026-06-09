@@ -121,71 +121,74 @@
 <div class="forest-backdrop">
   <div class="forest-sun"></div>
 
-  <!-- Left forest: 3 trees + ground foliage -->
+  <!-- Left: organic layered leaf blobs, like light through foliage -->
   <svg class="forest-trees forest-trees-left" viewBox="0 0 280 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMax slice">
     <defs>
-      <radialGradient id="lA" cx="50%" cy="35%" r="55%"><stop offset="0%" stop-color="#8DC49A" stop-opacity="0.65"/><stop offset="100%" stop-color="#3A6B4E" stop-opacity="0.28"/></radialGradient>
-      <radialGradient id="lB" cx="50%" cy="30%" r="55%"><stop offset="0%" stop-color="#A8D0B0" stop-opacity="0.50"/><stop offset="100%" stop-color="#52845F" stop-opacity="0.22"/></radialGradient>
-      <radialGradient id="lC" cx="50%" cy="38%" r="52%"><stop offset="0%" stop-color="#6B9E78" stop-opacity="0.72"/><stop offset="100%" stop-color="#2C5C3C" stop-opacity="0.34"/></radialGradient>
-      <radialGradient id="lShrub1" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#7DB88A" stop-opacity="0.60"/><stop offset="100%" stop-color="#3A6448" stop-opacity="0.25"/></radialGradient>
-      <radialGradient id="lShrub2" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#9EC9A6" stop-opacity="0.50"/><stop offset="100%" stop-color="#4E7A5A" stop-opacity="0.20"/></radialGradient>
+      <radialGradient id="lv1" cx="45%" cy="30%" r="60%"><stop offset="0%" stop-color="#A8C8A8" stop-opacity="0.60"/><stop offset="100%" stop-color="#4A7A58" stop-opacity="0.18"/></radialGradient>
+      <radialGradient id="lv2" cx="55%" cy="35%" r="58%"><stop offset="0%" stop-color="#88B494" stop-opacity="0.55"/><stop offset="100%" stop-color="#3A6448" stop-opacity="0.22"/></radialGradient>
+      <radialGradient id="lv3" cx="40%" cy="25%" r="62%"><stop offset="0%" stop-color="#C2D8BC" stop-opacity="0.45"/><stop offset="100%" stop-color="#5A8268" stop-opacity="0.15"/></radialGradient>
+      <radialGradient id="lv4" cx="50%" cy="40%" r="56%"><stop offset="0%" stop-color="#6E9E7C" stop-opacity="0.65"/><stop offset="100%" stop-color="#2A5438" stop-opacity="0.28"/></radialGradient>
+      <radialGradient id="lv5" cx="48%" cy="32%" r="60%"><stop offset="0%" stop-color="#9AC4A2" stop-opacity="0.50"/><stop offset="100%" stop-color="#447858" stop-opacity="0.20"/></radialGradient>
     </defs>
 
-    <!-- Tree L-A: tallest, far back -->
-    <path d="M32,900 L32,295 Q20,278 14,252 Q6,224 18,200 Q6,176 14,152 Q24,126 44,122 Q34,98 48,82 Q62,66 78,78 Q90,62 104,76 Q112,94 102,114 Q118,106 122,128 Q126,150 108,165 Q122,180 116,204 Q108,230 90,240 Q104,258 98,282 Q90,308 70,316 Q52,324 42,312 L44,900 Z" fill="url(#lB)" opacity="0.55"/>
-    <!-- Tree L-B: mid height, wide canopy -->
-    <path d="M102,900 L102,455 Q84,436 78,408 Q68,376 82,350 Q66,328 74,302 Q84,276 106,272 Q96,246 112,228 Q128,210 148,222 Q162,206 178,222 Q190,242 178,264 Q198,256 204,280 Q208,306 190,322 Q206,338 200,366 Q192,394 172,406 Q188,424 180,450 Q170,478 148,488 Q126,498 112,486 L114,900 Z" fill="url(#lA)" opacity="0.70"/>
-    <!-- Tree L-C: shortest, closest, fat canopy -->
-    <path d="M192,900 L192,595 Q178,578 172,556 Q162,528 174,506 Q160,488 168,466 Q178,444 200,441 Q190,418 206,404 Q222,390 238,402 Q252,388 264,402 Q274,420 264,436 Q278,430 280,452 Q280,474 264,486 Q278,500 272,524 Q264,548 244,557 Q258,574 250,596 Q240,620 218,625 Q200,628 194,616 L198,900 Z" fill="url(#lC)" opacity="0.85"/>
+    <!-- Blob cluster 1: tallest, far back, upper area -->
+    <path d="M60,480 C20,440 -10,380 10,320 C30,260 80,240 100,260 C120,200 100,120 130,80 C155,45 195,50 205,90 C220,60 250,65 255,100 C265,140 240,180 210,200 C240,220 250,270 230,310 C215,345 185,355 165,340 C170,390 160,440 130,470 C110,490 80,500 60,480 Z" fill="url(#lv3)" opacity="0.55"/>
 
-    <!-- Ground shrubs layer 1 — large left blob -->
-    <path d="M-10,900 Q0,868 8,848 Q0,828 10,810 Q22,792 40,796 Q34,774 50,762 Q68,750 82,764 Q88,746 104,748 Q118,752 116,768 Q130,756 142,768 Q150,782 140,796 Q154,788 158,804 Q160,822 146,832 Q156,848 148,864 Q138,882 120,884 Q108,896 90,892 Q72,900 50,900 Z" fill="url(#lShrub1)" opacity="0.70"/>
-    <!-- Ground shrubs layer 2 — smaller mid blob -->
-    <path d="M60,900 Q68,876 80,862 Q72,844 84,830 Q98,816 114,822 Q118,806 134,806 Q148,808 148,822 Q160,814 170,826 Q176,842 164,854 Q174,868 168,882 Q160,898 144,900 Q120,900 100,900 Z" fill="url(#lShrub2)" opacity="0.55"/>
-    <!-- Grass tufts -->
-    <path d="M10,900 Q12,880 18,868 Q22,856 20,842" stroke="#5A8A68" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
-    <path d="M22,900 Q28,874 36,860 Q42,848 38,832" stroke="#4A7A58" stroke-width="2.5" fill="none" opacity="0.45" stroke-linecap="round"/>
-    <path d="M50,900 Q54,878 62,862 Q68,850 64,836" stroke="#5A8A68" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
-    <path d="M80,900 Q86,872 94,856 Q100,844 96,828" stroke="#4A7A58" stroke-width="2" fill="none" opacity="0.38" stroke-linecap="round"/>
-    <path d="M130,900 Q134,878 142,864 Q148,852 144,838" stroke="#5A8A68" stroke-width="2" fill="none" opacity="0.35" stroke-linecap="round"/>
-    <path d="M160,900 Q166,876 174,862" stroke="#4A7A58" stroke-width="2" fill="none" opacity="0.35" stroke-linecap="round"/>
-    <path d="M200,900 Q206,882 216,868 Q224,856 220,840" stroke="#5A8A68" stroke-width="2.5" fill="none" opacity="0.40" stroke-linecap="round"/>
-    <path d="M230,900 Q238,876 248,860" stroke="#4A7A58" stroke-width="2" fill="none" opacity="0.38" stroke-linecap="round"/>
-    <!-- Ground fog -->
-    <ellipse cx="140" cy="900" rx="190" ry="20" fill="#4A7A58" opacity="0.08"/>
+    <!-- Blob cluster 2: mid layer, flows downward -->
+    <path d="M20,700 C-10,660 -15,600 10,555 C30,515 70,510 90,530 C95,490 85,440 110,415 C135,390 170,395 180,425 C200,400 230,410 235,445 C240,480 215,510 190,520 C205,550 200,595 178,625 C158,652 125,658 105,640 C90,680 70,720 40,730 C20,735 30,720 20,700 Z" fill="url(#lv2)" opacity="0.60"/>
+
+    <!-- Blob cluster 3: foreground, lush and wide -->
+    <path d="M-10,900 C-10,860 0,820 20,795 C5,770 0,735 18,710 C38,684 72,682 88,702 C95,675 110,655 135,655 C158,655 175,675 172,700 C192,680 218,685 225,710 C232,738 215,762 195,770 C210,792 208,828 188,852 C170,874 142,880 120,868 C105,888 80,904 55,900 C30,900 0,900 -10,900 Z" fill="url(#lv4)" opacity="0.68"/>
+
+    <!-- Blob accent: overlapping soft layer, gives depth -->
+    <path d="M80,820 C55,798 45,762 60,738 C48,718 50,690 70,678 C90,666 115,674 122,694 C138,672 162,668 174,688 C186,710 178,740 160,752 C172,772 168,802 150,820 C132,838 100,840 80,820 Z" fill="url(#lv5)" opacity="0.45"/>
+
+    <!-- Soft upward blade accents (grass/fern) -->
+    <path d="M15,900 C18,872 28,848 22,820" stroke="#5C8870" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.38"/>
+    <path d="M38,900 C44,868 58,840 48,808" stroke="#4A7860" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.42"/>
+    <path d="M68,900 C78,874 94,852 84,824" stroke="#5C8870" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.36"/>
+    <path d="M110,895 C122,866 138,844 126,814" stroke="#4A7860" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.34"/>
+    <path d="M155,900 C162,876 172,858 162,832" stroke="#5C8870" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.32"/>
+    <path d="M195,900 C204,880 218,862 208,838" stroke="#4A7860" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.36"/>
+    <path d="M235,900 C242,878 252,860 244,836" stroke="#5C8870" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.32"/>
+
+    <!-- Ground haze -->
+    <ellipse cx="120" cy="900" rx="200" ry="18" fill="#4A7A58" opacity="0.07"/>
   </svg>
 
-  <!-- Right forest: different composition + ground foliage -->
+  <!-- Right: different organic composition, mirrored feeling but unique shapes -->
   <svg class="forest-trees forest-trees-right" viewBox="0 0 280 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMax slice">
     <defs>
-      <radialGradient id="rA" cx="50%" cy="32%" r="52%"><stop offset="0%" stop-color="#96C8A0" stop-opacity="0.55"/><stop offset="100%" stop-color="#456E52" stop-opacity="0.24"/></radialGradient>
-      <radialGradient id="rB" cx="50%" cy="38%" r="56%"><stop offset="0%" stop-color="#72A880" stop-opacity="0.70"/><stop offset="100%" stop-color="#2E5C3E" stop-opacity="0.32"/></radialGradient>
-      <radialGradient id="rC" cx="50%" cy="33%" r="54%"><stop offset="0%" stop-color="#AECEB6" stop-opacity="0.48"/><stop offset="100%" stop-color="#5A8A68" stop-opacity="0.20"/></radialGradient>
-      <radialGradient id="rShrub1" cx="50%" cy="40%" r="58%"><stop offset="0%" stop-color="#82B890" stop-opacity="0.62"/><stop offset="100%" stop-color="#3C6448" stop-opacity="0.26"/></radialGradient>
-      <radialGradient id="rShrub2" cx="50%" cy="40%" r="58%"><stop offset="0%" stop-color="#A4C8AC" stop-opacity="0.48"/><stop offset="100%" stop-color="#527A5E" stop-opacity="0.20"/></radialGradient>
+      <radialGradient id="rv1" cx="55%" cy="28%" r="60%"><stop offset="0%" stop-color="#B0CEB0" stop-opacity="0.55"/><stop offset="100%" stop-color="#50845C" stop-opacity="0.18"/></radialGradient>
+      <radialGradient id="rv2" cx="45%" cy="35%" r="58%"><stop offset="0%" stop-color="#7AAE88" stop-opacity="0.62"/><stop offset="100%" stop-color="#345C42" stop-opacity="0.25"/></radialGradient>
+      <radialGradient id="rv3" cx="50%" cy="30%" r="62%"><stop offset="0%" stop-color="#C8DEC4" stop-opacity="0.42"/><stop offset="100%" stop-color="#5C886A" stop-opacity="0.15"/></radialGradient>
+      <radialGradient id="rv4" cx="52%" cy="38%" r="56%"><stop offset="0%" stop-color="#74A882" stop-opacity="0.68"/><stop offset="100%" stop-color="#2C5840" stop-opacity="0.30"/></radialGradient>
+      <radialGradient id="rv5" cx="46%" cy="34%" r="58%"><stop offset="0%" stop-color="#A0C8A8" stop-opacity="0.48"/><stop offset="100%" stop-color="#487C58" stop-opacity="0.20"/></radialGradient>
     </defs>
 
-    <!-- Tree R-A: medium tall, leftmost -->
-    <path d="M28,900 L28,375 Q16,358 12,332 Q4,304 18,280 Q6,258 14,234 Q24,208 46,206 Q36,182 52,166 Q68,150 84,164 Q96,148 110,164 Q118,184 106,202 Q122,196 126,218 Q128,242 110,256 Q124,270 118,296 Q110,322 90,332 Q104,350 96,376 Q86,404 64,412 Q44,418 36,404 L40,900 Z" fill="url(#rC)" opacity="0.58"/>
-    <!-- Tree R-B: tallest, wide canopy -->
-    <path d="M108,900 L108,278 Q90,260 84,232 Q74,200 90,174 Q74,150 84,124 Q96,96 120,92 Q108,66 126,50 Q144,34 162,48 Q178,32 194,50 Q204,72 192,94 Q212,86 216,112 Q218,138 198,154 Q216,168 208,196 Q198,226 176,236 Q194,256 184,282 Q172,312 148,320 Q124,328 112,312 L116,900 Z" fill="url(#rB)" opacity="0.68"/>
-    <!-- Tree R-C: shortest, fullest canopy, rightmost -->
-    <path d="M196,900 L196,560 Q182,542 176,518 Q168,490 182,468 Q168,450 176,428 Q186,406 210,403 Q200,380 218,366 Q236,352 252,366 Q266,350 278,366 Q280,388 268,404 Q280,398 280,420 Q278,444 260,456 Q274,470 268,494 Q258,520 236,528 Q250,546 242,568 Q230,594 206,598 Q196,600 196,588 L200,900 Z" fill="url(#rA)" opacity="0.80"/>
+    <!-- Blob cluster 1: tall background, shifted position vs left -->
+    <path d="M220,520 C245,480 268,415 248,348 C230,285 185,262 162,282 C148,225 165,138 138,95 C115,58 74,60 62,100 C48,68 20,72 15,108 C5,148 32,192 62,210 C34,232 22,284 44,326 C60,362 92,370 112,354 C108,406 120,458 150,488 C170,508 200,525 220,520 Z" fill="url(#rv3)" opacity="0.52"/>
 
-    <!-- Ground shrubs right — asymmetric to left -->
-    <path d="M20,900 Q30,866 42,848 Q36,826 50,812 Q66,798 82,806 Q86,786 104,784 Q120,784 122,800 Q136,790 148,804 Q156,820 144,834 Q158,848 150,866 Q142,884 122,888 Q108,900 88,900 Q60,900 40,900 Z" fill="url(#rShrub1)" opacity="0.65"/>
-    <path d="M100,900 Q110,878 124,864 Q118,848 132,836 Q148,824 162,832 Q168,816 182,818 Q194,822 192,836 Q204,828 214,842 Q218,858 206,868 Q214,882 206,896 Q194,904 176,900 Q154,900 130,900 Z" fill="url(#rShrub2)" opacity="0.52"/>
-    <!-- Grass tufts right -->
-    <path d="M15,900 Q20,878 28,864 Q34,852 30,836" stroke="#5A8A68" stroke-width="2" fill="none" opacity="0.42" stroke-linecap="round"/>
-    <path d="M40,900 Q48,874 58,858" stroke="#4A7A58" stroke-width="2.5" fill="none" opacity="0.40" stroke-linecap="round"/>
-    <path d="M72,900 Q80,876 90,860 Q98,848 92,832" stroke="#5A8A68" stroke-width="2" fill="none" opacity="0.38" stroke-linecap="round"/>
-    <path d="M110,900 Q118,876 128,860" stroke="#4A7A58" stroke-width="2" fill="none" opacity="0.36" stroke-linecap="round"/>
-    <path d="M148,900 Q156,878 166,862 Q174,850 170,836" stroke="#5A8A68" stroke-width="2" fill="none" opacity="0.38" stroke-linecap="round"/>
-    <path d="M180,900 Q188,876 198,860" stroke="#4A7A58" stroke-width="2" fill="none" opacity="0.36" stroke-linecap="round"/>
-    <path d="M220,900 Q228,880 238,864 Q246,852 242,838" stroke="#5A8A68" stroke-width="2.5" fill="none" opacity="0.42" stroke-linecap="round"/>
-    <path d="M252,900 Q260,878 270,862" stroke="#4A7A58" stroke-width="2" fill="none" opacity="0.38" stroke-linecap="round"/>
-    <!-- Ground fog -->
-    <ellipse cx="140" cy="900" rx="190" ry="20" fill="#4A7A58" opacity="0.08"/>
+    <!-- Blob cluster 2: mid, organic flow -->
+    <path d="M258,715 C274,672 276,608 250,562 C228,520 186,516 166,538 C160,496 168,446 144,420 C120,394 84,400 74,432 C54,408 24,420 20,456 C16,492 44,522 70,530 C54,562 58,608 82,638 C102,666 136,670 156,650 C172,692 192,732 222,740 C244,745 250,730 258,715 Z" fill="url(#rv2)" opacity="0.58"/>
+
+    <!-- Blob cluster 3: foreground lush -->
+    <path d="M290,900 C290,858 278,816 258,792 C272,766 276,730 258,706 C238,680 204,678 188,698 C180,670 165,650 140,650 C116,650 100,670 104,696 C84,676 58,682 52,708 C46,736 64,760 84,768 C70,790 72,826 92,850 C110,872 138,878 160,866 C175,886 200,902 226,900 C252,900 280,900 290,900 Z" fill="url(#rv4)" opacity="0.65"/>
+
+    <!-- Blob accent: soft overlap -->
+    <path d="M200,835 C224,812 234,776 218,750 C230,730 228,700 208,688 C188,676 162,684 156,706 C140,684 116,680 106,702 C96,724 106,754 124,766 C112,788 116,818 136,836 C154,854 186,855 200,835 Z" fill="url(#rv5)" opacity="0.42"/>
+
+    <!-- Blade accents right -->
+    <path d="M265,900 C260,872 250,848 258,820" stroke="#5C8870" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.38"/>
+    <path d="M242,900 C234,868 220,840 232,808" stroke="#4A7860" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.42"/>
+    <path d="M212,900 C202,874 186,852 198,824" stroke="#5C8870" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.36"/>
+    <path d="M170,895 C158,866 142,844 154,814" stroke="#4A7860" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.34"/>
+    <path d="M125,900 C118,876 108,858 118,832" stroke="#5C8870" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.32"/>
+    <path d="M85,900 C76,880 62,862 72,838" stroke="#4A7860" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.36"/>
+    <path d="M45,900 C38,878 28,860 36,836" stroke="#5C8870" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.32"/>
+
+    <!-- Ground haze -->
+    <ellipse cx="160" cy="900" rx="200" ry="18" fill="#4A7A58" opacity="0.07"/>
   </svg>
 </div>
 
