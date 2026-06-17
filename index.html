@@ -526,6 +526,293 @@
     margin-top: .75rem;
   }
 
+  /* ─── FAQ SECTION ─── */
+  .faq-section {
+    background: var(--warm-white);
+    border: 0.5px solid var(--stone);
+    border-radius: 20px;
+    padding: 2.5rem 2.5rem;
+    margin-bottom: 2rem;
+  }
+  .faq-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--forest); text-align: center;
+    margin-bottom: .75rem;
+  }
+  .faq-intro {
+    font-size: .8rem; color: var(--bark);
+    line-height: 1.85; text-align: center;
+    margin-bottom: 1.75rem;
+  }
+  .faq-item {
+    padding: 1rem 0;
+    border-top: 0.5px solid var(--stone);
+  }
+  .faq-q {
+    font-size: .82rem; font-weight: 500;
+    color: var(--forest); margin-bottom: .45rem;
+    letter-spacing: .04em;
+  }
+  .faq-a {
+    font-size: .78rem; color: var(--bark);
+    line-height: 1.9;
+  }
+  .faq-list {
+    list-style: none; padding: 0;
+  }
+  .faq-list li {
+    padding: .25rem 0 .25rem 1rem;
+    position: relative; line-height: 1.8;
+  }
+  .faq-list li::before {
+    content: '◦'; position: absolute; left: 0;
+    color: var(--sage);
+  }
+  .faq-contact {
+    font-size: .75rem; color: var(--sage);
+    text-align: center; margin-top: 1.5rem;
+    letter-spacing: .03em;
+  }
+  .faq-link { color: var(--deep-sage); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ─── PAYMENT MODAL ─── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    background: rgba(44,36,22,.55);
+    backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+    padding: 1.5rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--warm-white);
+    border-radius: 24px; padding: 2.5rem 2.5rem 2rem;
+    max-width: 500px; width: 100%;
+    box-shadow: 0 20px 60px rgba(44,36,22,.22);
+    animation: fadeUp .35s ease forwards;
+    position: relative;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal-close {
+    position: absolute; top: 1.25rem; right: 1.5rem;
+    background: none; border: none; cursor: pointer;
+    font-size: 1.3rem; color: var(--sage);
+    line-height: 1; transition: color .2s;
+  }
+  .modal-close:hover { color: var(--ink); }
+  .modal-eyebrow {
+    font-size: .62rem; letter-spacing: .22em;
+    color: var(--sage); text-transform: uppercase;
+    margin-bottom: .5rem;
+  }
+  .modal-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.25rem; font-weight: 400;
+    color: var(--forest); margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .bank-card {
+    background: linear-gradient(135deg, var(--forest) 0%, #2C4240 100%);
+    border-radius: 16px; padding: 1.5rem 1.75rem;
+    margin-bottom: 1.5rem; color: var(--cream);
+  }
+  .bank-card-label {
+    font-size: .62rem; letter-spacing: .18em;
+    color: rgba(245,240,232,.55); margin-bottom: .3rem;
+    text-transform: uppercase;
+  }
+  .bank-card-bank {
+    font-size: .88rem; color: var(--gold-light);
+    margin-bottom: .75rem; letter-spacing: .04em;
+  }
+  .bank-card-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; letter-spacing: .18em;
+    color: var(--cream); margin-bottom: .5rem;
+  }
+  .bank-card-name {
+    font-size: .78rem; color: rgba(245,240,232,.7);
+    letter-spacing: .08em;
+  }
+  .bank-card-amount {
+    margin-top: .75rem; padding-top: .75rem;
+    border-top: 0.5px solid rgba(245,240,232,.2);
+    font-size: .78rem; color: rgba(245,240,232,.65);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .bank-card-amount strong { color: var(--gold); font-size: 1.15rem; font-family: 'Cormorant Garamond', serif; }
+  .modal-label {
+    font-size: .75rem; color: var(--bark);
+    margin-bottom: .4rem; letter-spacing: .04em;
+  }
+  .modal-input {
+    width: 100%; padding: .7rem 1rem;
+    border: 0.5px solid var(--stone);
+    border-radius: 99px; background: var(--cream);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: .82rem; color: var(--ink);
+    outline: none; transition: border-color .2s;
+    margin-bottom: 1rem;
+  }
+  .modal-input:focus { border-color: var(--deep-sage); }
+  .modal-input::placeholder { color: var(--sage); }
+  .modal-consent {
+    font-size: .68rem; color: var(--sage);
+    line-height: 1.8; text-align: center;
+    margin-bottom: 1.25rem;
+  }
+  .modal-consent a { color: var(--deep-sage); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+  .modal-btn {
+    display: block; width: 100%;
+    padding: .85rem; border-radius: 99px;
+    background: var(--forest); color: var(--cream);
+    border: none; cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: .82rem; letter-spacing: .08em;
+    transition: background .2s, transform .15s;
+    text-align: center;
+  }
+  .modal-btn:hover { background: var(--deep-sage); transform: translateY(-1px); }
+  .modal-btn-confirm {
+    display: none; margin-top: .75rem;
+    background: var(--gold); color: var(--ink);
+  }
+  .modal-btn-confirm.visible { display: block; }
+  .modal-btn-confirm:hover { background: var(--gold-light); }
+
+  /* ─── PAGE 3: REPORT ─── */
+  .report-hero {
+    padding-top: 72px;
+    background: linear-gradient(160deg, var(--forest) 0%, #2C4240 60%, #1E3830 100%);
+    min-height: 35vh; display: flex; align-items: flex-end;
+    position: relative; overflow: hidden;
+  }
+  .report-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 15% 85%, rgba(201,169,110,.18) 0%, transparent 55%),
+                      radial-gradient(circle at 85% 15%, rgba(175,169,236,.12) 0%, transparent 55%);
+  }
+  .report-hero-content {
+    position: relative; z-index: 1;
+    padding: 3rem 3rem; max-width: 900px;
+    margin: 0 auto; width: 100%; text-align: center;
+  }
+  .report-eyebrow {
+    font-size: .62rem; letter-spacing: .28em;
+    color: var(--gold-light); text-transform: uppercase;
+    margin-bottom: .75rem;
+  }
+  .report-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 300; color: var(--cream);
+    line-height: 1.4; letter-spacing: .03em;
+    margin-bottom: .75rem;
+  }
+  .report-subtitle {
+    font-size: .82rem; color: rgba(245,240,232,.6);
+    letter-spacing: .04em;
+  }
+  .report-body {
+    max-width: 760px; margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+  }
+  .report-loading {
+    text-align: center; padding: 4rem 2rem;
+  }
+  .report-spinner {
+    width: 44px; height: 44px;
+    border: 3px solid var(--stone);
+    border-top-color: var(--forest);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1.25rem;
+  }
+  .report-loading-text {
+    font-family: 'Noto Serif TC', serif;
+    font-size: .9rem; color: var(--bark);
+    letter-spacing: .06em;
+  }
+  .report-module {
+    background: var(--warm-white);
+    border: 0.5px solid var(--stone);
+    border-radius: 20px; padding: 2rem 2rem;
+    margin-bottom: 1.5rem;
+    animation: fadeUp .5s ease forwards;
+  }
+  .report-module-num {
+    font-size: .62rem; letter-spacing: .22em;
+    color: var(--sage); text-transform: uppercase;
+    margin-bottom: .5rem;
+  }
+  .report-module-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.05rem; font-weight: 500;
+    color: var(--forest); margin-bottom: 1.25rem;
+    padding-bottom: .75rem;
+    border-bottom: 0.5px solid var(--stone);
+  }
+  .report-module-body {
+    font-size: .85rem; color: var(--bark);
+    line-height: 2.05; letter-spacing: .02em;
+    white-space: pre-line;
+  }
+  .report-values-row {
+    display: flex; flex-wrap: wrap; gap: .5rem;
+    margin-bottom: 1.25rem;
+  }
+  .report-value-chip {
+    background: linear-gradient(135deg, #F5EDD8, #EBD9A8);
+    border: 0.5px solid var(--gold-light);
+    border-radius: 99px; padding: .35rem .9rem;
+    font-size: .78rem; color: var(--forest);
+    letter-spacing: .04em;
+  }
+  .coupon-card {
+    background: linear-gradient(135deg, var(--forest) 0%, #2C4240 100%);
+    border-radius: 20px; padding: 2rem 2.25rem;
+    margin-bottom: 1.5rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .coupon-card::before {
+    content: '';position:absolute;inset:0;
+    background: radial-gradient(circle at 80% 20%, rgba(201,169,110,.15) 0%, transparent 55%);
+  }
+  .coupon-label {
+    font-size: .62rem; letter-spacing: .2em;
+    color: var(--gold-light); text-transform: uppercase;
+    margin-bottom: .5rem; position: relative;
+  }
+  .coupon-code {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; color: var(--gold);
+    letter-spacing: .15em; margin-bottom: .5rem;
+    position: relative;
+  }
+  .coupon-desc {
+    font-family: 'Noto Serif TC', serif;
+    font-size: .85rem; color: rgba(245,240,232,.8);
+    line-height: 1.8; position: relative;
+  }
+  .coupon-action {
+    margin-top: 1.25rem; position: relative;
+  }
+  .coupon-btn {
+    display: inline-block; padding: .7rem 2rem;
+    background: var(--gold); color: var(--ink);
+    border: none; border-radius: 99px; cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: .8rem; letter-spacing: .08em;
+    transition: all .2s; text-decoration: none;
+  }
+  .coupon-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .pdf-hint {
+    text-align: center; font-size: .72rem;
+    color: var(--sage); margin-bottom: 2rem;
+    letter-spacing: .04em;
+  }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
@@ -734,7 +1021,7 @@
 
       <!-- Plan 1: Experience -->
       <div class="plan-card">
-        <span class="plan-tag">體驗方案</span>
+        <span class="plan-tag">體驗方案 &nbsp;✦&nbsp; 早鳥限定 · 前 20 名</span>
         <h3 class="plan-name">拾光體驗<br>專屬深度報告</h3>
         <p class="plan-desc">完成價值觀探索後，解鎖你的專屬生涯分析報告，包含自我特質解析、職涯方向建議與理想夥伴特質。</p>
         <ul class="plan-features">
@@ -743,8 +1030,8 @@
           <li>理想夥伴特質報告</li>
           <li>PDF 格式，永久保存</li>
         </ul>
-        <p class="plan-price">即將開放 · 敬請期待</p>
-        <button class="plan-btn" onclick="scrollToInterest()">先登記，優先通知我</button>
+        <p class="plan-price"><span style="font-size:.75rem;color:var(--sage);text-decoration:line-through;font-family:'Noto Sans TC',sans-serif;">原價 NT$299</span><br>早鳥價 NT$<span style="font-size:1.8rem;color:var(--forest);font-family:'Cormorant Garamond',serif;font-weight:400;">199</span></p>
+        <button class="plan-btn" onclick="openPaymentModal()">立即解鎖深度報告 →</button>
       </div>
 
       <!-- Plan 2: Full Session -->
@@ -763,6 +1050,36 @@
         <button class="plan-btn" onclick="scrollToInterest()">即將公開，我想優先預約通知我</button>
       </div>
 
+    </div>
+
+    <!-- FAQ / 預約退費須知 -->
+    <div class="faq-section animate-in delay-3" id="faq-section">
+      <p class="section-eyebrow" style="text-align:center;margin-bottom:.6rem;">Booking Policy</p>
+      <h3 class="faq-title">✦ 預約與退費須知</h3>
+      <p class="faq-intro">謝謝你願意將重要的生涯藍圖託付給『拾光徑』。<br>為了保障雙方的時間與權益，請於付款前詳閱以下規範。</p>
+
+      <div class="faq-item">
+        <div class="faq-q">關於改期</div>
+        <div class="faq-a">視訊引導皆為專屬保留時段。如需變更時間，請於約定時間 <strong>24 小時前</strong>主動透過 <a href="mailto:myjourneyblueprint52@gmail.com" class="faq-link">Email</a> 通知，可免費調整一次。若於 24 小時內臨時取消，因時段已無法釋出給其他迷惘的靈魂，將酌收 <strong>30%</strong> 的時間預留損失。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">關於取消與退費</div>
+        <div class="faq-a">
+          <ul class="faq-list">
+            <li>於約定日期 <strong>3 天前</strong>取消，可全額退款（若非國泰世華銀行帳戶，需扣除 15 元跨行手續費）。</li>
+            <li>於約定日期 <strong>1–2 天前</strong>取消，退還 <strong>50%</strong> 費用。</li>
+            <li><strong>約定當日</strong>臨時未出席或取消，恕不退費、亦無法改期。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">關於數位報告</div>
+        <div class="faq-a">【專屬深度報告】屬動態客製化生成之數位內容，一旦匯款完成並發送，<strong>恕不接受退費</strong>。</div>
+      </div>
+
+      <p class="faq-contact">有任何疑問，歡迎來信 &nbsp;<a href="mailto:myjourneyblueprint52@gmail.com" class="faq-link">myjourneyblueprint52@gmail.com</a></p>
     </div>
 
     <!-- Interest Capture -->
@@ -798,6 +1115,122 @@
 
 </div>
 
+<!-- ═══════════════════════════════════
+     PAYMENT MODAL
+════════════════════════════════════ -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closePaymentModal()">✕</button>
+    <p class="modal-eyebrow">Secure Payment · 安全付款</p>
+    <h2 class="modal-title">解鎖你的專屬深度報告</h2>
+
+    <!-- Bank Card -->
+    <div class="bank-card">
+      <p class="bank-card-label">匯款帳號</p>
+      <p class="bank-card-bank">中國信託商業銀行（代碼 822）</p>
+      <p class="bank-card-number">9015 · 6129 · 6423</p>
+      <p class="bank-card-name">戶名：王怡蘋</p>
+      <div class="bank-card-amount">
+        <span>早鳥體驗價</span>
+        <strong>NT$ 199</strong>
+      </div>
+    </div>
+
+    <p class="modal-label">請填寫匯款帳號後五碼</p>
+    <input type="text" class="modal-input" id="modal-last5" placeholder="例：12345" maxlength="5" inputmode="numeric">
+
+    <p class="modal-label">你的 Email（報告將寄送至此）</p>
+    <input type="email" class="modal-input" id="modal-email" placeholder="your@email.com" oninput="checkModalReady()">
+
+    <p class="modal-consent">點擊下方按鈕「進行付款」，即代表你已同意
+      <a onclick="document.getElementById('faq-section').scrollIntoView({behavior:'smooth'});closePaymentModal()">《拾光徑服務與退費規範》</a>
+    </p>
+
+    <button class="modal-btn" id="modal-pay-btn" onclick="handleModalPay()">進行付款 →</button>
+    <button class="modal-btn modal-btn-confirm" id="modal-confirm-btn" onclick="confirmPaymentAndGo()">✓ 確認已匯款，前往查看報告</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     PAGE 3: 專屬深度報告
+════════════════════════════════════ -->
+<div id="p3" class="page">
+
+  <!-- Hero -->
+  <section class="report-hero">
+    <div class="report-hero-content animate-in">
+      <p class="report-eyebrow">Exclusive Deep Report · 專屬深度報告</p>
+      <h1 class="report-title">你的內在原廠設定<br>完整解析</h1>
+      <p class="report-subtitle" id="report-values-subtitle">正在為你的核心價值觀生成專屬報告⋯⋯</p>
+    </div>
+  </section>
+
+  <div class="report-body">
+
+    <!-- Loading state -->
+    <div class="report-loading" id="report-loading">
+      <div class="report-spinner"></div>
+      <p class="report-loading-text">AI 正在分析你的核心價值觀<br>這需要約 15–20 秒，請稍候⋯⋯</p>
+    </div>
+
+    <!-- Report content (hidden until loaded) -->
+    <div id="report-content" style="display:none;">
+
+      <!-- Values Row -->
+      <div class="report-module">
+        <p class="report-module-num">你的 10 個核心價值觀</p>
+        <div class="report-values-row" id="report-values-chips"></div>
+        <p style="font-size:.75rem;color:var(--sage);line-height:1.7;">以下報告皆依據你選出的這 10 個詞生成，是你靈魂最誠實的答案。</p>
+      </div>
+
+      <!-- Module 1: Insight -->
+      <div class="report-module" style="animation-delay:.1s;">
+        <p class="report-module-num">Module 01 · 內在原廠設定</p>
+        <h3 class="report-module-title">核心價值觀深度解析</h3>
+        <p class="report-module-body" id="report-mod1"></p>
+      </div>
+
+      <!-- Module 2: Career -->
+      <div class="report-module" style="animation-delay:.2s;">
+        <p class="report-module-num">Module 02 · 市場落地落點</p>
+        <h3 class="report-module-title">3 個職涯方向建議</h3>
+        <p class="report-module-body" id="report-mod2"></p>
+      </div>
+
+      <!-- Module 3: Partners -->
+      <div class="report-module" style="animation-delay:.3s;">
+        <p class="report-module-num">Module 03 · 職場人際指南</p>
+        <h3 class="report-module-title">理想夥伴特質 × 職場毒藥預警</h3>
+        <p class="report-module-body" id="report-mod3"></p>
+      </div>
+
+      <!-- PDF hint -->
+      <p class="pdf-hint">💡 &nbsp;可自行截圖，或在瀏覽器使用「列印 → 另存為 PDF」儲存本報告</p>
+
+      <!-- Module 4: Coupon -->
+      <div class="coupon-card">
+        <p class="coupon-label">高階服務 · 專屬優惠</p>
+        <p class="coupon-code">LIGHT-200</p>
+        <p class="coupon-desc">看完了報告，發現自己的卡點了嗎？這份地圖需要具體的行動方針。<br>憑本報告代碼，預約 Sherry 1on1 生涯引導，現折 <strong style="color:var(--gold);">NT$ 200</strong>。</p>
+        <div class="coupon-action">
+          <button class="coupon-btn" onclick="showPage('p2');setTimeout(()=>document.getElementById('interest-section').scrollIntoView({behavior:'smooth'}),400)">預約藍圖對話 1 on 1 →</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="coffee-strip" style="cursor:pointer" onclick="showPage('p2')">
+    <p>← &nbsp;返回藍圖對話方案頁</p>
+  </div>
+
+  <footer>
+    <p>拾光徑 × 靈魂本質 &nbsp;|&nbsp; 自我探索 × 生涯引導 &nbsp;|&nbsp; © 2026</p>
+  </footer>
+
+</div>
+
 <script>
   function showPage(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -809,7 +1242,6 @@
     if (links[map[id]]) links[map[id]].classList.add('nav-active');
   }
 
-  // Auto-navigate to blueprint page if coming from explore.html
   window.addEventListener('DOMContentLoaded', () => {
     if (window.location.hash === '#blueprint') {
       showPage('p2');
@@ -823,12 +1255,190 @@
   function handleInterest(e) {
     e.preventDefault();
     const email = document.getElementById('interest-email').value;
-    // In production: send to your email service
     document.getElementById('interest-email').value = '';
     document.getElementById('success-msg').style.display = 'block';
     setTimeout(() => {
       document.getElementById('success-msg').style.display = 'none';
     }, 5000);
+  }
+
+  // ─── PAYMENT MODAL ───
+  function openPaymentModal() {
+    document.getElementById('paymentModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePaymentModal() {
+    document.getElementById('paymentModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function checkModalReady() {
+    const email = document.getElementById('modal-email').value;
+    const btn = document.getElementById('modal-confirm-btn');
+    if (email && email.includes('@')) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }
+  function handleModalPay() {
+    const last5 = document.getElementById('modal-last5').value.trim();
+    const email = document.getElementById('modal-email').value.trim();
+    if (!email || !email.includes('@')) {
+      alert('請填寫有效的 Email 地址');
+      return;
+    }
+    document.getElementById('modal-confirm-btn').classList.add('visible');
+    document.getElementById('modal-pay-btn').style.opacity = '.5';
+    document.getElementById('modal-pay-btn').disabled = true;
+    // Store for report page
+    sessionStorage.setItem('report_email', email);
+    sessionStorage.setItem('report_last5', last5);
+  }
+  function confirmPaymentAndGo() {
+    closePaymentModal();
+    showPage('p3');
+    generateReport();
+  }
+  document.addEventListener('click', e => {
+    if (e.target === document.getElementById('paymentModal')) closePaymentModal();
+  });
+
+  // ─── REPORT GENERATION ───
+  const REPORT_INSIGHTS = {'韌性':'你知道跌倒、踩坑都不是終點。那些被你硬撐過去的低谷，正在悄悄內化成你最扎實的底氣。','心流':'你渴望那種「忘記時間、全神貫注」的狀態。當你找到那件能讓自己忘我投入的事，那就是你天賦的落腳點。','極簡':'你懂得在繁雜的世界裡做減法。定期幫生活與職涯「斷捨離」，留下真正重要的，前進的腳步才能輕盈。','安全感':'你重視穩定的根基與確定性。唯有後顧無憂、把地基打穩了，你才能真正心無旁騖地放膽去飛。','穩定可靠':'你是團隊或關係裡最令人安心的定海神針。這份不浮誇的厚實與擔當，是你行走職場最亮的名片。','財富':'你坦然地面對對金錢的渴望。你清楚知道財富是放大選擇權的工具，你追求的不只是數字，而是對人生的自主權。','四處旅行':'移動與轉換環境是你重新開機的方式。在不同的城市與陌生風景之間，你一邊探索世界，一邊撿回迷失的自己。','財務自由':'你渴望擁有「隨時說不」的底氣。財務自由對你而言，是不再為了生計向不喜歡的環境或人妥協。','平衡':'你拒絕把人生過得只剩下工作。平衡不是完美的各半，而是你能在工作、生活與自我之間，掌握好踩煞車與催油門的節奏。','有誠信':'你言出必行。在充滿套路的世界裡，這份對承諾的執著，是你建立長期信任與個人品牌最無價的資產。','做自己':'你不願意為了融入體制而抹殺自己的稜角。在別人的期待與真實的自我之間，你選擇勇敢地活出自己的原廠設定。','自律':'你相信複利的力量。那些看似枯燥、無人看見的日常堅持，正在拉開你與他人的差距，默默改變你的生涯軌跡。','有賺錢能力':'你重視自己的市場價值。具備隨時能變現的能力，讓你在任何環境變動下都不必驚慌，因為你知道自己隨時可以重新開始。','和睦':'你珍視關係裡的溫度。你明白真正的和諧從來不是粉飾太平，而是有勇氣和能力去好好修復與溝通。','享受自由':'你需要不受拘束的空間。對你而言，常規和框架只是參考，能自由決定自己的時間、節奏與生活方式，才是你前進的動力。','卓越':'你對自己有著不妥協的標準。不是為了向誰證明什麼，而是因為你體驗過極致的美好，就不想將就於差不多的平庸。','激勵他人':'你的言行自帶光芒與感染力。你最快樂的時刻，往往是看到身邊的人因為你的拉一把或一句點撥，重新找回前進的勇氣。','愉悅':'你知道過得快樂、懂得取悅自己，本身就是一項高尚的能力。讓自己維持在好狀態，是你對自己最基本的責任。','長期運動':'你把身體當作大後方。定期運動與流汗，不只是為了體態，更是你為大腦排毒、維持生涯長跑續航力的投資。','覺醒':'你不再願意盲目地被慣性推著走。那個突然看清盲點、明白自己要什麼的清醒瞬間，是你拿回人生發球權的開始。','有影響力':'你想用自己的專業在別人的生命或產業裡留下痕跡。影響力對你而言不是虛名，是一份用生命陪伴生命的深層責任。','圓滿':'你追求內外的完整與自洽。圓滿不是生活從不犯錯，而是當風雨過去，你回頭看，能坦然接納這一切都是最好的安排。','感恩':'你擁有一雙擅長在日常中拾光的眼睛。感恩不是盲目的樂觀，而是即使在混亂的職場或生活中，你依然有能力看見善意。','好奇心':'你對世界永遠抱持著探索的興致。這份不設限的好奇，讓你樂於嘗試新事物、接觸新領域，靈魂永遠維持在最新版本。','專業被認可':'你重視付出的努力獲得對等的市場反饋。被認可不是因為虛榮，而是你的專業實力與含金量得到了應有的尊重。','創造力':'你的腦袋裡總有跳脫框架的解法。那些天馬行空、不按牌理出牌的想法，正是你在職場上無法被輕易取代的獨特資產。','深層連結':'你對表面客套的社交感到疲憊。你渴望的是那種可以脫下職場防備、真誠坦白、彼此能聽懂對方弦外之音的深度對話。','勇氣':'你知道害怕是正常的，帶著恐懼繼續往前走才是解答。你的勇氣不是無所畏懼，而是看清現實後，依然選擇跨出下一步。','健康活力':'你知道高能量是一切宏大理想的底層邏輯。當你擁有飽滿的精力，你做任何決策都會更果斷，夢想才不會淪為空談。','生活單純':'你懂得拒絕無效的社交與複雜的關係。把生活圈縮小、讓心思回歸本質，反而能幫你騰出更多空間，去專注在真正核心的事。','持續進步':'你永遠走在自我反思與迭代的路上。那份對現狀還可以更好的不滿足，是驅使你不斷向上打破天花板的底層燃料。','社會地位':'你重視自己在專業領域的話語權。這不是虛榮，而是你清楚知道，擁有相應的位置與影響力，你才能調動更多資源去實踐理想。','學習力':'你把遇到的每個人、踩過的每個坑都當作生涯的養分。這份強大的內化與學習渴望，讓你無論幾歲，都能快速融入新時代。','公平正義':'你對不公不義、被貼標籤的事格外敏銳。這份原則，說明你心中有一把清晰的尺，在關鍵時刻你願意站出來捍衛正確的價值。','友誼':'你珍視那些不用特別經營也能一拍即合的夥伴。那些懂你的脆弱、為你的成功真心喝采的朋友，是你生涯路上最暖心的後盾。','傳承':'你想把自己踩過的坑、累積的智慧轉化為別人的路標。那份想傳遞價值、有所延續的心，是你身為前輩最溫柔的展現。','陪伴家人':'在看過職場的來來去去後，你深深明白最核心的風景往往就在家裡。那些平凡的相聚與日常，是你最不願意妥協的優先順序。','深耕':'你不羨慕速成的表面風光，你追求的是在一個領域挖得夠深、走得夠遠。那種成為專家的扎實感，最讓你感到踏實。','同理心':'作為一個優秀的傾聽者，你能輕易感知到別人在言語背後的委屈與需求。這份細膩，讓你天然具備療癒與引導他人的能力。','高品質':'你對將就、應付了事的態度感到難受。你對細節的精緻與用心，是你對自己專業品牌的一種極致尊重。','冒險':'穩定的生活會讓你感到枯萎，你的靈魂需要未知的挑戰來激發熱情。那些帶點風險、不確定會怎樣的時刻，最能讓你感受到活著。','智慧':'你追求穿透表象、看見事情本質的能力。不盲從主流、不被情緒綁架，用長遠且清醒的視角來看待生涯，是你一生的修煉。','歸屬感':'你需要一個能讓你感到安全、被全然接納的團隊或環境。找到了對的歸屬，你的根才能扎得夠深，能量才能毫無保留地釋放。','真實自我':'你受夠了在不同場合演繹別人期待的角色。那個敢於展現不完美、坦然接受自己所有面向的你，才是你最強大的版本。','創業精神':'你心裡有一把火，不想只當體制下的螺絲釘。那份想把想法從0到1落地、自己定義規則的渴望，是驅使你破局的創造能量。','共好':'你相信一個人走得快，但一群人才能走得遠。在實現自我價值的同時，也順手成就身邊的人，這讓你的職涯道路更寬廣。','自信':'你正在學著把評價的權力收回自己手上。那份不再需要向外界證明什麼、從內而外的篤定，是你送給自己最棒的禮物。','有機生活':'你追求身心靈的純淨與減法。在飲食、作息與環境上回歸天然與簡單，是你對抗高壓職場、找回身體節奏的溫柔革命。','內在平靜':'你渴望那種即使外界風雨交加、內心依舊井然有序的定力。內在的寧靜與自洽，是你面對職場動盪時最強大的護城河。','幫助他人':'你在利他中看見自己的價值。透過你的專業，讓另一個迷惘的人少走彎路，這帶給你極大的成就感。','自由':'你不願意被任何標籤、職稱或世俗框架給框住。保持靈活與選擇權，是你呼吸的方式，也是你規劃生涯的底層邏輯。','正念':'你明白焦慮往往來自對未來的過度擔憂。那份將注意力拉回此時此刻、專注於眼前半步的能力，能幫你有效停止職場的精神內耗。'};
+
+  // Career direction mapping
+  function getCareerProfile(vals) {
+    const financial = ['財富','財務自由','有賺錢能力','創業精神','社會地位'];
+    const creative = ['創造力','好奇心','冒險','心流','卓越','持續進步'];
+    const stable = ['安全感','穩定可靠','陪伴家人','和睦','生活單純','內在平靜'];
+    const people = ['幫助他人','激勵他人','深層連結','同理心','共好','傳承','歸屬感'];
+    const freedom = ['自由','享受自由','做自己','真實自我','四處旅行'];
+    let scores = {financial:0,creative:0,stable:0,people:0,freedom:0};
+    vals.forEach(v => {
+      if(financial.includes(v)) scores.financial++;
+      if(creative.includes(v)) scores.creative++;
+      if(stable.includes(v)) scores.stable++;
+      if(people.includes(v)) scores.people++;
+      if(freedom.includes(v)) scores.freedom++;
+    });
+    const sorted = Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+    const top2 = sorted.slice(0,2).map(e=>e[0]);
+    const directions = [];
+    if(top2.includes('financial') || top2.includes('creative')) {
+      directions.push('① 高變動性、強成果導向之新創或獨立接案環境\n→ 你的核心驅動力偏向「成果可見、收益可期」。在快速迭代的新創或以作品說話的接案市場，你的驅動力能被充分激活。建議尋找「KPI 清晰、升遷機制透明、允許嘗試失敗」的組織。');
+    }
+    if(top2.includes('people') || top2.includes('stable')) {
+      directions.push('② 制度完善、文化溫和之大型企業或內勤管理職\n→ 你對「安全感與人際溫度」有較高需求。這類環境提供穩定的資源與協作生態，讓你能在確定的框架中深耕專業、建立長期影響力。');
+    }
+    if(top2.includes('freedom') || top2.includes('creative')) {
+      directions.push('③ 彈性自主、以輸出為導向的遠端工作或斜槓模式\n→ 你對自主節奏有強烈需求。考慮以「核心正職 + 副業輸出」的複合路徑，在保障基本安全感的同時，也讓靈魂有喘息的空間去嘗試更多可能。');
+    }
+    // Always provide 3 directions
+    const defaults = [
+      '① 高變動性、強成果導向之新創或獨立接案環境\n→ 在快速迭代的環境中，你的驅動力能被充分激活。尋找「KPI 清晰、升遷機制透明、允許嘗試」的組織。',
+      '② 制度完善、文化溫和之大型企業或內勤管理職\n→ 穩定的資源與協作生態，讓你能在確定的框架中深耕專業、建立長期影響力。',
+      '③ 彈性自主、以輸出為導向的遠端工作或斜槓模式\n→ 以「核心正職 + 副業輸出」的複合路徑，在保障安全感的同時探索更多可能。'
+    ];
+    while(directions.length < 3) directions.push(defaults[directions.length]);
+    return directions.slice(0,3).join('\n\n');
+  }
+
+  function getPartnerProfile(vals) {
+    const nurturing = ['幫助他人','激勵他人','同理心','深層連結','傳承','共好'];
+    const autonomous = ['自由','做自己','創業精神','冒險','卓越'];
+    const isNurturing = vals.some(v => nurturing.includes(v));
+    const isAutonomous = vals.some(v => autonomous.includes(v));
+
+    let ideal = '最能激發你潛能的主管類型：';
+    if(isNurturing) ideal += '給予充分信任、不過度微管理、願意給你獨立負責的空間，同時在你卡住時能提供具體建議而非空話鼓勵的主管。';
+    else ideal += '目標清晰、溝通直接、願意給你發揮空間的主管——不需要特別溫暖，但需要公正且說到做到。';
+
+    let toxic = '\n\n職場毒藥預警——這類人會大量消耗你的能量：';
+    if(isAutonomous) toxic += '習慣控制細節、凡事要過問、缺乏邊界感的主管或同事；以及喜歡以「大局」為名要求你委屈自己的環境。';
+    else toxic += '情緒起伏大、立場不穩定、或喜歡在背後議論他人的同事；以及那些把你的付出視為理所當然的主管。';
+
+    let ideal_colleague = '\n\n最合拍的工作夥伴特質：';
+    const creative_vals = ['創造力','好奇心','心流'];
+    if(vals.some(v => creative_vals.includes(v))) {
+      ideal_colleague += '同樣有創意驅動力、願意一起腦力激盪、不害怕嘗試新方法的人。';
+    } else {
+      ideal_colleague += '踏實可靠、言行一致、不需要頻繁確認卻能準時交付的夥伴。';
+    }
+    return ideal + toxic + ideal_colleague;
+  }
+
+  async function generateReport() {
+    // Get stored values from sessionStorage (set by explore.html) or use demo values
+    const storedVals = sessionStorage.getItem('phase2_values');
+    const vals = storedVals ? JSON.parse(storedVals) : [];
+
+    // Populate chips
+    const chipsEl = document.getElementById('report-values-chips');
+    chipsEl.innerHTML = '';
+    if(vals.length > 0) {
+      vals.forEach(v => {
+        const chip = document.createElement('span');
+        chip.className = 'report-value-chip';
+        chip.textContent = v;
+        chipsEl.appendChild(chip);
+      });
+      document.getElementById('report-values-subtitle').textContent = '根據你的 '+vals.length+' 個核心價值觀，專屬解析如下';
+    } else {
+      document.getElementById('report-values-subtitle').textContent = '專屬深度報告';
+      chipsEl.innerHTML = '<p style="font-size:.8rem;color:var(--sage);">請先完成探索流程再查看報告。</p>';
+    }
+
+    // Use Claude API to generate the report
+    try {
+      const valsList = vals.length > 0 ? vals.join('、') : '（未偵測到選擇，請先完成探索流程）';
+      const prompt = `你是一位犀利且溫暖的生涯引導教練 Sherry，擅長根據個案的核心價值觀給予直接、有洞察力的職涯分析。
+
+個案選出的 10 個核心價值觀是：${valsList}
+
+請分三個部分生成報告，每部分之間用「---」分隔，不要有任何額外的標題或說明文字，直接輸出內容：
+
+【第一部分：核心價值觀深度解析】
+根據這 10 個詞，分析其中最突出的 3 個詞之間的張力與組合意義。不要雞湯，要犀利指出可能的職場盲點。風格參考：「同時留下了【卓越】與【內在平靜】的你，常在職場上陷入『想做到完美，卻讓靈魂極度枯竭』的惡性循環...」寫 3–4 段，每段 2–3 句，繁體中文。
+
+---
+
+【第二部分：3 個職涯方向建議】
+根據這 10 個價值觀的整體傾向，給出 3 個職涯環境建議（非特定職稱，而是環境屬性）。每個建議用「① / ② / ③」開頭，包含環境描述和為什麼適合這個人。繁體中文。
+
+---
+
+【第三部分：理想夥伴特質 × 職場毒藥預警】
+告訴他什麼樣的主管和同事最能激發他的潛能（理想夥伴），以及什麼樣的人是他的職場毒藥（要預警避開）。語氣直接、有共鳴感。繁體中文。`;
+
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1000,
+          messages: [{ role: 'user', content: prompt }]
+        })
+      });
+      const data = await response.json();
+      const text = data.content?.[0]?.text || '';
+      const parts = text.split('---').map(s => s.trim());
+
+      document.getElementById('report-mod1').textContent = parts[0] || '（生成失敗，請重新整理頁面）';
+      document.getElementById('report-mod2').textContent = parts[1] || getCareerProfile(vals);
+      document.getElementById('report-mod3').textContent = parts[2] || getPartnerProfile(vals);
+    } catch(e) {
+      // Fallback to local generation
+      const mod1 = vals.length > 0
+        ? vals.slice(0,3).map(v => REPORT_INSIGHTS[v] || '').filter(Boolean).join('\n\n')
+        : '請先完成探索流程，才能生成專屬報告。';
+      document.getElementById('report-mod1').textContent = mod1;
+      document.getElementById('report-mod2').textContent = getCareerProfile(vals);
+      document.getElementById('report-mod3').textContent = getPartnerProfile(vals);
+    }
+
+    // Show content
+    document.getElementById('report-loading').style.display = 'none';
+    document.getElementById('report-content').style.display = 'block';
   }
 </script>
 
