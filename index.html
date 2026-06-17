@@ -893,6 +893,82 @@
     background: rgba(211,201,188,.12);
   }
 
+  /* ─── LOOKUP NOTICE (查無資料 / 錯誤 提示) ─── */
+  .lookup-notice {
+    display: none;
+    background: var(--warm-white);
+    border: 1px solid var(--stone);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    animation: fadeUp .45s ease forwards;
+  }
+  .lookup-notice.visible { display: block; }
+  .lookup-notice-icon {
+    font-size: 2rem; margin-bottom: 1rem;
+  }
+  .lookup-notice-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.05rem; font-weight: 400;
+    color: var(--forest); margin-bottom: .75rem;
+  }
+  .lookup-notice-body {
+    font-size: .82rem; color: var(--bark);
+    line-height: 2; margin-bottom: 1.5rem;
+  }
+  .lookup-notice-body strong { color: var(--forest); }
+  .lookup-notice-steps {
+    list-style: none;
+    text-align: left;
+    max-width: 380px;
+    margin: 0 auto 1.5rem;
+    font-size: .8rem; color: var(--bark);
+    line-height: 1.9;
+  }
+  .lookup-notice-steps li {
+    padding: .3rem 0 .3rem 1.1rem;
+    position: relative;
+  }
+  .lookup-notice-steps li::before {
+    content: attr(data-num);
+    position: absolute; left: 0;
+    color: var(--deep-sage); font-weight: 500;
+  }
+  .lookup-notice-btns {
+    display: flex; gap: .75rem;
+    justify-content: center; flex-wrap: wrap;
+  }
+  .lookup-btn-primary {
+    display: inline-block; padding: .75rem 1.75rem;
+    background: var(--forest); color: var(--cream);
+    border: none; border-radius: 99px; cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: .78rem; letter-spacing: .08em;
+    transition: background .2s; text-decoration: none;
+  }
+  .lookup-btn-primary:hover { background: var(--deep-sage); }
+  .lookup-btn-ghost {
+    display: inline-block; padding: .75rem 1.75rem;
+    background: transparent; color: var(--forest);
+    border: 1px solid var(--deep-sage); border-radius: 99px;
+    cursor: pointer; font-family: 'Noto Sans TC', sans-serif;
+    font-size: .78rem; letter-spacing: .08em;
+    transition: all .2s; text-decoration: none;
+  }
+  .lookup-btn-ghost:hover { background: rgba(92,122,114,.08); }
+  /* 軟降級報告底部補救說明 */
+  .fallback-rescue {
+    background: rgba(201,169,110,.08);
+    border: 0.5px solid var(--gold-light);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    font-size: .75rem; color: var(--bark);
+    line-height: 1.85; text-align: center;
+  }
+  .fallback-rescue a { color: var(--deep-sage); text-decoration: underline; text-underline-offset: 2px; }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
@@ -1108,7 +1184,7 @@
           <li>核心價值觀深度解析</li>
           <li>3 個職涯方向建議</li>
           <li>理想夥伴特質報告</li>
-          <li>PDF 格式，永久保存</li>
+          <li>可截圖或轉存為 PDF，成為隨身小卡</li>
         </ul>
         <p class="plan-price"><span style="font-size:.75rem;color:var(--sage);text-decoration:line-through;font-family:'Noto Sans TC',sans-serif;">原價 NT$299</span><br>早鳥價 NT$<span style="font-size:1.8rem;color:var(--forest);font-family:'Cormorant Garamond',serif;font-weight:400;">199</span></p>
         <button class="plan-btn" onclick="openPaymentModal()">立即解鎖深度報告 →</button>
@@ -1297,7 +1373,46 @@
     <!-- Loading state -->
     <div class="report-loading" id="report-loading">
       <div class="report-spinner"></div>
-      <p class="report-loading-text">AI 正在分析你的核心價值觀<br>這需要約 15–20 秒，請稍候⋯⋯</p>
+      <p class="report-loading-text" id="report-loading-text">正在讀取你的探索紀錄<br>請稍候⋯⋯</p>
+    </div>
+
+    <!-- 查無資料提示（情況一：Email 找不到） -->
+    <div class="lookup-notice" id="notice-not-found">
+      <div class="lookup-notice-icon">🔍</div>
+      <h3 class="lookup-notice-title">找不到與這個信箱對應的探索紀錄</h3>
+      <p class="lookup-notice-body">
+        可能是探索時使用了<strong>不同的 Email</strong>，<br>
+        或當時未完成 Email 留存步驟。
+      </p>
+      <ul class="lookup-notice-steps">
+        <li data-num="①">確認探索時填的信箱是否與付款信箱相同</li>
+        <li data-num="②">或回到拾光徑，花 10 分鐘重新完成探索<br>
+            <span style="font-size:.72rem;color:var(--sage);">（完成後請記得留下 Email，報告即可自動生成）</span></li>
+      </ul>
+      <div class="lookup-notice-btns">
+        <button class="lookup-btn-ghost" onclick="showPage('p1')">← 回到拾光徑重新探索</button>
+        <button class="lookup-btn-primary" onclick="showFallbackReport()">先查看通用版報告 →</button>
+      </div>
+    </div>
+
+    <!-- 網路/技術錯誤提示（情況二） -->
+    <div class="lookup-notice" id="notice-error">
+      <div class="lookup-notice-icon">🌿</div>
+      <h3 class="lookup-notice-title">連線遇到了一點狀況</h3>
+      <p class="lookup-notice-body">
+        無法即時讀取你的探索紀錄，但你的資料並不會消失。<br>
+        你可以稍後重新整理頁面再試，<br>
+        或來信讓我們為你手動生成報告。
+      </p>
+      <ul class="lookup-notice-steps">
+        <li data-num="①">重新整理頁面後再試一次</li>
+        <li data-num="②">來信 <a href="mailto:myjourneyblueprint52@gmail.com" style="color:var(--deep-sage);">myjourneyblueprint52@gmail.com</a><br>
+            <span style="font-size:.72rem;color:var(--sage);">告知你的信箱與付款後五碼，24 小時內為你處理</span></li>
+      </ul>
+      <div class="lookup-notice-btns">
+        <button class="lookup-btn-ghost" onclick="location.reload()">重新整理頁面</button>
+        <button class="lookup-btn-primary" onclick="showFallbackReport()">先查看通用版報告 →</button>
+      </div>
     </div>
 
     <!-- Report content (hidden until loaded) -->
@@ -1308,6 +1423,12 @@
         <p class="report-module-num">你的 10 個核心價值觀</p>
         <div class="report-values-row" id="report-values-chips"></div>
         <p style="font-size:.75rem;color:var(--sage);line-height:1.7;">以下報告皆依據你選出的這 10 個詞生成，是你靈魂最誠實的答案。</p>
+        <!-- 軟降級時才顯示的補救說明 -->
+        <div class="fallback-rescue" id="fallback-rescue" style="display:none;">
+          此為<strong>通用版報告</strong>，尚未與你的個人探索紀錄連結。<br>
+          如需個人化版本，請來信 <a href="mailto:myjourneyblueprint52@gmail.com">myjourneyblueprint52@gmail.com</a>，
+          告知付款信箱與帳號後五碼，我們 24 小時內為你更換。
+        </div>
       </div>
 
       <!-- Module 1: Insight -->
@@ -1332,13 +1453,13 @@
       </div>
 
       <!-- PDF hint -->
-      <p class="pdf-hint">💡 &nbsp;可自行截圖，或在瀏覽器使用「列印 → 另存為 PDF」儲存本報告</p>
+      <p class="pdf-hint">💡 &nbsp;可自行截圖，或在瀏覽器使用「列印 → 另存為 PDF」儲存專屬報告</p>
 
       <!-- Module 4: Coupon -->
       <div class="coupon-card">
-        <p class="coupon-label">高階服務 · 專屬優惠</p>
+        <p class="coupon-label">生涯引導 · 專屬優惠</p>
         <p class="coupon-code">LIGHT-200</p>
-        <p class="coupon-desc">看完了報告，發現自己的卡點了嗎？這份地圖需要具體的行動方針。<br>憑本報告代碼，預約 Sherry 1on1 生涯引導，現折 <strong style="color:var(--gold);">NT$ 200</strong>。</p>
+        <p class="coupon-desc">看完了報告，發現自己的卡點了嗎？這份地圖仍需要具體的行動方針。<br>憑折扣代碼，預約 Sherry 1on1 生涯引導，現折 <strong style="color:var(--gold);">NT$ 200</strong>。<br><span style="font-size:.78rem;color:rgba(245,240,232,.55);letter-spacing:.04em;">請記得『複製』折扣碼喔！</span></p>
         <div class="coupon-action">
           <button class="coupon-btn" onclick="showPage('p2');setTimeout(()=>document.getElementById('interest-section').scrollIntoView({behavior:'smooth'}),400)">預約藍圖對話 1 on 1 →</button>
         </div>
@@ -1559,11 +1680,32 @@
     return `▍最能激發你潛能的主管類型\n${IDEAL_BOSS[top]}\n\n▍職場毒藥預警——這類人會大量消耗你的能量\n${TOXIC[top]}\n\n▍最合拍的工作夥伴特質\n${PARTNER[second] || PARTNER[top]}`;
   }
 
-  async function generateReport() {
-    const storedVals = sessionStorage.getItem('phase2_values');
-    const vals = storedVals ? JSON.parse(storedVals) : [];
+  // Apps Script URL（POST 與 GET 同一個端點）
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbygxBayCsI-FRJlvkiNr7vON6kZE8IaOmEX1BBnos_IoHywoa43KaqcdqMhpXMdLgK4/exec';
 
-    // Populate chips
+  // ── 輔助：顯示/隱藏各狀態區塊 ──
+  function hideAllNotices() {
+    document.getElementById('report-loading').style.display = 'none';
+    document.getElementById('notice-not-found').classList.remove('visible');
+    document.getElementById('notice-error').classList.remove('visible');
+    document.getElementById('report-content').style.display = 'none';
+  }
+
+  // 軟降級：顯示通用版報告（查無資料時體驗者主動點擊）
+  function showFallbackReport() {
+    hideAllNotices();
+    document.getElementById('fallback-rescue').style.display = 'block';
+    renderReport([], true); // 空陣列 = 通用版
+  }
+
+  // 核心：渲染報告（個人化 or 通用版）
+  async function renderReport(vals, isFallback) {
+    // 更新 loading 文字
+    document.getElementById('report-loading-text').innerHTML =
+      'AI 正在分析你的核心價值觀<br>這需要約 15–20 秒，請稍候⋯⋯';
+    document.getElementById('report-loading').style.display = 'block';
+
+    // 填入價值觀標籤
     const chipsEl = document.getElementById('report-values-chips');
     chipsEl.innerHTML = '';
     if (vals.length > 0) {
@@ -1573,15 +1715,27 @@
         chip.textContent = v;
         chipsEl.appendChild(chip);
       });
-      document.getElementById('report-values-subtitle').textContent = '根據你的 ' + vals.length + ' 個核心價值觀，專屬解析如下';
+      document.getElementById('report-values-subtitle').textContent =
+        '根據你的 ' + vals.length + ' 個核心價值觀，專屬解析如下';
     } else {
-      document.getElementById('report-values-subtitle').textContent = '專屬深度報告';
-      chipsEl.innerHTML = '<p style="font-size:.8rem;color:var(--sage);">請先完成探索流程再查看報告。</p>';
+      // 通用版：用五個維度代表詞作為展示
+      const GENERIC_VALS = ['卓越','安全感','幫助他人','自由','深耕','持續進步','真實自我','同理心','創造力','內在平靜'];
+      GENERIC_VALS.forEach(v => {
+        const chip = document.createElement('span');
+        chip.className = 'report-value-chip';
+        chip.style.opacity = '.55';
+        chip.textContent = v;
+        chipsEl.appendChild(chip);
+      });
+      document.getElementById('report-values-subtitle').textContent = '通用版報告（示範）';
     }
 
-    // ── API 生成（方案 A+B：強化 prompt + max_tokens 2000）──
+    const valsList = vals.length > 0
+      ? vals.join('、')
+      : '卓越、安全感、幫助他人、自由、深耕、持續進步、真實自我、同理心、創造力、內在平靜';
+
+    // ── API 生成 ──
     try {
-      const valsList = vals.length > 0 ? vals.join('、') : '（未偵測到選擇）';
       const prompt = `你是生涯引導教練 Sherry，風格犀利而溫暖，擅長從價值觀組合裡找出別人看不見的職場盲點。
 
 個案選出的 10 個核心價值觀是：${valsList}
@@ -1598,15 +1752,15 @@
 
 【第二部分】
 根據這 10 個詞的整體傾向，給出 3 個職涯環境建議。
-規格：三個建議必須代表三個**完全不同**的組織型態或工作模式（例如：高速成長型新創 ／ 制度穩定的大型企業 ／ 獨立接案或顧問角色），不可重疊。每個建議以「① ② ③」開頭，寫出環境屬性 + 為什麼這個人適合這裡。繁體中文。
+規格：三個建議必須代表三個完全不同的組織型態或工作模式，不可重疊。每個建議以「① ② ③」開頭，寫出環境屬性 + 為什麼這個人適合這裡。繁體中文。
 
 ---
 
 【第三部分】
 分三個段落輸出，每段以「▍」開頭：
-▍最能激發你潛能的主管類型（具體描述行為特質，不要說「有愛心的主管」這種空話）
-▍職場毒藥預警（描述具體行為或環境特徵，讓人讀了有「對！就是這個！」的感覺）
-▍最合拍的工作夥伴特質（同上，具體行為特質）
+▍最能激發你潛能的主管類型（具體描述行為特質）
+▍職場毒藥預警（描述具體行為或環境特徵）
+▍最合拍的工作夥伴特質（具體行為特質）
 繁體中文。`;
 
       const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -1627,17 +1781,76 @@
         document.getElementById('report-mod2').textContent = parts[1];
         document.getElementById('report-mod3').textContent = parts[2];
       } else {
-        throw new Error('incomplete response');
+        throw new Error('incomplete');
       }
     } catch(e) {
-      // ── Fallback：本地張力分析，確保與免費體驗結語完全不同 ──
-      document.getElementById('report-mod1').textContent = buildFallbackMod1(vals);
-      document.getElementById('report-mod2').textContent = buildFallbackMod2(vals);
-      document.getElementById('report-mod3').textContent = buildFallbackMod3(vals);
+      // 本地 fallback
+      const fVals = vals.length > 0 ? vals
+        : ['卓越','安全感','幫助他人','自由','深耕','持續進步','真實自我','同理心','創造力','內在平靜'];
+      document.getElementById('report-mod1').textContent = buildFallbackMod1(fVals);
+      document.getElementById('report-mod2').textContent = buildFallbackMod2(fVals);
+      document.getElementById('report-mod3').textContent = buildFallbackMod3(fVals);
     }
 
     document.getElementById('report-loading').style.display = 'none';
     document.getElementById('report-content').style.display = 'block';
+  }
+
+  // ── 主入口：先查 Email，再決定走哪條路 ──
+  async function generateReport() {
+    const storedEmail = sessionStorage.getItem('report_email') || '';
+    const storedVals  = sessionStorage.getItem('phase2_values');
+
+    // 步驟一：如果 sessionStorage 已有值觀資料，直接使用（最快路徑）
+    if (storedVals) {
+      const vals = JSON.parse(storedVals);
+      if (vals.length > 0) {
+        await renderReport(vals, false);
+        return;
+      }
+    }
+
+    // 步驟二：用 Email 向 Apps Script 查詢
+    if (!storedEmail) {
+      // 沒有 email → 顯示查無資料提示
+      hideAllNotices();
+      document.getElementById('notice-not-found').classList.add('visible');
+      return;
+    }
+
+    document.getElementById('report-loading-text').innerHTML =
+      '正在讀取你的探索紀錄<br>請稍候⋯⋯';
+    document.getElementById('report-loading').style.display = 'block';
+
+    try {
+      const res = await fetch(
+        `${APPS_SCRIPT_URL}?action=getValues&email=${encodeURIComponent(storedEmail)}`,
+        { method: 'GET' }
+      );
+      const result = await res.json();
+
+      if (result.status === 'found' && result.values && result.values.length > 0) {
+        // ✅ 查到資料 → 存入 sessionStorage 再渲染
+        sessionStorage.setItem('phase2_values', JSON.stringify(result.values));
+        hideAllNotices();
+        await renderReport(result.values, false);
+
+      } else if (result.status === 'not_found') {
+        // ❌ 查無資料 → 提示情況一
+        hideAllNotices();
+        document.getElementById('notice-not-found').classList.add('visible');
+
+      } else {
+        // ⚠️ 其他錯誤 → 提示情況二
+        hideAllNotices();
+        document.getElementById('notice-error').classList.add('visible');
+      }
+
+    } catch(networkErr) {
+      // 網路錯誤 → 提示情況二
+      hideAllNotices();
+      document.getElementById('notice-error').classList.add('visible');
+    }
   }
 </script>
 
