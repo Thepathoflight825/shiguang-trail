@@ -576,6 +576,36 @@
   }
   .faq-link { color: var(--deep-sage); text-decoration: underline; text-underline-offset: 3px; }
 
+  /* highlight items (認定依據、次數限制) */
+  .faq-item-highlight {
+    background: rgba(201,169,110,.07);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    border-top: none !important;
+    margin: .5rem 0;
+  }
+  .faq-item-highlight .faq-q { color: var(--bark); }
+
+  /* time-zone badges */
+  .faq-badge {
+    display: inline-block;
+    font-size: .6rem; letter-spacing: .1em;
+    padding: .2rem .7rem; border-radius: 99px;
+    margin-right: .5rem; vertical-align: middle;
+    font-weight: 400;
+  }
+  .faq-badge-green  { background: rgba(92,122,114,.14); color: var(--deep-sage); }
+  .faq-badge-amber  { background: rgba(201,169,110,.18); color: #8A6830; }
+  .faq-badge-red    { background: rgba(180,80,60,.10);  color: #9A4030; }
+
+  /* plan card consent note */
+  .plan-consent-note {
+    font-size: .66rem; color: var(--sage);
+    text-align: center; margin-top: .6rem;
+    line-height: 1.7; letter-spacing: .02em;
+  }
+  .plan-consent-note a { color: var(--deep-sage); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+
   /* ─── PAYMENT MODAL ─── */
   .modal-overlay {
     display: none; position: fixed; inset: 0; z-index: 500;
@@ -1032,6 +1062,7 @@
         </ul>
         <p class="plan-price"><span style="font-size:.75rem;color:var(--sage);text-decoration:line-through;font-family:'Noto Sans TC',sans-serif;">原價 NT$299</span><br>早鳥價 NT$<span style="font-size:1.8rem;color:var(--forest);font-family:'Cormorant Garamond',serif;font-weight:400;">199</span></p>
         <button class="plan-btn" onclick="openPaymentModal()">立即解鎖深度報告 →</button>
+        <p class="plan-consent-note">點擊即代表你已詳閱並同意<a onclick="showPage('p2');setTimeout(()=>document.getElementById('faq-section').scrollIntoView({behavior:'smooth'}),300)">《拾光徑服務與退費規範》</a></p>
       </div>
 
       <!-- Plan 2: Full Session -->
@@ -1058,22 +1089,55 @@
       <h3 class="faq-title">✦ 預約與退費須知</h3>
       <p class="faq-intro">謝謝你願意將重要的生涯藍圖託付給『拾光徑』。<br>為了保障雙方的時間與權益，請於付款前詳閱以下規範。</p>
 
-      <div class="faq-item">
-        <div class="faq-q">關於改期</div>
-        <div class="faq-a">視訊引導皆為專屬保留時段。如需變更時間，請於約定時間 <strong>24 小時前</strong>主動透過 <a href="mailto:myjourneyblueprint52@gmail.com" class="faq-link">Email</a> 通知，可免費調整一次。若於 24 小時內臨時取消，因時段已無法釋出給其他迷惘的靈魂，將酌收 <strong>30%</strong> 的時間預留損失。</div>
+      <!-- 認定依據 -->
+      <div class="faq-item faq-item-highlight">
+        <div class="faq-q">📌 &nbsp;時間認定依據</div>
+        <div class="faq-a">本服務之變更與退費認定，皆以本工作室官方信箱（<a href="mailto:myjourneyblueprint52@gmail.com" class="faq-link">myjourneyblueprint52@gmail.com</a>）收到電子郵件之「系統時間戳記」與「原定諮詢時段」之差距時數為<strong>唯一依據</strong>。</div>
       </div>
 
+      <!-- 三個時間區間 -->
       <div class="faq-item">
-        <div class="faq-q">關於取消與退費</div>
-        <div class="faq-a">
-          <ul class="faq-list">
-            <li>於約定日期 <strong>3 天前</strong>取消，可全額退款（若非國泰世華銀行帳戶，需扣除 15 元跨行手續費）。</li>
-            <li>於約定日期 <strong>1–2 天前</strong>取消，退還 <strong>50%</strong> 費用。</li>
-            <li><strong>約定當日</strong>臨時未出席或取消，恕不退費、亦無法改期。</li>
+        <div class="faq-q">
+          <span class="faq-badge faq-badge-green">72 小時前</span>
+          預約時段 72 小時前（即 3 天前）：可免費改期、或全額退款
+        </div>
+        <div class="faq-a">如需變更時段或取消預約，請於原定諮詢時間 72 小時前來信通知。<br>
+          <ul class="faq-list" style="margin-top:.5rem;">
+            <li><strong>取消</strong>：可獲全額退款（若非中國信託銀行帳戶，需扣除 15 元跨行轉帳手續費）。</li>
+            <li><strong>改期</strong>：可免費調整一次。</li>
           </ul>
         </div>
       </div>
 
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-badge faq-badge-amber">24–72 小時</span>
+          預約時段 24–72 小時之內（即 1–2 天內）：不可改期、退還 50% 費用
+        </div>
+        <div class="faq-a">因時段已專屬保留，此區間內<strong>恕不接受改期申請</strong>。如需取消預約，將退還 <strong>50%</strong> 服務費用。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-badge faq-badge-red">24 小時內</span>
+          預約時段 24 小時之內（即諮詢前一日與當日）：不可改期且恕不退費
+        </div>
+        <div class="faq-a">於諮詢前 24 小時內臨時取消、變更或諮詢當日未出席者，因該時段已鎖定且無法釋出給其他迷惘的靈魂，<strong>恕無法退費亦無法改期</strong>。</div>
+      </div>
+
+      <!-- 延期次數限制 -->
+      <div class="faq-item faq-item-highlight">
+        <div class="faq-q">✦ &nbsp;延期與變更次數限制（重要）</div>
+        <div class="faq-a">
+          <ul class="faq-list">
+            <li><strong>次數上限</strong>：每筆訂單僅限免費變更時段<strong>「一次」</strong>。</li>
+            <li><strong>改期後退費權益凍結</strong>：為避免變更時段後惡意取消，凡經改期後之訂單，不論距離新預約時段有多久，皆自動視為「進入 24 小時之內」之狀態。後續如因個人因素再度取消或要求二度改期，恕無法改期亦不予退還任何費用。</li>
+            <li><strong>時效限制</strong>：申請改期之新時段，必須在原定預約日起算之 <strong>30 天內</strong>完成諮詢（因導師個人或不可抗力之天災因素需調整者不在此限），逾期未完成預約視同放棄該次服務，恕不退費。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 數位報告 -->
       <div class="faq-item">
         <div class="faq-q">關於數位報告</div>
         <div class="faq-a">【專屬深度報告】屬動態客製化生成之數位內容，一旦匯款完成並發送，<strong>恕不接受退費</strong>。</div>
@@ -1142,8 +1206,9 @@
     <p class="modal-label">你的 Email（報告將寄送至此）</p>
     <input type="email" class="modal-input" id="modal-email" placeholder="your@email.com" oninput="checkModalReady()">
 
-    <p class="modal-consent">點擊下方按鈕「進行付款」，即代表你已同意
+    <p class="modal-consent">點擊下方「進行付款」，即代表你已<strong style="color:var(--bark);">詳閱、理解並同意</strong>
       <a onclick="document.getElementById('faq-section').scrollIntoView({behavior:'smooth'});closePaymentModal()">《拾光徑服務與退費規範》</a>
+      所有內容，包含改期次數限制與退費條件。
     </p>
 
     <button class="modal-btn" id="modal-pay-btn" onclick="handleModalPay()">進行付款 →</button>
