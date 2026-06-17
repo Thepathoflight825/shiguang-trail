@@ -424,8 +424,9 @@
   .plan-card:not(.featured) .plan-features li::before { color: var(--sage); }
   .plan-card.featured .plan-features li::before { color: var(--gold-light); }
   .plan-price {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Noto Serif TC', serif;
     font-size: 1rem; margin-bottom: 1.25rem;
+    line-height: 1.7;
   }
   .plan-card:not(.featured) .plan-price { color: var(--sage); }
   .plan-card.featured .plan-price { color: var(--gold-light); }
@@ -657,9 +658,10 @@
     margin-bottom: .75rem; letter-spacing: .04em;
   }
   .bank-card-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; letter-spacing: .18em;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.35rem; letter-spacing: .22em;
     color: var(--cream); margin-bottom: .5rem;
+    font-weight: 400;
   }
   .bank-card-name {
     font-size: .78rem; color: rgba(245,240,232,.7);
@@ -671,7 +673,7 @@
     font-size: .78rem; color: rgba(245,240,232,.65);
     display: flex; justify-content: space-between; align-items: center;
   }
-  .bank-card-amount strong { color: var(--gold); font-size: 1.15rem; font-family: 'Cormorant Garamond', serif; }
+  .bank-card-amount strong { color: var(--gold); font-size: 1.05rem; font-family: 'Noto Serif TC', serif; font-weight: 500; letter-spacing: .04em; }
   .modal-label {
     font-size: .75rem; color: var(--bark);
     margin-bottom: .4rem; letter-spacing: .04em;
@@ -1186,7 +1188,7 @@
           <li>理想夥伴特質報告</li>
           <li>可截圖或轉存為 PDF，成為隨身小卡</li>
         </ul>
-        <p class="plan-price"><span style="font-size:.75rem;color:var(--sage);text-decoration:line-through;font-family:'Noto Sans TC',sans-serif;">原價 NT$299</span><br>早鳥價 NT$<span style="font-size:1.8rem;color:var(--forest);font-family:'Cormorant Garamond',serif;font-weight:400;">199</span></p>
+        <p class="plan-price"><span style="font-size:.72rem;color:var(--sage);text-decoration:line-through;font-family:'Noto Sans TC',sans-serif;letter-spacing:.04em;">原價 NT$299</span><br><span style="font-size:.8rem;color:var(--sage);font-family:'Noto Sans TC',sans-serif;letter-spacing:.04em;">早鳥價 &nbsp;</span><span style="font-size:1.55rem;color:var(--forest);font-family:'Noto Serif TC',serif;font-weight:500;letter-spacing:.02em;">NT$199</span></p>
         <button class="plan-btn" onclick="openPaymentModal()">立即解鎖深度報告 →</button>
         <p class="plan-consent-note">點擊即代表你已詳閱並同意<a onclick="showPage('p2');setTimeout(()=>document.getElementById('faq-section').scrollIntoView({behavior:'smooth'}),300)">《拾光徑服務與退費規範》</a></p>
       </div>
