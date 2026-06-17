@@ -711,6 +711,52 @@
   .modal-btn-confirm.visible { display: block; }
   .modal-btn-confirm:hover { background: var(--gold-light); }
 
+  /* digital report note inside modal */
+  .modal-digital-note {
+    font-size: .67rem; color: var(--sage);
+    line-height: 1.75; text-align: center;
+    margin-bottom: 1.1rem;
+    padding: .6rem .8rem;
+    background: rgba(201,169,110,.07);
+    border-radius: 8px;
+    letter-spacing: .01em;
+  }
+
+  /* checkbox consent row */
+  .modal-checkbox-row {
+    display: flex; align-items: flex-start; gap: .65rem;
+    cursor: pointer; margin-bottom: 1.25rem;
+    padding: .85rem 1rem;
+    border: 1.5px solid var(--stone);
+    border-radius: 12px;
+    transition: border-color .2s, background .2s;
+  }
+  .modal-checkbox-row:hover { border-color: var(--deep-sage); background: rgba(92,122,114,.04); }
+  .modal-checkbox-row.checked { border-color: var(--deep-sage); background: rgba(92,122,114,.06); }
+  .modal-checkbox-box {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    border: 1.5px solid var(--pebble);
+    border-radius: 5px;
+    background: var(--warm-white);
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, border-color .2s;
+    margin-top: 1px;
+  }
+  .modal-checkbox-row.checked .modal-checkbox-box {
+    background: var(--deep-sage);
+    border-color: var(--deep-sage);
+  }
+  .modal-checkbox-text {
+    font-size: .72rem; color: var(--bark);
+    line-height: 1.75; letter-spacing: .02em;
+  }
+  .modal-terms-link {
+    color: var(--deep-sage);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   /* ─── PAGE 3: REPORT ─── */
   .report-hero {
     padding-top: 72px;
@@ -815,10 +861,11 @@
     margin-bottom: .5rem; position: relative;
   }
   .coupon-code {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem; color: var(--gold);
-    letter-spacing: .15em; margin-bottom: .5rem;
-    position: relative;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.65rem; color: var(--gold);
+    letter-spacing: .28em; margin-bottom: .5rem;
+    position: relative; font-weight: 300;
+    font-style: normal;
   }
   .coupon-desc {
     font-family: 'Noto Serif TC', serif;
@@ -1201,17 +1248,29 @@
     </div>
 
     <p class="modal-label">請填寫匯款帳號後五碼</p>
-    <input type="text" class="modal-input" id="modal-last5" placeholder="例：12345" maxlength="5" inputmode="numeric">
+    <input type="text" class="modal-input" id="modal-last5" placeholder="例：12345" maxlength="5" inputmode="numeric" oninput="checkModalReady()">
 
     <p class="modal-label">你的 Email（報告將寄送至此）</p>
     <input type="email" class="modal-input" id="modal-email" placeholder="your@email.com" oninput="checkModalReady()">
 
-    <p class="modal-consent">點擊下方「進行付款」，即代表你已<strong style="color:var(--bark);">詳閱、理解並同意</strong>
-      <a onclick="document.getElementById('faq-section').scrollIntoView({behavior:'smooth'});closePaymentModal()">《拾光徑服務與退費規範》</a>
-      所有內容，包含改期次數限制與退費條件。
-    </p>
+    <!-- Digital report disclaimer -->
+    <p class="modal-digital-note">【專屬深度報告】屬動態客製化生成之數位內容，一旦匯款完成並發送，恕不接受退費。</p>
 
-    <button class="modal-btn" id="modal-pay-btn" onclick="handleModalPay()">進行付款 →</button>
+    <!-- Checkbox consent -->
+    <label class="modal-checkbox-row" id="modal-agree-row">
+      <span class="modal-checkbox-box" id="modal-checkbox-visual">
+        <svg id="modal-check-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+          <polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <input type="checkbox" id="modal-agree" style="display:none;" onchange="checkModalReady()">
+      <span class="modal-checkbox-text">
+        我已詳閱、理解並同意
+        <a class="modal-terms-link" onclick="document.getElementById('faq-section').scrollIntoView({behavior:'smooth'});closePaymentModal()">《拾光徑服務與退費規範》</a>
+        所有內容，包含改期次數限制與退費條件。
+      </span>
+    </label>
+
     <button class="modal-btn modal-btn-confirm" id="modal-confirm-btn" onclick="confirmPaymentAndGo()">✓ 確認已匯款，前往查看報告</button>
   </div>
 </div>
@@ -1331,35 +1390,52 @@
   function openPaymentModal() {
     document.getElementById('paymentModal').classList.add('open');
     document.body.style.overflow = 'hidden';
+    // Reset state
+    document.getElementById('modal-last5').value = '';
+    document.getElementById('modal-email').value = '';
+    document.getElementById('modal-agree').checked = false;
+    document.getElementById('modal-checkbox-visual').querySelector('svg').style.display = 'none';
+    document.getElementById('modal-agree-row').classList.remove('checked');
+    document.getElementById('modal-confirm-btn').classList.remove('visible');
   }
   function closePaymentModal() {
     document.getElementById('paymentModal').classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  // Toggle checkbox on label click
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('modal-agree-row').addEventListener('click', function(e) {
+      if (e.target.classList.contains('modal-terms-link')) return; // let link work independently
+      const cb = document.getElementById('modal-agree');
+      cb.checked = !cb.checked;
+      const icon = document.getElementById('modal-check-icon');
+      icon.style.display = cb.checked ? 'block' : 'none';
+      this.classList.toggle('checked', cb.checked);
+      checkModalReady();
+    });
+  });
+
   function checkModalReady() {
-    const email = document.getElementById('modal-email').value;
-    const btn = document.getElementById('modal-confirm-btn');
-    if (email && email.includes('@')) {
+    const last5  = document.getElementById('modal-last5').value.trim();
+    const email  = document.getElementById('modal-email').value.trim();
+    const agreed = document.getElementById('modal-agree').checked;
+    const btn    = document.getElementById('modal-confirm-btn');
+    const ready  = last5.length > 0 && email.includes('@') && agreed;
+    if (ready) {
       btn.classList.add('visible');
     } else {
       btn.classList.remove('visible');
     }
   }
-  function handleModalPay() {
+  function confirmPaymentAndGo() {
     const last5 = document.getElementById('modal-last5').value.trim();
     const email = document.getElementById('modal-email').value.trim();
-    if (!email || !email.includes('@')) {
-      alert('請填寫有效的 Email 地址');
-      return;
-    }
-    document.getElementById('modal-confirm-btn').classList.add('visible');
-    document.getElementById('modal-pay-btn').style.opacity = '.5';
-    document.getElementById('modal-pay-btn').disabled = true;
-    // Store for report page
+    if (!last5) { alert('請填寫匯款帳號後五碼'); return; }
+    if (!email || !email.includes('@')) { alert('請填寫有效的 Email 地址'); return; }
+    if (!document.getElementById('modal-agree').checked) { alert('請勾選同意服務條款'); return; }
     sessionStorage.setItem('report_email', email);
     sessionStorage.setItem('report_last5', last5);
-  }
-  function confirmPaymentAndGo() {
     closePaymentModal();
     showPage('p3');
     generateReport();
