@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>預約 1 on 1 生涯引導 — 拾光徑</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5F0E8; --warm-white: #FAF7F2;
+  --stone: #E8DDD0; --pebble: #D3C9BC;
+  --sage: #9BA8A3;  --deep-sage: #5C7A72;
+  --forest: #3D5A54; --bark: #6B5B4E;
+  --ink: #2C2416;
+  --gold: #C9A96E; --gold-light: #E8D5A3;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Sans TC',sans-serif; background:var(--cream); color:var(--ink); }
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.1rem 2.5rem;
+  background:rgba(245,240,232,.92); backdrop-filter:blur(12px);
+  border-bottom:0.5px solid var(--stone);
+}
+.nav-brand { font-family:'Noto Serif TC',serif; font-size:1.3rem; font-weight:500; color:var(--forest); letter-spacing:.08em; text-decoration:none; }
+.nav-back { font-size:.78rem; color:var(--sage); letter-spacing:.06em; cursor:pointer; transition:color .2s; text-decoration:none; }
+.nav-back:hover { color:var(--forest); }
+
+/* ── HERO ── */
+.hero {
+  padding: 6rem 2rem 3rem;
+  background: linear-gradient(160deg, var(--forest) 0%, #2C4240 60%, #1E3830 100%);
+  position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(circle at 20% 80%, rgba(201,169,110,.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(175,169,236,.08) 0%, transparent 50%);
+}
+.hero-inner { max-width:680px; margin:0 auto; position:relative; z-index:1; }
+.hero-eyebrow { font-size:.6rem; letter-spacing:.28em; color:var(--gold-light); text-transform:uppercase; margin-bottom:.65rem; }
+.hero-title { font-family:'Noto Serif TC',serif; font-size:clamp(1.6rem,3.5vw,2.3rem); font-weight:300; color:var(--cream); line-height:1.45; margin-bottom:.75rem; }
+.hero-sub { font-size:.82rem; color:rgba(245,240,232,.6); line-height:1.85; }
+.hero-steps {
+  display:flex; gap:1.5rem; margin-top:1.75rem; flex-wrap:wrap;
+}
+.hero-step {
+  display:flex; align-items:center; gap:.5rem;
+  font-size:.72rem; color:rgba(245,240,232,.5); letter-spacing:.04em;
+}
+.hero-step-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--gold); flex-shrink:0;
+}
+.hero-step.active { color:var(--gold-light); }
+.hero-step.active .hero-step-dot { background:var(--gold); box-shadow:0 0 6px var(--gold); }
+
+/* ── FORM CONTAINER ── */
+.form-wrap { max-width:680px; margin:0 auto; padding:2.5rem 1.5rem 5rem; }
+
+/* ── SECTION CARD ── */
+.section-card {
+  background:var(--warm-white); border:0.5px solid var(--stone);
+  border-radius:20px; padding:2rem 2rem; margin-bottom:1.25rem;
+}
+.section-num { font-size:.6rem; letter-spacing:.22em; color:var(--sage); text-transform:uppercase; margin-bottom:.4rem; }
+.section-title {
+  font-family:'Noto Serif TC',serif; font-size:1.05rem; font-weight:400;
+  color:var(--forest); margin-bottom:.35rem;
+}
+.section-desc { font-size:.75rem; color:var(--sage); line-height:1.7; margin-bottom:1.5rem; }
+.section-divider { height:0.5px; background:var(--stone); margin:1.25rem 0; }
+
+/* ── FORM ELEMENTS ── */
+.field { margin-bottom:1.25rem; }
+.field:last-child { margin-bottom:0; }
+.field-label {
+  display:block; font-size:.75rem; color:var(--bark);
+  margin-bottom:.45rem; letter-spacing:.04em;
+}
+.field-label span { color:var(--deep-sage); }
+.field-input {
+  width:100%; padding:.72rem 1.1rem;
+  border:0.5px solid var(--stone); border-radius:12px;
+  background:var(--cream); font-family:'Noto Sans TC',sans-serif;
+  font-size:.82rem; color:var(--ink); outline:none;
+  transition:border-color .2s;
+}
+.field-input:focus { border-color:var(--deep-sage); background:var(--warm-white); }
+.field-input::placeholder { color:var(--sage); }
+textarea.field-input { resize:vertical; min-height:90px; border-radius:12px; }
+
+/* ── RADIO / CHECKBOX GROUP ── */
+.options-grid { display:flex; flex-direction:column; gap:.55rem; }
+.option-item {
+  display:flex; align-items:flex-start; gap:.75rem;
+  cursor:pointer; padding:.65rem .85rem;
+  border:0.5px solid var(--stone); border-radius:10px;
+  transition:border-color .2s, background .2s;
+}
+.option-item:hover { border-color:var(--deep-sage); background:rgba(92,122,114,.04); }
+.option-item.selected { border-color:var(--deep-sage); background:rgba(92,122,114,.07); }
+.option-item input { display:none; }
+.option-box {
+  flex-shrink:0; width:18px; height:18px; margin-top:1px;
+  border:1.5px solid var(--pebble); border-radius:4px;
+  background:var(--warm-white); display:flex; align-items:center; justify-content:center;
+  transition:all .2s;
+}
+.option-item.selected .option-box { background:var(--deep-sage); border-color:var(--deep-sage); }
+.option-radio .option-box { border-radius:50%; }
+.option-item.selected .option-radio .option-box::after {
+  content:''; width:7px; height:7px; border-radius:50%; background:white;
+}
+.option-text { font-size:.8rem; color:var(--bark); line-height:1.7; }
+.option-item.selected .option-text { color:var(--forest); }
+.other-input {
+  display:none; margin-top:.5rem; width:100%;
+  padding:.5rem .75rem; border:0.5px solid var(--stone);
+  border-radius:8px; background:var(--cream);
+  font-family:'Noto Sans TC',sans-serif; font-size:.78rem;
+  color:var(--ink); outline:none;
+}
+.other-input:focus { border-color:var(--deep-sage); }
+
+/* ── CALENDAR ── */
+.calendar-wrap { margin-bottom:1.25rem; }
+.calendar-month-nav {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:1rem;
+}
+.cal-nav-btn {
+  background:none; border:0.5px solid var(--stone); border-radius:8px;
+  padding:.35rem .75rem; cursor:pointer; color:var(--bark);
+  font-size:.8rem; transition:all .2s;
+}
+.cal-nav-btn:hover { border-color:var(--deep-sage); color:var(--forest); }
+.cal-nav-btn:disabled { opacity:.3; cursor:default; }
+.cal-month-label { font-family:'Noto Serif TC',serif; font-size:.95rem; color:var(--forest); }
+.cal-grid {
+  display:grid; grid-template-columns:repeat(7,1fr); gap:3px;
+  margin-bottom:1rem;
+}
+.cal-day-head {
+  text-align:center; font-size:.62rem; color:var(--sage);
+  padding:.3rem 0; letter-spacing:.06em;
+}
+.cal-day {
+  text-align:center; padding:.45rem .2rem; border-radius:8px;
+  font-size:.75rem; cursor:default; color:var(--pebble);
+  transition:all .15s;
+}
+.cal-day.available { color:var(--bark); cursor:pointer; font-weight:500; }
+.cal-day.available:hover { background:rgba(92,122,114,.1); color:var(--forest); }
+.cal-day.selected-date { background:var(--forest); color:var(--cream) !important; }
+.cal-day.today { color:var(--deep-sage); font-weight:600; }
+
+/* ── TIME SLOTS ── */
+.slots-wrap { display:none; }
+.slots-wrap.visible { display:block; }
+.slots-date-label {
+  font-size:.72rem; color:var(--sage); margin-bottom:.6rem;
+  letter-spacing:.04em;
+}
+.slots-grid { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+.slot-chip {
+  padding:.45rem 1rem; border-radius:99px;
+  border:0.5px solid var(--stone); cursor:pointer;
+  font-size:.75rem; color:var(--bark);
+  transition:all .2s;
+}
+.slot-chip:hover:not(.blocked):not(.booked-chip) { border-color:var(--deep-sage); color:var(--forest); }
+.slot-chip.selected-slot { background:var(--forest); color:var(--cream); border-color:var(--forest); }
+.slot-chip.blocked { background:var(--stone); color:var(--sage); cursor:default; font-size:.7rem; }
+.selected-slots-list { margin-top:.75rem; }
+.selected-slot-tag {
+  display:inline-flex; align-items:center; gap:.4rem;
+  background:rgba(92,122,114,.1); border:0.5px solid var(--deep-sage);
+  border-radius:99px; padding:.3rem .8rem;
+  font-size:.72rem; color:var(--forest); margin:.2rem .2rem 0 0;
+}
+.slot-remove { cursor:pointer; color:var(--sage); font-size:.85rem; line-height:1; }
+.slot-remove:hover { color:var(--forest); }
+.slots-hint { font-size:.68rem; color:var(--sage); margin-top:.5rem; line-height:1.6; }
+
+/* ── PAYMENT CARD ── */
+.bank-card {
+  background:linear-gradient(135deg, var(--forest) 0%, #2C4240 100%);
+  border-radius:16px; padding:1.5rem 1.75rem; margin-bottom:1.25rem;
+  color:var(--cream); position:relative; overflow:hidden;
+}
+.bank-card::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(circle at 80% 20%, rgba(201,169,110,.15) 0%, transparent 55%);
+}
+.bank-card > * { position:relative; z-index:1; }
+.bc-label { font-size:.6rem; letter-spacing:.18em; color:rgba(245,240,232,.55); text-transform:uppercase; margin-bottom:.3rem; }
+.bc-bank  { font-size:.85rem; color:var(--gold-light); margin-bottom:.6rem; letter-spacing:.04em; }
+.bc-num   { font-family:'Noto Serif TC',serif; font-size:1.3rem; letter-spacing:.2em; color:var(--cream); margin-bottom:.4rem; }
+.bc-name  { font-size:.75rem; color:rgba(245,240,232,.65); letter-spacing:.08em; }
+.bc-amount-row {
+  margin-top:.75rem; padding-top:.75rem;
+  border-top:0.5px solid rgba(245,240,232,.2);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.bc-amount-label { font-size:.75rem; color:rgba(245,240,232,.6); }
+.bc-amount-value { font-family:'Noto Serif TC',serif; font-size:1.05rem; color:var(--gold); font-weight:500; letter-spacing:.04em; }
+.bc-original { font-size:.65rem; text-decoration:line-through; color:rgba(245,240,232,.35); margin-right:.5rem; }
+
+/* ── DISCOUNT ROW ── */
+.discount-row {
+  display:flex; gap:.6rem; margin-bottom:1.25rem; align-items:stretch;
+}
+.discount-input {
+  flex:1; padding:.72rem 1.1rem;
+  border:0.5px solid var(--stone); border-radius:12px;
+  background:var(--cream); font-family:'Noto Sans TC',sans-serif;
+  font-size:.82rem; color:var(--ink); outline:none;
+  text-transform:uppercase; letter-spacing:.08em;
+  transition:border-color .2s;
+}
+.discount-input:focus { border-color:var(--deep-sage); }
+.discount-input::placeholder { text-transform:none; letter-spacing:normal; color:var(--sage); }
+.discount-btn {
+  padding:.72rem 1.1rem; border-radius:12px;
+  background:var(--forest); color:var(--cream);
+  border:none; cursor:pointer;
+  font-family:'Noto Sans TC',sans-serif; font-size:.78rem;
+  letter-spacing:.06em; transition:background .2s; white-space:nowrap;
+}
+.discount-btn:hover { background:var(--deep-sage); }
+.discount-feedback {
+  font-size:.72rem; margin-bottom:1rem;
+  padding:.5rem .85rem; border-radius:8px; display:none;
+}
+.discount-feedback.valid { background:rgba(92,122,114,.1); color:var(--deep-sage); display:block; }
+.discount-feedback.invalid { background:rgba(180,80,60,.08); color:#9A4030; display:block; }
+
+/* ── AGREE CHECKBOX ── */
+.agree-row {
+  display:flex; align-items:flex-start; gap:.65rem;
+  cursor:pointer; padding:.85rem 1rem;
+  border:1.5px solid var(--stone); border-radius:12px;
+  transition:border-color .2s, background .2s;
+  margin-bottom:1.25rem;
+}
+.agree-row:hover { border-color:var(--deep-sage); background:rgba(92,122,114,.04); }
+.agree-row.checked { border-color:var(--deep-sage); background:rgba(92,122,114,.06); }
+.agree-box {
+  flex-shrink:0; width:20px; height:20px;
+  border:1.5px solid var(--pebble); border-radius:5px;
+  background:var(--warm-white); display:flex; align-items:center; justify-content:center;
+  transition:all .2s; margin-top:1px;
+}
+.agree-row.checked .agree-box { background:var(--deep-sage); border-color:var(--deep-sage); }
+.agree-text { font-size:.72rem; color:var(--bark); line-height:1.75; letter-spacing:.02em; }
+.agree-link { color:var(--deep-sage); text-decoration:underline; text-underline-offset:2px; }
+
+/* ── DIGITAL NOTE ── */
+.digital-note {
+  font-size:.69rem; color:var(--bark); line-height:1.85;
+  text-align:center; margin-bottom:1.1rem;
+  padding:.65rem 1rem; background:rgba(211,201,188,.28);
+  border-radius:8px; border-left:2.5px solid var(--pebble);
+  letter-spacing:.02em;
+}
+
+/* ── SUBMIT BUTTON ── */
+.submit-btn {
+  display:block; width:100%; padding:.95rem;
+  background:var(--forest); color:var(--cream);
+  border:none; border-radius:99px; cursor:pointer;
+  font-family:'Noto Sans TC',sans-serif; font-size:.85rem;
+  letter-spacing:.1em; transition:all .2s; text-align:center;
+  opacity:.45; pointer-events:none;
+}
+.submit-btn.active { opacity:1; pointer-events:auto; }
+.submit-btn.active:hover { background:var(--deep-sage); transform:translateY(-1px); }
+.submit-loading { display:none; }
+.submit-btn.loading .submit-text { display:none; }
+.submit-btn.loading .submit-loading { display:inline; }
+
+/* ── VALIDATION ── */
+.field-error { font-size:.68rem; color:#9A4030; margin-top:.35rem; display:none; }
+.field-error.visible { display:block; }
+
+/* ── SPINNER ── */
+@keyframes spin { to { transform:rotate(360deg); } }
+@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── MOBILE ── */
+@media(max-width:640px){
+  nav { padding:.9rem 1.25rem; }
+  .hero { padding:5rem 1.25rem 2.5rem; }
+  .form-wrap { padding:1.75rem 1rem 4rem; }
+  .section-card { padding:1.5rem 1.25rem; }
+  .hero-steps { gap:1rem; }
+  .discount-row { flex-wrap:wrap; }
+  .discount-btn { width:100%; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="index.html">拾光徑</a>
+  <a class="nav-back" href="index.html#blueprint">← 返回方案頁</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Blueprint Dialogue · 1 on 1 預約</p>
+    <h1 class="hero-title">在正式對話之前，<br>先讓我認識你。</h1>
+    <p class="hero-sub">這份前置問卷幫助 Sherry 在視訊前深入了解你的現況與期望，<br>讓每一分鐘的對話都不浪費在「暖場」上。</p>
+    <div class="hero-steps">
+      <div class="hero-step active"><div class="hero-step-dot"></div>基本盤點</div>
+      <div class="hero-step"><div class="hero-step-dot"></div>核心痛點</div>
+      <div class="hero-step"><div class="hero-step-dot"></div>期望落差</div>
+      <div class="hero-step"><div class="hero-step-dot"></div>確認付款</div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<div class="form-wrap">
+
+  <!-- ── 第一區塊：基本盤點 ── -->
+  <div class="section-card">
+    <p class="section-num">Part 01 · 基本盤點</p>
+    <h2 class="section-title">先讓我認識你</h2>
+    <p class="section-desc">填上你的基本資訊，以及最希望諮詢的時段。</p>
+
+    <div class="field">
+      <label class="field-label">姓名 / 暱稱 <span>*</span></label>
+      <input type="text" class="field-input" id="f-name" placeholder="例：Sherry 或 怡蘋" oninput="checkReady()">
+    </div>
+
+    <div class="field">
+      <label class="field-label">你的 Email <span>*</span></label>
+      <input type="email" class="field-input" id="f-email" placeholder="your@email.com" oninput="checkReady()">
+      <p class="field-error" id="err-email">請填寫有效的 Email 格式</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- CALENDAR -->
+    <div class="field">
+      <label class="field-label">諮詢預約時段 <span>*</span>（最多可預選 3 個，Sherry 將從中確認一個）</label>
+      <div class="calendar-wrap">
+        <div class="calendar-month-nav">
+          <button class="cal-nav-btn" id="cal-prev" onclick="changeMonth(-1)">‹ 上個月</button>
+          <span class="cal-month-label" id="cal-label"></span>
+          <button class="cal-nav-btn" id="cal-next" onclick="changeMonth(1)">下個月 ›</button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+      <div class="slots-wrap" id="slots-wrap">
+        <p class="slots-date-label" id="slots-date-label"></p>
+        <div class="slots-grid" id="slots-grid"></div>
+      </div>
+      <div class="selected-slots-list" id="selected-slots-list"></div>
+      <p class="slots-hint">* 開放時段：當月及次月每週六、日的 11:00 / 14:00 / 15:30<br>* 填問卷當天起需至少 3 個工作日後的時段才可預約</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="field">
+      <label class="field-label">目前身份別 <span>*</span></label>
+      <div class="options-grid" id="identity-group">
+        <label class="option-item option-radio" onclick="selectRadio(this,'identity')">
+          <input type="radio" name="identity" value="在職中（想看外部機會/內部分流）">
+          <div class="option-box"></div>
+          <span class="option-text">在職中（想看外部機會 / 內部分流）</span>
+        </label>
+        <label class="option-item option-radio" onclick="selectRadio(this,'identity')">
+          <input type="radio" name="identity" value="待業/轉職過渡期">
+          <div class="option-box"></div>
+          <span class="option-text">待業 / 轉職過渡期</span>
+        </label>
+        <label class="option-item option-radio" onclick="selectRadio(this,'identity')">
+          <input type="radio" name="identity" value="學生/應屆畢業生">
+          <div class="option-box"></div>
+          <span class="option-text">學生 / 應屆畢業生</span>
+        </label>
+        <label class="option-item option-radio" onclick="selectRadio(this,'identity')">
+          <input type="radio" name="identity" value="自由職業者/個人品牌經營者">
+          <div class="option-box"></div>
+          <span class="option-text">自由職業者 / 個人品牌經營者</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">目前 / 前一份工作的產業與職稱</label>
+      <input type="text" class="field-input" id="f-industry" placeholder="例：科技業 PM、行銷工作室專案經理">
+    </div>
+
+    <div class="field">
+      <label class="field-label">總工作年資 <span>*</span></label>
+      <div class="options-grid" id="seniority-group">
+        <label class="option-item option-radio" onclick="selectRadio(this,'seniority')">
+          <input type="radio" name="seniority" value="1年以下"><div class="option-box"></div><span class="option-text">1 年以下</span>
+        </label>
+        <label class="option-item option-radio" onclick="selectRadio(this,'seniority')">
+          <input type="radio" name="seniority" value="1–3年"><div class="option-box"></div><span class="option-text">1–3 年</span>
+        </label>
+        <label class="option-item option-radio" onclick="selectRadio(this,'seniority')">
+          <input type="radio" name="seniority" value="3–5年"><div class="option-box"></div><span class="option-text">3–5 年</span>
+        </label>
+        <label class="option-item option-radio" onclick="selectRadio(this,'seniority')">
+          <input type="radio" name="seniority" value="5–10年"><div class="option-box"></div><span class="option-text">5–10 年</span>
+        </label>
+        <label class="option-item option-radio" onclick="selectRadio(this,'seniority')">
+          <input type="radio" name="seniority" value="10年以上"><div class="option-box"></div><span class="option-text">10 年以上</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 第二區塊：核心痛點 ── -->
+  <div class="section-card">
+    <p class="section-num">Part 02 · 核心痛點與現狀</p>
+    <h2 class="section-title">你卡在哪裡？</h2>
+    <p class="section-desc">說真話比說對話更重要。這些資訊只用於諮詢準備，不會對外分享。</p>
+
+    <div class="field">
+      <label class="field-label">如果要用一句話形容你目前的「最大痛點」或「職涯卡點」，那會是什麼？ <span>*</span></label>
+      <textarea class="field-input" id="f-painpoint" placeholder="不需要整理，就是那個讓你夜裡睡不著的那個⋯⋯" oninput="checkReady()"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field-label">最讓你感到「能量枯竭」或「焦慮」的職場情境是？（複選，最多 3 項）</label>
+      <div class="options-grid" id="drains-group">
+        <label class="option-item" onclick="selectCheck(this,'drains',3)">
+          <input type="checkbox" value="工作熟練但毫無成就感，感覺在空轉"><div class="option-box"></div>
+          <span class="option-text">工作內容熟練但毫無成就感，感覺在空轉</span>
+        </label>
+        <label class="option-item" onclick="selectCheck(this,'drains',3)">
+          <input type="checkbox" value="每天硬撐職場E人，下班只想登出"><div class="option-box"></div>
+          <span class="option-text">每天都在當職場 E 人硬撐，下班只想當 I 人徹底登出</span>
+        </label>
+        <label class="option-item" onclick="selectCheck(this,'drains',3)">
+          <input type="checkbox" value="薪資/升遷碰壁，不知是否繼續妥協"><div class="option-box"></div>
+          <span class="option-text">現職薪資 / 升遷碰壁，不知道該不該為了五斗米繼續妥協</span>
+        </label>
+        <label class="option-item" onclick="selectCheck(this,'drains',3)">
+          <input type="checkbox" value="主管管理風格或團隊文化嚴重消耗內在平靜"><div class="option-box"></div>
+          <span class="option-text">主管的管理風格或團隊文化，嚴重消耗我的內在平靜</span>
+        </label>
+        <label class="option-item" onclick="selectCheck(this,'drains',3)">
+          <input type="checkbox" value="想轉職但方向模糊、缺乏底氣"><div class="option-box"></div>
+          <span class="option-text">想轉職，但對下一個產業 / 職能方向感到模糊、缺乏底氣</span>
+        </label>
+        <label class="option-item" id="drains-other-item" onclick="selectCheck(this,'drains',3)">
+          <input type="checkbox" value="other-drains"><div class="option-box"></div>
+          <span class="option-text">其他：<input type="text" class="other-input" id="drains-other-text" placeholder="請說明⋯⋯" onclick="event.stopPropagation()"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 第三區塊：期望落差 ── -->
+  <div class="section-card">
+    <p class="section-num">Part 03 · 期望落差與價值盲點</p>
+    <h2 class="section-title">你最閃光的時刻是什麼？</h2>
+    <p class="section-desc">不限大事。「幫團隊理順了一個複雜流程」或「被客戶真誠感謝」都算。</p>
+
+    <div class="field">
+      <label class="field-label">過去職場中，最讓你閃閃發光、最有成就感（進入心流）的時刻是？ <span>*</span></label>
+      <textarea class="field-input" id="f-shining" placeholder="描述那個讓你忘記時間、渾然忘我的場景⋯⋯" oninput="checkReady()"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field-label">如果有一份「完美的理想工作」，你希望它必須具備哪三個關鍵要素？（複選，最多 3 項）</label>
+      <div class="options-grid" id="ideal-group">
+        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+          <input type="checkbox" value="優渥且具市場競爭力的薪酬與獎金"><div class="option-box"></div>
+          <span class="option-text">優渥且具市場競爭力的薪酬與獎金</span>
+        </label>
+        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+          <input type="checkbox" value="彈性工時或遠端工作機會（WFH）"><div class="option-box"></div>
+          <span class="option-text">彈性的工作時間或遠端工作機會（WFH）</span>
+        </label>
+        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+          <input type="checkbox" value="主管充分授權、組織政治透明簡單"><div class="option-box"></div>
+          <span class="option-text">主管充分授權、組織政治透明簡單</span>
+        </label>
+        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+          <input type="checkbox" value="能發揮創造力、有高度自主性的發揮空間"><div class="option-box"></div>
+          <span class="option-text">能發揮創造力、有高度自主性的發揮空間</span>
+        </label>
+        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+          <input type="checkbox" value="穩定步調、下班能完全登出生活"><div class="option-box"></div>
+          <span class="option-text">穩定的步調、下班能完全登出生活</span>
+        </label>
+        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+          <input type="checkbox" value="具社會影響力、能實質幫助他人"><div class="option-box"></div>
+          <span class="option-text">具有社會影響力、能實質幫助到他人</span>
+        </label>
+        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+          <input type="checkbox" value="明確的晉升管道與專業技能學習資源"><div class="option-box"></div>
+          <span class="option-text">有明確的晉升管道與專業技能學習資源</span>
+        </label>
+        <label class="option-item" id="ideal-other-item" onclick="selectCheck(this,'ideal',3)">
+          <input type="checkbox" value="other-ideal"><div class="option-box"></div>
+          <span class="option-text">其他：<input type="text" class="other-input" id="ideal-other-text" placeholder="請說明⋯⋯" onclick="event.stopPropagation()"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 第四區塊：付款 ── -->
+  <div class="section-card">
+    <p class="section-num">Part 04 · 確認付款</p>
+    <h2 class="section-title">完成預約的最後一步</h2>
+    <p class="section-desc">請依下方帳號完成匯款，並填入後五碼確認。</p>
+
+    <!-- 銀行卡 -->
+    <div class="bank-card">
+      <p class="bc-label">匯款帳號</p>
+      <p class="bc-bank">中國信託商業銀行（代碼 822）</p>
+      <p class="bc-num">9015 · 6129 · 6423</p>
+      <p class="bc-name">戶名：王怡蘋</p>
+      <div class="bc-amount-row">
+        <span class="bc-amount-label">1 on 1 生涯引導</span>
+        <span class="bc-amount-value">
+          <span class="bc-original" id="bc-original" style="display:none;">NT$2,200</span>
+          <span id="bc-price">NT$ 2,200</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- 折扣碼 -->
+    <div class="discount-row">
+      <input type="text" class="discount-input" id="f-discount" placeholder="輸入折扣碼（選填）" maxlength="20">
+      <button class="discount-btn" onclick="applyDiscount()">套用</button>
+    </div>
+    <div class="discount-feedback" id="discount-feedback"></div>
+
+    <div class="field">
+      <label class="field-label">匯款帳號後五碼 <span>*</span></label>
+      <input type="text" class="field-input" id="f-last5" placeholder="例：12345" maxlength="5" inputmode="numeric" oninput="checkReady()">
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 數位說明 -->
+    <div class="digital-note">
+      諮詢視訊為線上進行，Sherry 將於收到款項後 24 小時內以 Email 確認時段。<br>
+      視訊前 3–5 天將收到專屬前置報告，請留意信箱。
+    </div>
+
+    <!-- 同意條款 -->
+    <div class="agree-row" id="agree-row" onclick="toggleAgree(event)">
+      <div class="agree-box" id="agree-box">
+        <svg id="agree-check" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+          <polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <input type="checkbox" id="f-agree" style="display:none;" onchange="checkReady()">
+      <span class="agree-text">
+        我已詳閱、理解並同意
+        <a class="agree-link" href="index.html#faq-section" target="_blank" onclick="event.stopPropagation()">《拾光徑服務與退費規範》</a>
+        所有內容，包含改期次數限制與退費條件。
+      </span>
+    </div>
+
+    <!-- 送出按鈕 -->
+    <button class="submit-btn" id="submit-btn" onclick="submitBooking()">
+      <span class="submit-text">確認送出預約 →</span>
+      <span class="submit-loading">送出中⋯⋯</span>
+    </button>
+    <p style="font-size:.66rem;color:var(--sage);text-align:center;margin-top:.75rem;letter-spacing:.03em;">
+      送出即代表你已詳閱並同意《拾光徑服務與退費規範》所有內容
+    </p>
+
+  </div>
+</div>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8Tv7ab8wPbLWCF5KI7A_pF8xqrJY2u8bK26x5MclZEii6jRTIEuUsRMeTSeYgZOIO/exec';
+const BASE_PRICE = 2200;
+const TIMES = ['11:00','14:00','15:30'];
+
+let currentYear, currentMonth, blockedSlots = [], selectedSlots = [];
+let discountAmount = 0, discountCode = '';
+
+// ── 初始化日曆 ──
+function init() {
+  const today = new Date();
+  currentYear  = today.getFullYear();
+  currentMonth = today.getMonth();
+  renderCalendar();
+  fetchBlockedSlots();
+}
+
+function fetchBlockedSlots() {
+  fetch(`${APPS_SCRIPT_URL}?action=getSlots`)
+    .then(r => r.json())
+    .then(d => { if(d.blocked) blockedSlots = d.blocked; renderCalendar(); })
+    .catch(() => {});
+}
+
+function changeMonth(dir) {
+  currentMonth += dir;
+  if(currentMonth > 11){ currentMonth=0; currentYear++; }
+  if(currentMonth < 0) { currentMonth=11; currentYear--; }
+  renderCalendar();
+  document.getElementById('slots-wrap').classList.remove('visible');
+}
+
+function renderCalendar() {
+  const today     = new Date();
+  today.setHours(0,0,0,0);
+  const minDate   = addWorkdays(new Date(today), 3);
+  const maxDate   = new Date(today.getFullYear(), today.getMonth() + 2, 0); // 次月底
+
+  // 限制導航範圍
+  const baseYear  = today.getFullYear(), baseMon = today.getMonth();
+  document.getElementById('cal-prev').disabled =
+    (currentYear === baseYear && currentMonth <= baseMon);
+  document.getElementById('cal-next').disabled =
+    (currentYear > baseYear + 1) ||
+    (currentYear === baseYear + 1 && currentMonth > baseMon + 1) ||
+    (currentYear === baseYear && currentMonth >= baseMon + 2);
+
+  const label = `${currentYear} 年 ${currentMonth+1} 月`;
+  document.getElementById('cal-label').textContent = label;
+
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+  ['日','一','二','三','四','五','六'].forEach(d => {
+    const h = document.createElement('div');
+    h.className = 'cal-day-head'; h.textContent = d;
+    grid.appendChild(h);
+  });
+
+  const first   = new Date(currentYear, currentMonth, 1);
+  const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+  // 空格
+  for(let i = 0; i < first.getDay(); i++){
+    const e = document.createElement('div'); e.className='cal-day'; grid.appendChild(e);
+  }
+
+  for(let d = 1; d <= lastDay; d++){
+    const date = new Date(currentYear, currentMonth, d);
+    const dow  = date.getDay(); // 0=日,6=六
+    const cell = document.createElement('div');
+    const ds   = toDateStr(date);
+    cell.textContent = d;
+
+    const isToday    = date.getTime() === today.getTime();
+    const isWeekend  = (dow === 0 || dow === 6);
+    const isInRange  = date >= minDate && date <= maxDate;
+    const hasSlot    = TIMES.some(t => !isBlocked(ds, t));
+
+    if(isWeekend && isInRange && hasSlot){
+      cell.className = 'cal-day available' + (isToday?' today':'');
+      cell.onclick   = () => showSlots(ds, d);
+    } else {
+      cell.className = 'cal-day' + (isToday?' today':'');
+    }
+    grid.appendChild(cell);
+  }
+}
+
+function showSlots(dateStr, dayNum) {
+  // 更新日期選中樣式
+  document.querySelectorAll('.cal-day.selected-date').forEach(c => {
+    c.classList.remove('selected-date');
+  });
+  // 找對應 cell 並標記
+  const cells = document.querySelectorAll('.cal-day.available');
+  cells.forEach(c => { if(parseInt(c.textContent) === dayNum) c.classList.add('selected-date'); });
+
+  const wrap  = document.getElementById('slots-wrap');
+  const label = document.getElementById('slots-date-label');
+  const grid  = document.getElementById('slots-grid');
+
+  const d = new Date(dateStr);
+  label.textContent = `${d.getFullYear()} 年 ${d.getMonth()+1} 月 ${d.getDate()} 日（${['日','一','二','三','四','五','六'][d.getDay()]}）`;
+  grid.innerHTML = '';
+
+  TIMES.forEach(t => {
+    const chip = document.createElement('div');
+    const key  = `${dateStr} ${t}`;
+    const already = selectedSlots.includes(key);
+    if(isBlocked(dateStr, t)){
+      chip.className = 'slot-chip blocked'; chip.textContent = `${t} 已額滿`;
+    } else if(already){
+      chip.className = 'slot-chip selected-slot'; chip.textContent = t;
+      chip.onclick = () => removeSlot(key);
+    } else {
+      chip.className = 'slot-chip'; chip.textContent = t;
+      chip.onclick   = () => addSlot(dateStr, t, chip);
+    }
+    grid.appendChild(chip);
+  });
+
+  wrap.classList.add('visible');
+}
+
+function addSlot(dateStr, time, chip) {
+  if(selectedSlots.length >= 3){ alert('最多只能預選 3 個時段喔！'); return; }
+  const key = `${dateStr} ${time}`;
+  if(selectedSlots.includes(key)) return;
+  selectedSlots.push(key);
+  chip.className = 'slot-chip selected-slot';
+  chip.onclick   = () => removeSlot(key);
+  renderSelectedSlots();
+  checkReady();
+}
+
+function removeSlot(key) {
+  selectedSlots = selectedSlots.filter(s => s !== key);
+  const [ds] = key.split(' ');
+  showSlots(ds, parseInt(ds.split('-')[2]));
+  renderSelectedSlots();
+  checkReady();
+}
+
+function renderSelectedSlots() {
+  const list = document.getElementById('selected-slots-list');
+  list.innerHTML = selectedSlots.length
+    ? '<p style="font-size:.72rem;color:var(--sage);margin-bottom:.4rem;letter-spacing:.04em;">已選時段：</p>' +
+      selectedSlots.map(s => `<span class="selected-slot-tag">${formatSlot(s)}<span class="slot-remove" onclick="removeSlot('${s}')">✕</span></span>`).join('')
+    : '';
+}
+
+function formatSlot(key) {
+  const [ds, t] = key.split(' ');
+  const d = new Date(ds);
+  return `${d.getMonth()+1}/${d.getDate()}（${['日','一','二','三','四','五','六'][d.getDay()]}）${t}`;
+}
+
+function isBlocked(dateStr, time) {
+  return blockedSlots.some(b => b.date === dateStr && b.time === time);
+}
+
+function toDateStr(date) {
+  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+}
+
+function addWorkdays(date, days) {
+  let count = 0;
+  while(count < days){
+    date.setDate(date.getDate() + 1);
+    const dow = date.getDay();
+    if(dow !== 0 && dow !== 6) count++;
+  }
+  return date;
+}
+
+// ── 表單選項 ──
+function selectRadio(el, group) {
+  document.querySelectorAll(`#${group}-group .option-item`).forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+  checkReady();
+}
+
+function selectCheck(el, group, max) {
+  const checked = document.querySelectorAll(`#${group}-group .option-item.selected`);
+  if(!el.classList.contains('selected') && checked.length >= max){
+    alert(`最多選 ${max} 項喔！`); return;
+  }
+  el.classList.toggle('selected');
+  el.querySelector('input[type=checkbox]').checked = el.classList.contains('selected');
+  // 顯示/隱藏 other input
+  const otherId = group === 'drains' ? 'drains-other-text' : 'ideal-other-text';
+  const otherItem = group === 'drains' ? 'drains-other-item' : 'ideal-other-item';
+  if(el.id === otherItem){
+    document.getElementById(otherId).style.display = el.classList.contains('selected') ? 'block' : 'none';
+  }
+}
+
+// ── 折扣碼 ──
+async function applyDiscount() {
+  const code = document.getElementById('f-discount').value.trim().toUpperCase();
+  const fb   = document.getElementById('discount-feedback');
+  if(!code){ fb.className='discount-feedback'; fb.textContent=''; return; }
+
+  try {
+    const res  = await fetch(`${APPS_SCRIPT_URL}?action=getDiscounts&code=${encodeURIComponent(code)}`);
+    const data = await res.json();
+    if(data.status === 'valid' && data.discount > 0){
+      discountAmount = data.discount;
+      discountCode   = code;
+      const final = BASE_PRICE - discountAmount;
+      document.getElementById('bc-price').textContent   = `NT$ ${final.toLocaleString()}`;
+      document.getElementById('bc-original').style.display = 'inline';
+      fb.className = 'discount-feedback valid';
+      fb.textContent = `✓ 折扣碼有效！已折抵 NT$${discountAmount}，實付 NT$${final.toLocaleString()}`;
+    } else {
+      discountAmount = 0; discountCode = '';
+      document.getElementById('bc-price').textContent   = 'NT$ 2,200';
+      document.getElementById('bc-original').style.display = 'none';
+      fb.className = 'discount-feedback invalid';
+      fb.textContent = '✗ 此折扣碼無效或已過期';
+    }
+  } catch(e) {
+    fb.className = 'discount-feedback invalid';
+    fb.textContent = '無法驗證折扣碼，請稍後再試';
+  }
+}
+
+// ── 同意勾選 ──
+function toggleAgree(e) {
+  if(e.target.classList.contains('agree-link')) return;
+  const cb    = document.getElementById('f-agree');
+  const box   = document.getElementById('agree-box');
+  const icon  = document.getElementById('agree-check');
+  const row   = document.getElementById('agree-row');
+  cb.checked = !cb.checked;
+  icon.style.display = cb.checked ? 'block' : 'none';
+  row.classList.toggle('checked', cb.checked);
+  checkReady();
+}
+
+// ── 送出驗證 ──
+function checkReady() {
+  const name    = document.getElementById('f-name').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const painpt  = document.getElementById('f-painpoint').value.trim();
+  const shining = document.getElementById('f-shining').value.trim();
+  const last5   = document.getElementById('f-last5').value.trim();
+  const agreed  = document.getElementById('f-agree').checked;
+  const hasIdentity  = document.querySelector('#identity-group .option-item.selected');
+  const hasSeniority = document.querySelector('#seniority-group .option-item.selected');
+  const hasSlots     = selectedSlots.length > 0;
+  const validEmail   = email.includes('@') && email.includes('.');
+
+  const ready = name && validEmail && painpt && shining && last5 && agreed && hasIdentity && hasSeniority && hasSlots;
+  const btn   = document.getElementById('submit-btn');
+  btn.classList.toggle('active', !!ready);
+
+  // Email 即時提示
+  const errEmail = document.getElementById('err-email');
+  if(email && !validEmail) errEmail.classList.add('visible');
+  else errEmail.classList.remove('visible');
+}
+
+// ── 送出 ──
+async function submitBooking() {
+  const btn = document.getElementById('submit-btn');
+  btn.classList.add('loading');
+
+  // 收集複選資料
+  const getDrains = () => {
+    const vals = [];
+    document.querySelectorAll('#drains-group .option-item.selected').forEach(el => {
+      const v = el.querySelector('input[type=checkbox]').value;
+      if(v === 'other-drains'){
+        const t = document.getElementById('drains-other-text').value.trim();
+        if(t) vals.push('其他：' + t);
+      } else vals.push(v);
+    });
+    return vals;
+  };
+  const getIdeal = () => {
+    const vals = [];
+    document.querySelectorAll('#ideal-group .option-item.selected').forEach(el => {
+      const v = el.querySelector('input[type=checkbox]').value;
+      if(v === 'other-ideal'){
+        const t = document.getElementById('ideal-other-text').value.trim();
+        if(t) vals.push('其他：' + t);
+      } else vals.push(v);
+    });
+    return vals;
+  };
+
+  const payload = {
+    action:     'saveBooking',
+    name:       document.getElementById('f-name').value.trim(),
+    email:      document.getElementById('f-email').value.trim(),
+    identity:   document.querySelector('#identity-group .option-item.selected')?.querySelector('input')?.value || '',
+    industry:   document.getElementById('f-industry').value.trim(),
+    seniority:  document.querySelector('#seniority-group .option-item.selected')?.querySelector('input')?.value || '',
+    painPoint:  document.getElementById('f-painpoint').value.trim(),
+    drains:     getDrains(),
+    shining:    document.getElementById('f-shining').value.trim(),
+    idealWork:  getIdeal(),
+    slots:      selectedSlots.map(formatSlot),
+    last5:      document.getElementById('f-last5').value.trim(),
+    discount:   discountCode,
+    finalPrice: BASE_PRICE - discountAmount,
+    timestamp:  new Date().toISOString(),
+  };
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method:'POST', mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+  } catch(e) {}
+
+  // 跳轉感謝頁
+  window.location.href = 'thankyou.html';
+}
+
+init();
+</script>
+</body>
+</html>

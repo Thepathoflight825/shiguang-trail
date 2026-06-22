@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>預約確認 — 拾光徑</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#F5F0E8; --warm-white:#FAF7F2;
+  --stone:#E8DDD0; --pebble:#D3C9BC;
+  --sage:#9BA8A3;  --deep-sage:#5C7A72;
+  --forest:#3D5A54; --bark:#6B5B4E;
+  --ink:#2C2416;
+  --gold:#C9A96E; --gold-light:#E8D5A3;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Noto Sans TC',sans-serif; background:var(--cream); color:var(--ink); min-height:100vh; display:flex; flex-direction:column; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.1rem 2.5rem;
+  background:rgba(245,240,232,.92); backdrop-filter:blur(12px);
+  border-bottom:0.5px solid var(--stone);
+}
+.nav-brand { font-family:'Noto Serif TC',serif; font-size:1.3rem; font-weight:500; color:var(--forest); letter-spacing:.08em; text-decoration:none; }
+
+main {
+  flex:1; display:flex; align-items:center; justify-content:center;
+  padding:6rem 1.5rem 4rem;
+}
+
+.card {
+  max-width:560px; width:100%;
+  background:var(--warm-white); border:0.5px solid var(--stone);
+  border-radius:24px; padding:3rem 2.5rem;
+  text-align:center;
+  animation: fadeUp .6s ease forwards;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+.icon-wrap {
+  width:64px; height:64px; border-radius:50%;
+  background:linear-gradient(135deg, var(--forest), var(--deep-sage));
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 1.5rem;
+}
+
+.eyebrow {
+  font-size:.62rem; letter-spacing:.22em; color:var(--sage);
+  text-transform:uppercase; margin-bottom:.6rem;
+}
+.title {
+  font-family:'Noto Serif TC',serif; font-size:1.55rem; font-weight:400;
+  color:var(--forest); line-height:1.45; margin-bottom:.85rem;
+}
+.body { font-size:.82rem; color:var(--bark); line-height:2; margin-bottom:1.75rem; }
+
+.steps {
+  background:var(--cream); border-radius:14px;
+  padding:1.25rem 1.5rem; margin-bottom:1.75rem;
+  text-align:left;
+}
+.step-row {
+  display:flex; gap:.85rem; align-items:flex-start;
+  padding:.55rem 0;
+  border-bottom:0.5px solid var(--stone);
+}
+.step-row:last-child { border-bottom:none; }
+.step-num {
+  flex-shrink:0; width:22px; height:22px; border-radius:50%;
+  background:var(--forest); color:var(--cream);
+  font-size:.62rem; display:flex; align-items:center; justify-content:center;
+  margin-top:1px;
+}
+.step-text { font-size:.78rem; color:var(--bark); line-height:1.7; }
+.step-text strong { color:var(--forest); }
+
+.btn-group { display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
+.btn-primary {
+  display:inline-block; padding:.75rem 2rem;
+  background:var(--forest); color:var(--cream);
+  border:none; border-radius:99px; cursor:pointer;
+  font-family:'Noto Sans TC',sans-serif; font-size:.8rem;
+  letter-spacing:.08em; transition:all .2s; text-decoration:none;
+}
+.btn-primary:hover { background:var(--deep-sage); transform:translateY(-1px); }
+.btn-ghost {
+  display:inline-block; padding:.75rem 2rem;
+  background:transparent; color:var(--forest);
+  border:1px solid var(--deep-sage); border-radius:99px;
+  cursor:pointer; font-family:'Noto Sans TC',sans-serif;
+  font-size:.8rem; letter-spacing:.08em; transition:all .2s; text-decoration:none;
+}
+.btn-ghost:hover { background:rgba(92,122,114,.08); }
+
+.note {
+  font-size:.68rem; color:var(--sage); margin-top:1.5rem;
+  line-height:1.8; letter-spacing:.02em;
+}
+.note a { color:var(--deep-sage); text-decoration:underline; text-underline-offset:2px; }
+
+@media(max-width:480px){
+  nav { padding:.9rem 1.25rem; }
+  .card { padding:2.25rem 1.5rem; }
+  .btn-group { flex-direction:column; }
+  .btn-primary, .btn-ghost { text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">拾光徑</a>
+</nav>
+
+<main>
+  <div class="card">
+    <div class="icon-wrap">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <polyline points="6,14 11,19 22,9" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <p class="eyebrow">Booking Confirmed · 預約已送出</p>
+    <h1 class="title">謝謝你願意讓我<br>陪你走這一段。</h1>
+    <p class="body">你的前置問卷已成功送出，Sherry 將在收到款項確認後 <strong>24 小時內</strong> 以 Email 回覆確認諮詢時段。</p>
+
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>等待匯款確認</strong><br>Sherry 核對帳號後五碼，以 Email 確認時段（24 小時內）</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>收到前置報告</strong><br>視訊前 3–5 天，你將收到專屬的導航信與前置報告，請留意信箱</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>準時上線</strong><br>帶著你的問題與好奇心出現，剩下的交給我們的對話</div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <a class="btn-primary" href="index.html">回到拾光徑首頁</a>
+      <a class="btn-ghost" href="explore.html">重新體驗價值觀探索</a>
+    </div>
+
+    <p class="note">有任何問題，歡迎來信 <a href="mailto:myjourneyblueprint52@gmail.com">myjourneyblueprint52@gmail.com</a><br>我通常在 1–2 個工作日內回覆。</p>
+  </div>
+</main>
+
+</body>
+</html>
