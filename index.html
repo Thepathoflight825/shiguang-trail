@@ -449,49 +449,6 @@
   .plan-card.featured .plan-btn:hover { background: var(--gold-light); }
 
   /* Interest form */
-  .interest-section {
-    background: #D5CDB8;
-    border-radius: 20px; padding: 2.5rem;
-    text-align: center; margin-bottom: 2rem;
-    box-shadow: 0 2px 16px rgba(44,36,22,.07);
-  }
-  .interest-title {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 1.1rem; color: var(--forest);
-    margin-bottom: .5rem;
-  }
-  .interest-desc {
-    font-size: .8rem; color: var(--bark);
-    line-height: 1.7; margin-bottom: 1.5rem;
-  }
-  .interest-form {
-    display: flex; gap: .75rem;
-    max-width: 480px; margin: 0 auto;
-  }
-  .interest-input {
-    flex: 1; padding: .7rem 1.1rem;
-    border: 0.5px solid var(--pebble);
-    border-radius: 99px; background: var(--warm-white);
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: .8rem; color: var(--ink);
-    outline: none; transition: border-color .2s;
-  }
-  .interest-input::placeholder { color: var(--sage); }
-  .interest-input:focus { border-color: var(--deep-sage); }
-  .interest-submit {
-    padding: .7rem 1.5rem;
-    background: var(--forest); color: var(--cream);
-    border: none; border-radius: 99px; cursor: pointer;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: .78rem; letter-spacing: .08em;
-    white-space: nowrap; transition: background .2s;
-  }
-  .interest-submit:hover { background: var(--deep-sage); }
-  .interest-note {
-    font-size: .68rem; color: var(--sage);
-    margin-top: .75rem; letter-spacing: .05em;
-  }
-
   /* SCPC badge */
   .credential-bar {
     display: flex; align-items: center; justify-content: center;
@@ -519,13 +476,102 @@
   .delay-3 { animation-delay: .35s; opacity: 0; }
   .delay-4 { animation-delay: .5s; opacity: 0; }
 
-  /* ─── SUCCESS MESSAGE ─── */
-  .success-msg {
-    display: none; padding: .75rem 1.5rem;
-    background: rgba(92,122,114,.15); border-radius: 99px;
-    font-size: .78rem; color: var(--deep-sage);
-    margin-top: .75rem;
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-section {
+    padding: 0 0 2rem;
   }
+  .testimonials-header {
+    text-align: center; margin-bottom: 1.75rem;
+  }
+  .testimonials-eyebrow {
+    font-size: .6rem; letter-spacing: .24em;
+    color: var(--sage); text-transform: uppercase;
+    margin-bottom: .5rem;
+  }
+  .testimonials-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--forest); letter-spacing: .03em;
+  }
+  .testimonials-track-wrap {
+    position: relative; overflow: hidden;
+  }
+  .testimonials-track {
+    display: flex; gap: 1rem;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: .25rem .25rem 1.25rem;
+    scrollbar-width: none;
+  }
+  .testimonials-track::-webkit-scrollbar { display: none; }
+  .tcard {
+    flex-shrink: 0; width: 300px;
+    scroll-snap-align: start;
+    background: var(--warm-white);
+    border: 0.5px solid var(--stone);
+    border-radius: 20px; padding: 1.75rem 1.5rem;
+    display: flex; flex-direction: column;
+    gap: .85rem; transition: transform .2s, box-shadow .2s;
+    cursor: default;
+  }
+  .tcard:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(44,36,22,.08); }
+  .tcard-quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; line-height: .8;
+    color: var(--gold-light); align-self: flex-start;
+    margin-bottom: -.25rem;
+  }
+  .tcard-headline {
+    font-family: 'Noto Serif TC', serif;
+    font-size: .95rem; font-weight: 500;
+    color: var(--forest); line-height: 1.55;
+    letter-spacing: .02em;
+  }
+  .tcard-body {
+    font-size: .78rem; color: var(--bark);
+    line-height: 1.95; flex: 1;
+  }
+  .tcard-footer {
+    display: flex; align-items: center; gap: .75rem;
+    padding-top: .85rem;
+    border-top: 0.5px solid var(--stone);
+  }
+  .tcard-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--deep-sage), var(--forest));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Noto Serif TC', serif;
+    font-size: .8rem; color: var(--cream);
+    flex-shrink: 0; letter-spacing: .04em;
+  }
+  .tcard-meta { display: flex; flex-direction: column; gap: .15rem; }
+  .tcard-name { font-size: .78rem; color: var(--forest); font-weight: 500; letter-spacing: .04em; }
+  .tcard-tag {
+    font-size: .65rem; color: var(--sage);
+    letter-spacing: .06em;
+  }
+  .tcard-service {
+    margin-left: auto; flex-shrink: 0;
+    font-size: .6rem; letter-spacing: .1em;
+    color: var(--deep-sage);
+    background: rgba(92,122,114,.1);
+    border-radius: 99px; padding: .2rem .65rem;
+    white-space: nowrap;
+  }
+  /* placeholder 樣式 */
+  .tcard.placeholder { opacity: .55; }
+  .tcard.placeholder .tcard-headline { color: var(--pebble); }
+  .tcard.placeholder .tcard-body { color: var(--stone); }
+  /* 捲動指示點 */
+  .testimonials-dots {
+    display: flex; justify-content: center; gap: .5rem;
+    margin-top: .25rem;
+  }
+  .t-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--pebble); transition: all .25s; cursor: pointer;
+  }
+  .t-dot.active { background: var(--deep-sage); width: 18px; border-radius: 99px; }
 
   /* ─── FAQ SECTION ─── */
   .faq-section {
@@ -984,7 +1030,6 @@
     .blueprint-hero-content { padding: 3rem 1.5rem; }
     .blueprint-body { padding: 2.5rem 1.5rem 1rem; }
     .plans-grid { grid-template-columns: 1fr; }
-    .interest-form { flex-direction: column; }
     .credential-bar { padding: 1.5rem 1.5rem 3rem; }
   }
 </style>
@@ -1277,15 +1322,84 @@
     </div>
 
     <!-- Interest Capture -->
-    <div class="interest-section animate-in delay-4" id="interest-section">
-      <h3 class="interest-title">💌 &nbsp;心動了嗎？先留下你的 Email</h3>
-      <p class="interest-desc">方案正式開放時，你將第一個收到通知。<br>不定期也會收到關於自我探索的小思考。</p>
-      <form class="interest-form" onsubmit="handleInterest(event)">
-        <input type="email" class="interest-input" placeholder="your@email.com" required id="interest-email">
-        <button type="submit" class="interest-submit">留下 Email</button>
-      </form>
-      <div class="success-msg" id="success-msg">✓ &nbsp;已收到！方案開放時我們會第一個通知你。</div>
-      <p class="interest-note">不會寄送廣告，隨時可以取消訂閱。</p>
+    <!-- ── 好評見證 ── -->
+    <div class="testimonials-section animate-in delay-4">
+      <div class="testimonials-header">
+        <p class="testimonials-eyebrow">Voices from the Path · 拾光者的話</p>
+        <h3 class="testimonials-title">✦ &nbsp;他們走過這條路之後</h3>
+      </div>
+      <div class="testimonials-track-wrap">
+        <div class="testimonials-track" id="t-track">
+
+          <!-- 卡片 A -->
+          <div class="tcard placeholder">
+            <div class="tcard-quote-mark">"</div>
+            <p class="tcard-headline">（見證者 A 的核心金句，<br>15 字以內）</p>
+            <p class="tcard-body">這裡放見證者 A 的完整故事。2–4 句，描述諮詢前後的具體轉變——例如「諮詢前我⋯⋯，和 Sherry 對話後，我第一次意識到⋯⋯」</p>
+            <div class="tcard-footer">
+              <div class="tcard-avatar">A</div>
+              <div class="tcard-meta">
+                <span class="tcard-name">見證者 A</span>
+                <span class="tcard-tag">在職 5 年 · 考慮轉職中</span>
+              </div>
+              <span class="tcard-service">深度報告</span>
+            </div>
+          </div>
+
+          <!-- 卡片 B -->
+          <div class="tcard placeholder">
+            <div class="tcard-quote-mark">"</div>
+            <p class="tcard-headline">（見證者 B 的核心金句，<br>15 字以內）</p>
+            <p class="tcard-body">這裡放見證者 B 的完整故事。可以聚焦在「1 on 1 對話中最讓自己驚訝的一個洞察」，讓潛在個案感受到對話的深度與價值。</p>
+            <div class="tcard-footer">
+              <div class="tcard-avatar">B</div>
+              <div class="tcard-meta">
+                <span class="tcard-name">見證者 B</span>
+                <span class="tcard-tag">待業中 · 尋找方向</span>
+              </div>
+              <span class="tcard-service">1 on 1 引導</span>
+            </div>
+          </div>
+
+          <!-- 卡片 C -->
+          <div class="tcard placeholder">
+            <div class="tcard-quote-mark">"</div>
+            <p class="tcard-headline">（見證者 C 的核心金句，<br>15 字以內）</p>
+            <p class="tcard-body">這裡放見證者 C 的故事。建議選擇一個與卡片 A、B 不同的身份背景，讓不同階段的讀者都能在這裡找到共鳴。</p>
+            <div class="tcard-footer">
+              <div class="tcard-avatar">C</div>
+              <div class="tcard-meta">
+                <span class="tcard-name">見證者 C</span>
+                <span class="tcard-tag">自由工作者 · 個人品牌</span>
+              </div>
+              <span class="tcard-service">1 on 1 引導</span>
+            </div>
+          </div>
+
+          <!-- 卡片 D -->
+          <div class="tcard placeholder">
+            <div class="tcard-quote-mark">"</div>
+            <p class="tcard-headline">（見證者 D 的核心金句，<br>15 字以內）</p>
+            <p class="tcard-body">這裡放見證者 D 的故事。當有真實見證內容時，只需更換文字即可，不需要改動任何程式碼。</p>
+            <div class="tcard-footer">
+              <div class="tcard-avatar">D</div>
+              <div class="tcard-meta">
+                <span class="tcard-name">見證者 D</span>
+                <span class="tcard-tag">應屆畢業生 · 初入職場</span>
+              </div>
+              <span class="tcard-service">深度報告</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- 捲動指示點 -->
+      <div class="testimonials-dots" id="t-dots">
+        <div class="t-dot active" onclick="scrollToCard(0)"></div>
+        <div class="t-dot" onclick="scrollToCard(1)"></div>
+        <div class="t-dot" onclick="scrollToCard(2)"></div>
+        <div class="t-dot" onclick="scrollToCard(3)"></div>
+      </div>
     </div>
 
   </div>
@@ -1465,7 +1579,7 @@
         <p class="coupon-code">LIGHT-200</p>
         <p class="coupon-desc">看完了報告，發現自己的卡點了嗎？這份地圖仍需要具體的行動方針。<br>憑折扣代碼，預約 Sherry 1on1 生涯引導，現折 <strong style="color:var(--gold);">NT$ 200</strong>。<br><span style="font-size:.78rem;color:rgba(245,240,232,.55);letter-spacing:.04em;">請記得『複製』折扣碼喔！</span></p>
         <div class="coupon-action">
-          <button class="coupon-btn" onclick="showPage('p2');setTimeout(()=>document.getElementById('interest-section').scrollIntoView({behavior:'smooth'}),400)">預約藍圖對話 1 on 1 →</button>
+          <button class="coupon-btn" onclick="window.location.href='index.html#blueprint'">預約藍圖對話 1 on 1 →</button>
         </div>
       </div>
 
@@ -1500,19 +1614,29 @@
     }
   });
 
-  function scrollToInterest() {
-    document.getElementById('interest-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // ─── TESTIMONIALS SCROLL ───
+  function scrollToCard(idx) {
+    const track = document.getElementById('t-track');
+    if (!track) return;
+    const cards = track.querySelectorAll('.tcard');
+    if (cards[idx]) {
+      cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    }
+    document.querySelectorAll('.t-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
   }
-
-  function handleInterest(e) {
-    e.preventDefault();
-    const email = document.getElementById('interest-email').value;
-    document.getElementById('interest-email').value = '';
-    document.getElementById('success-msg').style.display = 'block';
-    setTimeout(() => {
-      document.getElementById('success-msg').style.display = 'none';
-    }, 5000);
-  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('t-track');
+    if (!track) return;
+    track.addEventListener('scroll', () => {
+      const cards = track.querySelectorAll('.tcard');
+      let closest = 0, minDist = Infinity;
+      cards.forEach((c, i) => {
+        const dist = Math.abs(c.getBoundingClientRect().left - track.getBoundingClientRect().left);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      document.querySelectorAll('.t-dot').forEach((d, i) => d.classList.toggle('active', i === closest));
+    });
+  });
 
   // ─── PAYMENT MODAL ───
   function openPaymentModal() {
