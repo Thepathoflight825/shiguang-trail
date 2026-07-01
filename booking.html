@@ -304,6 +304,16 @@ textarea.field-input { resize:vertical; min-height:90px; border-radius:12px; }
 .policy-details[open] .policy-chevron { transform:rotate(180deg); }
 .policy-details-body { padding:1.25rem 1.1rem .5rem; }
 
+/* ── MISSING FIELDS HINT ── */
+.missing-hint {
+  display:none;
+  font-size:.72rem; color:#9A6A30; line-height:1.7;
+  text-align:center; margin-bottom:.85rem;
+  padding:.6rem .9rem; background:rgba(201,169,110,.12);
+  border-radius:8px; letter-spacing:.02em;
+}
+.missing-hint.visible { display:block; }
+
 /* ── SUBMIT BUTTON ── */
 .submit-btn {
   display:block; width:100%; padding:.95rem;
@@ -472,27 +482,27 @@ textarea.field-input { resize:vertical; min-height:90px; border-radius:12px; }
     <div class="field">
       <label class="field-label">最讓你感到「能量枯竭」或「焦慮」的職場情境是？（複選，最多 3 項）</label>
       <div class="options-grid" id="drains-group">
-        <label class="option-item" onclick="selectCheck(this,'drains',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'drains',3)">
           <input type="checkbox" value="工作熟練但毫無成就感，感覺在空轉"><div class="option-box"></div>
           <span class="option-text">工作內容熟練但毫無成就感，感覺在空轉</span>
         </label>
-        <label class="option-item" onclick="selectCheck(this,'drains',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'drains',3)">
           <input type="checkbox" value="每天硬撐職場E人，下班只想登出"><div class="option-box"></div>
           <span class="option-text">每天都在當職場 E 人硬撐，下班只想當 I 人徹底登出</span>
         </label>
-        <label class="option-item" onclick="selectCheck(this,'drains',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'drains',3)">
           <input type="checkbox" value="薪資/升遷碰壁，不知是否繼續妥協"><div class="option-box"></div>
           <span class="option-text">現職薪資 / 升遷碰壁，不知道該不該為了五斗米繼續妥協</span>
         </label>
-        <label class="option-item" onclick="selectCheck(this,'drains',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'drains',3)">
           <input type="checkbox" value="主管管理風格或團隊文化嚴重消耗內在平靜"><div class="option-box"></div>
           <span class="option-text">主管的管理風格或團隊文化，嚴重消耗我的內在平靜</span>
         </label>
-        <label class="option-item" onclick="selectCheck(this,'drains',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'drains',3)">
           <input type="checkbox" value="想轉職但方向模糊、缺乏底氣"><div class="option-box"></div>
           <span class="option-text">想轉職，但對下一個產業 / 職能方向感到模糊、缺乏底氣</span>
         </label>
-        <label class="option-item" id="drains-other-item" onclick="selectCheck(this,'drains',3)">
+        <label class="option-item" id="drains-other-item" onclick="selectCheck(event,this,'drains',3)">
           <input type="checkbox" value="other-drains"><div class="option-box"></div>
           <span class="option-text">其他：<input type="text" class="other-input" id="drains-other-text" placeholder="請說明⋯⋯" onclick="event.stopPropagation()"></span>
         </label>
@@ -514,35 +524,35 @@ textarea.field-input { resize:vertical; min-height:90px; border-radius:12px; }
     <div class="field">
       <label class="field-label">如果有一份「完美的理想工作」，你希望它必須具備哪三個關鍵要素？（複選，最多 3 項）</label>
       <div class="options-grid" id="ideal-group">
-        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'ideal',3)">
           <input type="checkbox" value="優渥且具市場競爭力的薪酬與獎金"><div class="option-box"></div>
           <span class="option-text">優渥且具市場競爭力的薪酬與獎金</span>
         </label>
-        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'ideal',3)">
           <input type="checkbox" value="彈性工時或遠端工作機會（WFH）"><div class="option-box"></div>
           <span class="option-text">彈性的工作時間或遠端工作機會（WFH）</span>
         </label>
-        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'ideal',3)">
           <input type="checkbox" value="主管充分授權、組織政治透明簡單"><div class="option-box"></div>
           <span class="option-text">主管充分授權、組織政治透明簡單</span>
         </label>
-        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'ideal',3)">
           <input type="checkbox" value="能發揮創造力、有高度自主性的發揮空間"><div class="option-box"></div>
           <span class="option-text">能發揮創造力、有高度自主性的發揮空間</span>
         </label>
-        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'ideal',3)">
           <input type="checkbox" value="穩定步調、下班能完全登出生活"><div class="option-box"></div>
           <span class="option-text">穩定的步調、下班能完全登出生活</span>
         </label>
-        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'ideal',3)">
           <input type="checkbox" value="具社會影響力、能實質幫助他人"><div class="option-box"></div>
           <span class="option-text">具有社會影響力、能實質幫助到他人</span>
         </label>
-        <label class="option-item" onclick="selectCheck(this,'ideal',3)">
+        <label class="option-item" onclick="selectCheck(event,this,'ideal',3)">
           <input type="checkbox" value="明確的晉升管道與專業技能學習資源"><div class="option-box"></div>
           <span class="option-text">有明確的晉升管道與專業技能學習資源</span>
         </label>
-        <label class="option-item" id="ideal-other-item" onclick="selectCheck(this,'ideal',3)">
+        <label class="option-item" id="ideal-other-item" onclick="selectCheck(event,this,'ideal',3)">
           <input type="checkbox" value="other-ideal"><div class="option-box"></div>
           <span class="option-text">其他：<input type="text" class="other-input" id="ideal-other-text" placeholder="請說明⋯⋯" onclick="event.stopPropagation()"></span>
         </label>
@@ -669,6 +679,9 @@ textarea.field-input { resize:vertical; min-height:90px; border-radius:12px; }
         所有內容，包含改期次數限制與退費條件。
       </span>
     </div>
+
+    <!-- 缺少項目提示（即時更新） -->
+    <p class="missing-hint" id="missing-hint"></p>
 
     <!-- 送出按鈕 -->
     <button class="submit-btn" id="submit-btn" onclick="submitBooking()">
@@ -865,7 +878,13 @@ function selectRadio(el, group) {
   checkReady();
 }
 
-function selectCheck(el, group, max) {
+function selectCheck(e, el, group, max) {
+  // label 內含 checkbox 時，瀏覽器會在使用者點擊 label 後，
+  // 自動再對內部 input 觸發一次 click（並往上 bubble 回 label），
+  // 導致 selectCheck 被呼叫兩次、選取狀態被切換兩次而互相抵銷。
+  // 這裡忽略這次「轉發給 input」的 click，只處理使用者真正點擊 label 的那次。
+  if (e && e.target && e.target.tagName === 'INPUT') return;
+
   const checked = document.querySelectorAll(`#${group}-group .option-item.selected`);
   if(!el.classList.contains('selected') && checked.length >= max){
     alert(`最多選 ${max} 項喔！`); return;
@@ -939,6 +958,26 @@ function checkReady() {
   const ready = name && validEmail && painpt && shining && last5 && agreed && hasIdentity && hasSeniority && hasSlots;
   const btn   = document.getElementById('submit-btn');
   btn.classList.toggle('active', !!ready);
+
+  // 缺少項目提示（即時列出還沒完成的必填項）
+  const missing = [];
+  if(!name) missing.push('姓名 / 暱稱');
+  if(!validEmail) missing.push('Email');
+  if(!hasSlots) missing.push('諮詢預約時段');
+  if(!hasIdentity) missing.push('目前身份別');
+  if(!hasSeniority) missing.push('總工作年資');
+  if(!painpt) missing.push('最大痛點描述');
+  if(!shining) missing.push('閃光時刻描述');
+  if(!last5) missing.push('匯款帳號後五碼');
+  if(!agreed) missing.push('同意服務與退費規範');
+
+  const hint = document.getElementById('missing-hint');
+  if(missing.length > 0){
+    hint.textContent = `還差一點！尚待完成：${missing.join('、')}`;
+    hint.classList.add('visible');
+  } else {
+    hint.classList.remove('visible');
+  }
 
   // Email 即時提示
   const errEmail = document.getElementById('err-email');
