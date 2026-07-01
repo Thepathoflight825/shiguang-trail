@@ -271,6 +271,39 @@ textarea.field-input { resize:vertical; min-height:90px; border-radius:12px; }
   letter-spacing:.02em;
 }
 
+/* ── FAQ / 退費須知內容（供可收合區塊使用） ── */
+.faq-item { padding:1rem 0; border-top:0.5px solid var(--stone); }
+.faq-item:first-of-type { border-top:none; padding-top:0; }
+.faq-q { font-size:.82rem; font-weight:500; color:var(--forest); margin-bottom:.45rem; letter-spacing:.04em; }
+.faq-a { font-size:.78rem; color:var(--bark); line-height:1.9; }
+.faq-list { list-style:none; padding:0; }
+.faq-list li { padding:.25rem 0 .25rem 1rem; position:relative; line-height:1.8; }
+.faq-list li::before { content:'◦'; position:absolute; left:0; color:var(--sage); }
+.faq-intro { font-size:.8rem; color:var(--bark); line-height:1.85; text-align:left; margin-bottom:1.25rem; }
+.faq-contact { font-size:.75rem; color:var(--sage); text-align:center; margin-top:1.5rem; letter-spacing:.03em; }
+.faq-link { color:var(--deep-sage); text-decoration:underline; text-underline-offset:3px; }
+.faq-item-highlight { background:rgba(201,169,110,.07); border-radius:12px; padding:1rem 1.1rem; border-top:none !important; margin:.5rem 0; }
+.faq-item-highlight .faq-q { color:var(--bark); }
+.faq-badge { display:inline-block; font-size:.6rem; letter-spacing:.1em; padding:.2rem .7rem; border-radius:99px; margin-right:.5rem; vertical-align:middle; font-weight:400; }
+.faq-badge-green { background:rgba(92,122,114,.14); color:var(--deep-sage); }
+.faq-badge-amber { background:rgba(201,169,110,.18); color:#8A6830; }
+.faq-badge-red { background:rgba(180,80,60,.10); color:#9A4030; }
+
+/* ── COLLAPSIBLE POLICY BLOCK ── */
+.policy-details { border:0.5px solid var(--stone); border-radius:16px; margin-bottom:1.5rem; overflow:hidden; background:var(--warm-white); }
+.policy-summary {
+  list-style:none; cursor:pointer; padding:.85rem 1.1rem;
+  display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+  font-family:'Noto Serif TC',serif; font-size:.85rem; color:var(--forest);
+  background:var(--cream); user-select:none;
+}
+.policy-summary::-webkit-details-marker { display:none; }
+.policy-summary::marker { content:''; }
+.policy-summary-hint { font-family:'Noto Sans TC',sans-serif; font-size:.62rem; color:var(--sage); letter-spacing:.02em; margin-left:auto; margin-right:.25rem; }
+.policy-chevron { flex-shrink:0; transition:transform .25s ease; font-size:.7rem; color:var(--sage); }
+.policy-details[open] .policy-chevron { transform:rotate(180deg); }
+.policy-details-body { padding:1.25rem 1.1rem .5rem; }
+
 /* ── SUBMIT BUTTON ── */
 .submit-btn {
   display:block; width:100%; padding:.95rem;
@@ -558,6 +591,70 @@ textarea.field-input { resize:vertical; min-height:90px; border-radius:12px; }
       視訊前 3–5 天將收到會前個人化導航信，請留意您的信箱。
     </div>
 
+    <!-- 預約與退費須知（可收合） -->
+    <details class="policy-details" id="policy-booking-1on1">
+      <summary class="policy-summary">
+        <span>✦ 預約與退費須知</span>
+        <span class="policy-summary-hint">點擊展開</span>
+        <span class="policy-chevron">▾</span>
+      </summary>
+      <div class="policy-details-body">
+        <p class="faq-intro">謝謝你願意將重要的生涯藍圖託付給『拾光徑』。<br>為了保障雙方的時間與權益，請於付款前詳閱以下規範。</p>
+
+        <div class="faq-item faq-item-highlight">
+          <div class="faq-q">📌 &nbsp;時間認定依據</div>
+          <div class="faq-a">本服務之變更與退費認定，皆以本工作室官方信箱（<a href="mailto:myjourneyblueprint52@gmail.com" class="faq-link">myjourneyblueprint52@gmail.com</a>）收到電子郵件之「系統時間戳記」與「原定諮詢時段」之差距時數為<strong>唯一依據</strong>。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <span class="faq-badge faq-badge-green">72 小時前</span>
+            預約時段 72 小時前（即 3 天前）：可免費改期、或全額退款
+          </div>
+          <div class="faq-a">如需變更時段或取消預約，請於原定諮詢時間 72 小時前來信通知。<br>
+            <ul class="faq-list" style="margin-top:.5rem;">
+              <li><strong>取消</strong>：可獲全額退款（若非中國信託銀行帳戶，需扣除 15 元跨行轉帳手續費）。</li>
+              <li><strong>改期</strong>：可免費調整一次。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <span class="faq-badge faq-badge-amber">24–72 小時</span>
+            預約時段 24–72 小時之內（即 1–2 天內）：不可改期、退還 50% 費用
+          </div>
+          <div class="faq-a">因時段已專屬保留，此區間內<strong>恕不接受改期申請</strong>。如需取消預約，將退還 <strong>50%</strong> 服務費用。</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">
+            <span class="faq-badge faq-badge-red">24 小時內</span>
+            預約時段 24 小時之內（即諮詢前一日與當日）：不可改期且恕不退費
+          </div>
+          <div class="faq-a">於諮詢前 24 小時內臨時取消、變更或諮詢當日未出席者，因該時段已鎖定且無法釋出給其他迷惘的靈魂，<strong>恕無法退費亦無法改期</strong>。</div>
+        </div>
+
+        <div class="faq-item faq-item-highlight">
+          <div class="faq-q">✦ &nbsp;延期與變更次數限制（重要）</div>
+          <div class="faq-a">
+            <ul class="faq-list">
+              <li><strong>次數上限</strong>：每筆訂單僅限免費變更時段<strong>「一次」</strong>。</li>
+              <li><strong>改期後退費權益凍結</strong>：為避免變更時段後惡意取消，凡經改期後之訂單，不論距離新預約時段有多久，皆自動視為「進入 24 小時之內」之狀態。後續如因個人因素再度取消或要求二度改期，恕無法改期亦不予退還任何費用。</li>
+              <li><strong>時效限制</strong>：申請改期之新時段，必須在原定預約日起算之 <strong>30 天內</strong>完成諮詢（因導師個人或不可抗力之天災因素需調整者不在此限），逾期未完成預約視同放棄該次服務，恕不退費。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">關於數位報告</div>
+          <div class="faq-a">【專屬深度報告】屬動態客製化生成之數位內容，一旦匯款完成並發送，<strong>恕不接受退費</strong>。</div>
+        </div>
+
+        <p class="faq-contact">有任何疑問，歡迎來信 &nbsp;<a href="mailto:myjourneyblueprint52@gmail.com" class="faq-link">myjourneyblueprint52@gmail.com</a></p>
+      </div>
+    </details>
+
     <!-- 同意條款 -->
     <div class="agree-row" id="agree-row" onclick="toggleAgree(event)">
       <div class="agree-box" id="agree-box">
@@ -568,7 +665,7 @@ textarea.field-input { resize:vertical; min-height:90px; border-radius:12px; }
       <input type="checkbox" id="f-agree" style="display:none;" onchange="checkReady()">
       <span class="agree-text">
         我已詳閱、理解並同意
-        <a class="agree-link" href="index.html#faq-section" target="_blank" onclick="event.stopPropagation()">《拾光徑服務與退費規範》</a>
+        <a class="agree-link" href="javascript:void(0)" onclick="event.stopPropagation();document.getElementById('policy-booking-1on1').open=true;document.getElementById('policy-booking-1on1').scrollIntoView({behavior:'smooth',block:'start'})">《拾光徑服務與退費規範》</a>
         所有內容，包含改期次數限制與退費條件。
       </span>
     </div>
